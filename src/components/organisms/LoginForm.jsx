@@ -45,7 +45,7 @@ const LoginForm = () => {
 
   return (
     <Box size="small" classname="justify-center">
-      <Photo className="block w-64 h-9" src="src\images\logintitle.png" />
+      <Photo className="block w-64 h-9 mb-5" src="src\images\logintitle.png" />
       <TextInput
         type="email"
         name="login"
@@ -73,6 +73,7 @@ const LoginForm = () => {
         //   })
         // }
       ></Button>
+      <Button type="longwhite" label="회원가입"></Button>
     </Box>
   );
 };

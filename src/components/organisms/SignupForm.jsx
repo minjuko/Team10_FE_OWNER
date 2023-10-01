@@ -8,7 +8,7 @@ import useInput from "../../hooks/useinput";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
-const RegisterForm = () => {
+const SignupForm = () => {
   //   const navigate = useNavigate();
   //   const [errors, setError] = useState({});
   const { value, handleOnChange } = useInput({
@@ -192,4 +192,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default SignupForm;
