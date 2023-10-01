@@ -4,6 +4,8 @@ const getType = (type) => {
   switch (type) {
     case "long":
       return "block w-96 h-14 p-4 bg-sky-500 text-white font-semibold rounded-none";
+    case "longwhite":
+      return "block w-96 h-14 p-4 bg-white text-black font-semibold rounded-none";
     case "small":
       return "block w-24 h-14 p-4 bg-gray-600 text-white font-semibold rounded-none";
     case "addPhoto":
