@@ -37,3 +37,10 @@ export const AddPhoto = {
     label: "+",
   },
 };
+
+export const withTextInput = {
+  args: {
+    type: "withTextInput",
+    label: "주소찾기",
+  },
+};
