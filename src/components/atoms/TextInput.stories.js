@@ -17,7 +17,7 @@ export default {
 export const MainTextInput = {
   args: {
     placeholder: { control: "text" },
-    type: "email",
+    type: "text",
   },
 };
 

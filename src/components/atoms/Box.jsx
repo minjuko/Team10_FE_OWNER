@@ -6,7 +6,7 @@ const getSizeClasses = (size) => {
       return "w-[496px] h-[441px]";
     }
     case "medium": {
-      return "w-963 h-945";
+      return "w-[496px] h-[625px]";
     }
     default: {
       return "w-96 w-10";

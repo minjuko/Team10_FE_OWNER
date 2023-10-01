@@ -47,15 +47,18 @@ const LoginForm = () => {
     <Box size="small" classname="justify-center">
       <Photo className="block w-64 h-9" src="src\images\logintitle.png" />
       <TextInput
-        placeholder="이메일"
-        id="email"
         type="email"
+        name="login"
+        placeholder="이메일"
+        label="이메일"
         value={value.email}
         onChange={handleOnChange}
       />
+
       <TextInput
         placeholder="*******"
-        id="password"
+        name="password"
+        label="비밀번호"
         type="password"
         value={value.password}
         onChange={handleOnChange}
