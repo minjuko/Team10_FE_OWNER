@@ -16,6 +16,7 @@ export default {
 
 export const MainTextWithButton = {
   args: {
+    type: "email",
     buttonlabel: "주소찾기",
     placeholder: { control: "text" },
   },

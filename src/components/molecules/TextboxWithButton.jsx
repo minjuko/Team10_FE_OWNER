@@ -13,7 +13,7 @@ const TextboxWithButton = ({
     <div className="flex flex-row w-96">
       <TextInput
         placeholder={placeholder}
-        type="withbutton"
+        type={type}
         value={value}
         onChange={onChange}
       />

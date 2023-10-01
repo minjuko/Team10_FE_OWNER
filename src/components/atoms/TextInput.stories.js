@@ -17,13 +17,13 @@ export default {
 export const MainTextInput = {
   args: {
     placeholder: { control: "text" },
-    type: "alone",
+    type: "email",
   },
 };
 
 export const WithButtonInput = {
   args: {
     placeholder: { control: "text" },
-    type: "withbutton",
+    type: "register",
   },
 };

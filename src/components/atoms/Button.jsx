@@ -20,6 +20,10 @@ export const Button = ({ type, label, ...props }) => {
       label={label}
       className={`${getType(type)} `}
       {...props}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
     >
       {label}
     </button>
