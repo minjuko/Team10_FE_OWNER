@@ -24,6 +24,6 @@ export const MainTextInput = {
 export const WithButtonInput = {
   args: {
     placeholder: { control: "text" },
-    type: "register",
+    type: "text",
   },
 };

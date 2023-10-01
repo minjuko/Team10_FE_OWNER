@@ -1,11 +1,11 @@
-import RegisterForm from "../components/organisms/RegisterForm";
+import SignupForm from "../components/organisms/SignupForm";
 
-const RegisterPage = () => {
+const SignupPage = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-500">
-      <RegisterForm />
+      <SignupForm />
     </div>
   );
 };
 
-export default RegisterPage;
+export default SignupPage;
