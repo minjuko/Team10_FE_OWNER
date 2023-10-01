@@ -1,21 +1,29 @@
-import React from 'react';
-import { TextInput } from './TextInput';
+import React from "react";
+import { TextInput } from "./TextInput";
 
 export default {
-  title: 'Atom/TextInput',
+  title: "Atom/TextInput",
   component: TextInput,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
-    type: 'text',
-    placeholder: { control: 'text' },
+    type: "alone",
+    placeholder: { control: "text" },
   },
 };
 
 export const MainTextInput = {
   args: {
-    placeholder: {control: 'text'},
+    placeholder: { control: "text" },
+    type: "text",
+  },
+};
+
+export const WithButtonInput = {
+  args: {
+    placeholder: { control: "text" },
+    type: "register",
   },
 };
