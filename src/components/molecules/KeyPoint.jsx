@@ -1,11 +1,11 @@
 // KeyPoint.jsx
 import React from 'react';
 import Badge from '../atoms/Badge';
+import { Box } from '../atoms/Box';
 
 const KeyPoint = ({ pointLabels, selectedPoints}) => {
   return (
-    <div>
-      <h3>키포인트</h3>
+    <Box size="keypointbox">
       <div className="grid grid-cols-3 gap-2 mt-2">
         {pointLabels.map((label, index) => (
           <Badge
@@ -16,7 +16,7 @@ const KeyPoint = ({ pointLabels, selectedPoints}) => {
           />
         ))}
       </div>
-    </div>
+    </Box>
   );
 };
 
