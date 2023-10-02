@@ -42,31 +42,29 @@ const FileUploader = () => {
 
   return (
     <div className="uploader-wrapper">
-      <div className="flex items-center mt-8">
-        <label className="text-start text-gray-800 text-base pl-6 mr-10">매장 사진</label>
-        <Button type="addPhoto" label="+" onClick={() => inputRef.click()} />
-      </div>
-      <div>
-        <input
-          type="file" multiple={true} accept="image/*"
-          onChange={saveImage}
-          onClick={(e) => e.target.value = null}
-          ref={(refParam) => (inputRef = refParam)}
-          className="hidden"
-        />
-        <div className="file-container">
-          {fileList?.map((item, index) => (
-            <div className="file-wrapper" key={index}>
-              {item.type === "image" ? (
-                <img src={item.preview_URL} alt={`Preview of ${index}`} />
-              ) : null}
-              <div className="delete-button" onClick={() => { deleteImage(index) }}>
-                <Button type="small" label="삭제" />
-              </div>
-            </div>
-          ))}
+      <div className="flex flex-col mt-2">
+        <div className="flex flex-item gap-[220px]">
+          <label className="text-start text-gray-700 text-base pl-4">매장사진</label>
+          <Button type="addPhoto" label="+ 추가" onClick={() => inputRef.click()}>추가</Button>
         </div>
+        <div className="file-container overflow-x-auto flex gap-4">
+        {fileList?.map((item, index) => (
+          <div className="file-wrapper" key={index}>
+            {item.type === "image" ? (
+              <img src={item.preview_URL} alt={`Preview of ${index}`} className="" />
+            ) : null}
+              <Button type="deletePhoto" className="delete-button" label="X" onClick={() => { deleteImage(index) }}></Button>
+          </div>
+        ))}
       </div>
+    </div>
+      <input
+        type="file" multiple={true} accept="image/*"
+        onChange={saveImage}
+        onClick={(e) => e.target.value = null}
+        ref={(refParam) => (inputRef = refParam)}
+        className="hidden"
+      />
     </div>
   );
 }
