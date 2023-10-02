@@ -3,9 +3,9 @@ import React, { useState } from "react";
 const getType = (type) => {
   switch (type) {
     case "unclicked":
-      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center text-sm font-normal text-black bg-slate-200 rounded-full border border-slate-300";
+      return "align-middle px-3.5 py-1  rounded-xl border border-gray-300 text-blackleading-normal text-center";
     case "onclicked":
-      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center text-sm font-normal text-white bg-sky-500 rounded-full";
+      return "align-middle px-3.5 py-1  rounded-xl bg-sky-500 text-white leading-normal text-center";
     default:
       return "";
   }
