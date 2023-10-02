@@ -5,7 +5,7 @@ const getType = (type) => {
     case "unclicked":
       return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center text-sm font-normal text-black bg-slate-200 rounded-full border border-slate-300";
     case "onclicked":
-      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center text-sm font-normal text-white bg-blue-500 rounded-full";
+      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center text-sm font-normal text-white bg-sky-500 rounded-full";
     default:
       return "";
   }
