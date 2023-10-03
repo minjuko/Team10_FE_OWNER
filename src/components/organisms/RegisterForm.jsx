@@ -5,8 +5,8 @@ import TextboxWithButton from "../molecules/TextboxWithButton";
 import { TextArea } from '../atoms/TextArea';
 import { Box } from "../atoms/Box";
 import TimeSelector from "../molecules/TimeSelector";
-import KeyPoint from "../molecules/KeyPoint";
 import FileUploader from "../molecules/FileUploader";
+import KeyPointSelector from "../molecules/KeyPointSelector";
 
 const RegisterForm = () => {
 
@@ -16,6 +16,11 @@ const RegisterForm = () => {
     const [weekendStartTime, setWeekendStartTime] = useState(new Date()); 
     const [weekendEndTime, setWeekendEndTime] = useState(new Date()); 
     const pointLabels = ['하부세차', '개러지형 독립공간', '야간조명', '100% 수돗물', '휴게실', '에어컨', '발수코팅건'];
+
+    const handleNumberChange = (e) => {
+      const numericValue = e.target.value.replace(/[^0-9]/g, '');
+      e.target.value = numericValue;
+    };
 
     return (
         <Box size='registerbox' className="justify-center">
@@ -27,12 +32,12 @@ const RegisterForm = () => {
             <div className="left-info pr-4">
               {/*매장명*/}
               <div className="flex flex-col mt-4">
-                <label className="text-start text-gray-700 text-base pl-4">매장명</label>
+                <label className="text-start text-gray-700 text-base">매장명</label>
                 <TextInput placeholder="OO세차장" name="registerform-long"/>
               </div>
               {/*주소*/}
               <div className="flex flex-col mt-4">
-                <label className="text-start text-gray-700 text-base pl-4">주소</label>
+                <label className="text-start text-gray-700 text-base">주소</label>
                 <TextboxWithButton
                   type="text"
                   name="username"
@@ -43,19 +48,27 @@ const RegisterForm = () => {
               </div>
               {/*전화번호*/}
               <div className="flex flex-col mt-4">
-                <label className="text-start text-gray-700 text-base pl-4">전화번호</label>
-                <TextInput placeholder="전화번호" name="registerform-long"/>
+                <label className="text-start text-gray-700 text-base">전화번호</label>
+                <TextInput
+                  placeholder="전화번호"
+                name="registerform-long"
+                onChange={handleNumberChange} // 숫자 입력을 제한하는 이벤트 핸들러
+                />
               </div>
               {/*30분당 금액*/}
               <div className="flex flex-col mt-4">
-                <label className="text-start text-gray-700 text-base pl-4">30분당 금액</label>
-                <TextInput placeholder="30분당 금액" name="registerform-long"/>
+                <label className="text-start text-gray-700 text-base">30분당 금액</label>
+                <TextInput 
+                  placeholder="30분당 금액" 
+                  name="registerform-long"
+                  onChange={handleNumberChange}
+                />
               </div>
               {/*영업시간*/}
               <div className="flex flex-col gap-[0px]">
-                <label className="text-start text-gray-700 text-base mt-6 pl-4">영업시간</label>
+                <label className="text-start text-gray-700 text-base mt-6">영업시간</label>
                 <div className="flex flex-item mt-2">
-                  <label className="text-start text-gray-700 text-base mt-10 pl-4">평일</label>
+                  <label className="text-start text-gray-700 text-base mt-10">평일</label>
                   <TimeSelector
                     startTime={weekdayStartTime}
                     setStartTime={setWeekdayStartTime}
@@ -64,13 +77,12 @@ const RegisterForm = () => {
                   />
                 </div>
                 <div className="flex flex-item mt-2">
-                  <label className="text-start text-gray-700 text-base mt-10 pl-4">주말</label>
+                  <label className="text-start text-gray-700 text-base mt-10">주말</label>
                   <TimeSelector
                     startTime={weekendStartTime}
                     setStartTime={setWeekendStartTime}
                     endTime={weekendEndTime}
                     setEndTime={setWeekendEndTime}
-  
                   />
                 </div>
               </div>
@@ -81,12 +93,12 @@ const RegisterForm = () => {
                 <FileUploader/>
               {/*키포인트*/}
               <div className="flex flex-col mt-4">
-                <label className="text-start text-gray-700 text-base pl-4">키포인트</label>
-                <KeyPoint pointLabels={pointLabels} selectedPoints={selectedPoints}/>
+                <label className="text-start text-gray-700 text-base">키포인트</label>
+                <KeyPointSelector pointLabels={pointLabels} selectedPoints={selectedPoints}/>
               </div>
               {/*매장 설명*/}
               <div className="flex flex-col mt-4">
-                <label className="text-start text-gray-700 text-base pl-4">매장 설명</label>
+                <label className="text-start text-gray-700 text-base">매장 설명</label>
                 <TextArea size={'register-intro'} placeholder={'내용 입력'} label={'매장 설명'}></TextArea>
               </div>
             </div>

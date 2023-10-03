@@ -18,7 +18,7 @@ const getSizeClasses = (size) => {
 };
 
 const BASE_INPUT_CLASSES =
-  'border border-gray-300 resize-none bg-gray-100 rounded-xl';
+  'border border-gray-300 resize-none bg-gray-100 rounded-xl py-4';
 
 export const TextArea = ({ placeholder, size, value, onChange, ...props }) => {
   const sizeClass = getSizeClasses(size);
