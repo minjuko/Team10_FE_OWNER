@@ -52,10 +52,10 @@ const RegisterForm = () => {
                 <TextInput placeholder="30분당 금액" name="registerform-long"/>
               </div>
               {/*영업시간*/}
-              <div className="flex flex-col mt-4">
-                <label className="text-start text-gray-700 text-base pl-4">영업시간</label>
+              <div className="flex flex-col gap-[0px]">
+                <label className="text-start text-gray-700 text-base mt-6 pl-4">영업시간</label>
                 <div className="flex flex-item mt-2">
-                  <label className="text-start text-gray-700 text-base mt-4 pl-4">평일</label>
+                  <label className="text-start text-gray-700 text-base mt-10 pl-4">평일</label>
                   <TimeSelector
                     startTime={weekdayStartTime}
                     setStartTime={setWeekdayStartTime}
@@ -64,7 +64,7 @@ const RegisterForm = () => {
                   />
                 </div>
                 <div className="flex flex-item mt-2">
-                  <label className="text-start text-gray-700 text-base mt-4 pl-4">주말</label>
+                  <label className="text-start text-gray-700 text-base mt-10 pl-4">주말</label>
                   <TimeSelector
                     startTime={weekendStartTime}
                     setStartTime={setWeekendStartTime}
