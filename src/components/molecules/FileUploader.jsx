@@ -44,14 +44,14 @@ const FileUploader = () => {
     <div className="uploader-wrapper">
       <div className="flex flex-col mt-2">
         <div className="flex flex-item gap-[220px]">
-          <label className="text-start text-gray-700 text-base pl-4">매장사진</label>
+          <label className="text-start text-gray-700 text-base">매장사진</label>
           <Button type="addPhoto" label="+ 추가" onClick={() => inputRef.click()}>추가</Button>
         </div>
         <div className="file-container overflow-x-auto flex gap-4">
         {fileList?.map((item, index) => (
           <div className="file-wrapper" key={index}>
             {item.type === "image" ? (
-              <img src={item.preview_URL} alt={`Preview of ${index}`} className="" />
+              <img src={item.preview_URL} alt={`Preview of ${index}`} className="square-image"/>
             ) : null}
               <Button type="deletePhoto" className="delete-button" label="X" onClick={() => { deleteImage(index) }}></Button>
           </div>

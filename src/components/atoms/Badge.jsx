@@ -5,7 +5,7 @@ const getType = (type) => {
     case "unclicked":
       return "align-middle px-3.5 py-1  rounded-xl border border-gray-300 text-blackleading-normal text-center";
     case "onclicked":
-      return "align-middle px-3.5 py-1  rounded-xl bg-sky-500 text-white leading-normal text-center";
+      return "align-middle px-3.5 py-1  rounded-xl  border border-sky-500 bg-sky-500 text-white leading-normal text-center";
     default:
       return "";
   }

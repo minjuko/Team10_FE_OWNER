@@ -29,7 +29,7 @@ export const TextInput = ({
   name,
   value,
   onChange,
-  readOnly
+  readOnly,
 }) => {
   return (
     <input
