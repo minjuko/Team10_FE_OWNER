@@ -2,7 +2,7 @@ import React from 'react';
 import Badge from '../atoms/Badge';
 import { Box } from '../atoms/Box';
 
-const KeyPoint = ({ pointLabels, selectedPoints }) => {
+const KeyPointSelector = ({ pointLabels, selectedPoints }) => {
   return (
     <Box size="keypointbox">
       <div className="flex flex-col gap-2">
@@ -42,4 +42,4 @@ const KeyPoint = ({ pointLabels, selectedPoints }) => {
   );
 };
 
-export default KeyPoint;
+export default KeyPointSelector;
