@@ -10,12 +10,11 @@ import FileUploader from "../molecules/FileUploader";
 
 const RegisterForm = () => {
 
-  // 필요 변수 
-    const [selectedPoints, setSelectedPoints] = useState([]); // 선택한 키포인트 배열
-    const [weekdayStartTime, setWeekdayStartTime] = useState(new Date()); // 평일 시작 시간 상태
-    const [weekdayEndTime, setWeekdayEndTime] = useState(new Date()); // 평일 종료 시간 상태
-    const [weekendStartTime, setWeekendStartTime] = useState(new Date()); // 주말 시작 시간 상태
-    const [weekendEndTime, setWeekendEndTime] = useState(new Date()); // 주말 종료 시간 상태
+    const [selectedPoints, setSelectedPoints] = useState([]); 
+    const [weekdayStartTime, setWeekdayStartTime] = useState(new Date()); 
+    const [weekdayEndTime, setWeekdayEndTime] = useState(new Date()); 
+    const [weekendStartTime, setWeekendStartTime] = useState(new Date()); 
+    const [weekendEndTime, setWeekendEndTime] = useState(new Date()); 
     const pointLabels = ['하부세차', '개러지형 독립공간', '야간조명', '100% 수돗물', '휴게실', '에어컨', '발수코팅건'];
 
     return (
@@ -39,6 +38,7 @@ const RegisterForm = () => {
                   name="username"
                   placeholder="주소"
                   buttonlabel="주소찾기"
+                  onClick=""
                 />
               </div>
               {/*전화번호*/}
@@ -54,7 +54,6 @@ const RegisterForm = () => {
               {/*영업시간*/}
               <div className="flex flex-col mt-4">
                 <label className="text-start text-gray-700 text-base pl-4">영업시간</label>
-                {/*24시간 운영 체크박스 미구현*/}
                 <div className="flex flex-item mt-2">
                   <label className="text-start text-gray-700 text-base mt-4 pl-4">평일</label>
                   <TimeSelector
@@ -80,7 +79,6 @@ const RegisterForm = () => {
             <div className="right-info pl-4">
               {/*매장 사진*/}
                 <FileUploader/>
-          
               {/*키포인트*/}
               <div className="flex flex-col mt-4">
                 <label className="text-start text-gray-700 text-base pl-4">키포인트</label>
@@ -99,8 +97,6 @@ const RegisterForm = () => {
             type="long"
             label="입점신청"
           />
-          
-         
         </Box>
     );
 }
