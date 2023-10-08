@@ -33,7 +33,7 @@ const Badge = ({ label }) => {
           onChange={toggleCheckbox}
           className="hidden"
         />
-        {label}
+        <span className="select-none">{label}</span>
       </label>
     </div>
   );
