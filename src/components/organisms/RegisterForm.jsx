@@ -30,7 +30,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <Box size="registerbox" className="justify-center">
+    <Box size="registerBox" className="justify-center">
       {/*제목 텍스트*/}
       <div className="text-[32px] font-bold mt-12">입점을 환영합니다!</div>
       <div className="text-gray-500 text-base mt-4">
