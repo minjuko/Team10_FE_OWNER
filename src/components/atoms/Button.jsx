@@ -11,7 +11,7 @@ const getType = (type) => {
     case "addPhoto":
       return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center border border-gray-300 bg-gray-100";
     case "deletePhoto":
-      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center border border-gray-300 bg-gray-100"
+      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center border border-gray-300 bg-gray-100";
     case "withTextInput":
       return "w-28 h-14 px-4 rounded-xl bg-sky-100 text-sky-500";
   }
@@ -22,13 +22,12 @@ export const Button = ({ type, label, onClick, ...props }) => {
     <button
       type={type}
       label={label}
-      className={`${getType(type)} `}
+      className={getType(type)}
       {...props}
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
-      }}
-    >
+      }}>
       {label}
     </button>
   );

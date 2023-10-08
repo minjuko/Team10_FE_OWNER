@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 
-const getType = (type) => {
-  switch (type) {
-    case "unclicked":
-      return "align-middle px-3.5 py-1  rounded-xl border border-gray-300 text-blackleading-normal text-center";
-    case "onclicked":
-      return "align-middle px-3.5 py-1  rounded-xl  border border-sky-500 bg-sky-500 text-white leading-normal text-center";
-    default:
-      return "";
-  }
-};
-
-const Badge = ({ label, ...props }) => {
+const Badge = ({ label }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const getType = (type) => {
+    const commonStyle =
+      "align-middle px-3.5 py-1 rounded-full border leading-normal text-center";
+
+    switch (type) {
+      case "unclicked":
+        return `${commonStyle} border-gray-300 bg-white text-black`;
+      case "onclicked":
+        return `${commonStyle} border-sky-500 bg-sky-500 text-white`;
+      default:
+        return "";
+    }
+  };
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
@@ -20,16 +23,14 @@ const Badge = ({ label, ...props }) => {
 
   return (
     <div className="field">
-      <label
-        className={`${isChecked ? getType("onclicked") : getType("unclicked")}`}
-      >
+      <label className={`${getType(isChecked ? "onclicked" : "unclicked")}`}>
         <input
           type="checkbox"
           checked={isChecked}
           onChange={toggleCheckbox}
           className="hidden"
         />
-        {label}
+        <span className="select-none">{label}</span>
       </label>
     </div>
   );
