@@ -23,10 +23,7 @@ const Badge = ({ label }) => {
 
   return (
     <div className="field">
-      <label
-        className={`${
-          isChecked ? getType("onclicked") : getType("unclicked")
-        }`}>
+      <label className={`${getType(isChecked ? "onclicked" : "unclicked")}`}>
         <input
           type="checkbox"
           checked={isChecked}
