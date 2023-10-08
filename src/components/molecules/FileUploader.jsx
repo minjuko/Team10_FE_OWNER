@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../atoms/Button";
 import "./FileUploader.css";
 
 const FileUploader = () => {
   const [fileList, setFileList] = useState([]);
-  let inputRef;
+  const inputRef = useRef();
 
   const saveImage = (e) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ const FileUploader = () => {
           <Button
             type="addPhoto"
             label="+ 추가"
-            onClick={() => inputRef.click()}>
+            onClick={() => inputRef.current.click()}>
             추가
           </Button>
         </div>
@@ -80,7 +80,7 @@ const FileUploader = () => {
         accept="image/*"
         onChange={saveImage}
         onClick={(e) => (e.target.value = null)}
-        ref={(refParam) => (inputRef = refParam)}
+        ref={inputRef}
         className="hidden"
       />
     </div>
