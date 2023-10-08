@@ -1,23 +1,16 @@
 import React from "react";
 
-const getSizeClasses = (size) => {
-  switch (size) {
-    case "small": {
-      return "w-[496px] h-[441px]";
-    }
-    case "medium": {
-      return "w-[496px] h-[625px]";
-    }
-    default: {
-      return "w-96 w-10";
-    }
-  }
+const commonStyle =
+  "flex flex-col justify-center items-center gap-4 border border-gray-300 rounded-xl";
+
+const types = {
+  small: "w-[496px] h-[441px] bg-white",
+  medium: "w-[496px] h-[625px] bg-white",
+  registerBox: "w-[913px] h-[907px] bg-white",
+  keypointBox: "w-[384px] h-[139px] bg-gray-100",
+  default: "w-96 w-10",
 };
 
-const BASE_BOX_CLASSES =
-  "flex flex-col justify-center items-center gap-4 border rounded-xl border-gray-300 bg-white";
-
-export const Box = ({ className, children, size }) => {
-  const sizeClass = getSizeClasses(size);
-  return <div className={`${BASE_BOX_CLASSES} ${sizeClass}`}>{children}</div>;
+export const Box = ({ className, children, size = "default" }) => {
+  return <div className={`${commonStyle} ${types[size]}`}>{children}</div>;
 };

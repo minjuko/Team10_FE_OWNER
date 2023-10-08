@@ -8,6 +8,9 @@ const getSizeClasses = (size) => {
     case 'medium': {
       return 'w-963 h-945';
     }
+    case 'register-intro': {
+      return 'w-96 h-[204px] px-4 ';
+    }
     default: {
       return 'w-393 h-187';
     }
@@ -15,7 +18,7 @@ const getSizeClasses = (size) => {
 };
 
 const BASE_INPUT_CLASSES =
-  'border border-gray-300 resize-none bg-gray-100 focus:outline-none focus:border-blue-500';
+  'border border-gray-300 resize-none bg-gray-100 rounded-xl py-4';
 
 export const TextArea = ({ placeholder, size, value, onChange, ...props }) => {
   const sizeClass = getSizeClasses(size);
