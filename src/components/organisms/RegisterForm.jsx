@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextInput } from "../atoms/TextInput";
 import { Button } from "../atoms/Button";
-import TextboxWithButton from "../molecules/TextboxWithButton";
+
 import { TextArea } from "../atoms/TextArea";
 import { Box } from "../atoms/Box";
 import TimeSelector from "../molecules/TimeSelector";
 import FileUploader from "../molecules/FileUploader";
 import KeyPointSelector from "../molecules/KeyPointSelector";
+import DaumPostcode from "react-daum-postcode";
 
 const RegisterForm = () => {
+  
+  const [storeName, setStoreName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedPoints, setSelectedPoints] = useState([]);
   const [weekdayStartTime, setWeekdayStartTime] = useState(new Date());
   const [weekdayEndTime, setWeekdayEndTime] = useState(new Date());
   const [weekendStartTime, setWeekendStartTime] = useState(new Date());
   const [weekendEndTime, setWeekendEndTime] = useState(new Date());
+  const [openPostcode, setOpenPostcode] = useState(false);
+
   const pointLabels = [
     "하부세차",
     "개러지형 독립공간",
@@ -29,6 +36,21 @@ const RegisterForm = () => {
     e.target.value = numericValue;
   };
 
+  const handle = {
+    clickButton: () => {
+        setOpenPostcode(current => !current);
+    },
+
+    selectAddress: (data) => {
+        console.log(`
+            주소: ${data.address},
+        `)
+        const selectedAddress = data.address;
+        setAddress(selectedAddress);
+        setOpenPostcode(false);
+    },
+}
+
   return (
     <Box size="registerBox" className="justify-center">
       {/*제목 텍스트*/}
@@ -42,18 +64,34 @@ const RegisterForm = () => {
           {/*매장명*/}
           <div className="flex flex-col mt-4">
             <label className="text-start text-gray-700 text-base">매장명</label>
-            <TextInput placeholder="OO세차장" name="registerform-long" />
+            <TextInput
+              placeholder="OO세차장"
+              name="registerform-long"
+              value={storeName}
+              onChange={(e) => setStoreName(e.target.value)}
+            />
           </div>
           {/*주소*/}
           <div className="flex flex-col mt-4">
             <label className="text-start text-gray-700 text-base">주소</label>
-            <TextboxWithButton
-              type="text"
+            <div className="flex flex-items">
+            <TextInput 
+              type="registerform-medium"
               name="username"
               placeholder="주소"
-              buttonlabel="주소찾기"
-              onClick=""
+              value={address}
+              onChange={(e) => setAddress(e.target.value)} // 주소 입력 변경 시 state 업데이트
             />
+            <Button type="withTextInput" label="주소 찾기" onClick={handle.clickButton}/>
+            {openPostcode && (
+              <DaumPostcode
+                onComplete={handle.selectAddress}
+                autoClose={false}
+                defaultQuery="판교역로 235"
+                style={{ position: "absolute", zIndex: 1000, width: "40%" }}
+              />
+            )}
+            </div>
           </div>
           {/*전화번호*/}
           <div className="flex flex-col mt-4">
@@ -112,9 +150,7 @@ const RegisterForm = () => {
           <FileUploader />
           {/*키포인트*/}
           <div className="flex flex-col mt-4">
-            <label className="text-start text-gray-700 text-base">
-              키포인트
-            </label>
+            <label className="text-start text-gray-700 text-base">키포인트</label>
             <KeyPointSelector
               pointLabels={pointLabels}
               selectedPoints={selectedPoints}
@@ -128,12 +164,13 @@ const RegisterForm = () => {
             <TextArea
               size={"register-intro"}
               placeholder={"내용 입력"}
-              label={"매장 설명"}></TextArea>
+              label={"매장 설명"}
+            ></TextArea>
           </div>
         </div>
       </div>
       {/*입점신청*/}
-      <Button type="long" label="입점신청" />
+      <Button type="long" label="입점신청"/>
     </Box>
   );
 };
