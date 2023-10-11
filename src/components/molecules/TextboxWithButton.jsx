@@ -1,5 +1,5 @@
-import { TextInput } from "../atoms/TextInput";
-import { Button } from "../atoms/Button";
+import TextInput from "../atoms/TextInput";
+import Button from "../atoms/Button";
 
 const TextboxWithButton = ({
   type,
