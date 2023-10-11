@@ -11,6 +11,12 @@ const types = {
   default: "w-96 w-10",
 };
 
-export const Box = ({ className, children, size = "default" }) => {
-  return <div className={`${commonStyle} ${types[size]}`}>{children}</div>;
+const Box = ({ className, children }) => {
+  return (
+    <div className={`p-14 bg-white rounded-xl shadow-2xl ${className}`}>
+      {children}
+    </div>
+  );
 };
+
+export default Box;
