@@ -8,6 +8,7 @@ const styles = {
     "flex items-center px-3.5 py-1 border border-gray-300 bg-gray-100 rounded-full text-xs",
   deletePhoto: " w-6 h-6 bg-gray-100 rounded-full text-xs",
   withTextInput: "w-28 h-14 px-4 rounded-xl bg-sky-100 text-sky-500",
+  cta: "block px-7 py-4 bg-primary text-white font-semibold rounded-full",
 };
 
 const Button = ({ type = "button", style, className, ...props }) => {
