@@ -5,7 +5,7 @@ const commonStyle =
 
 const Box = ({ className, children }) => {
   return (
-    <div className={`p-14 bg-white rounded-xl shadow-2xl ${className}`}>
+    <div className={`bg-white rounded-xl shadow-2xl ${className}`}>
       {children}
     </div>
   );
