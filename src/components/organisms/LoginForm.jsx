@@ -15,7 +15,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   return (
-    <Box className="grid gap-14">
+    <Box className="p-14 grid gap-14">
       <Photo className="flex justify-center" src={Logo} />
 
       <form
