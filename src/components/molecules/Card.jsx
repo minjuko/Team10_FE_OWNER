@@ -12,9 +12,9 @@ const Card = ({ title, children }) => {
   return (
     <div className="w-64 bg-white rounded-xl shadow-2xl overflow-auto">
       <div className="bg-primary text-white font-semibold text-center p-4">
-        하이
+        {title}
       </div>
-      <div className="p-4">하이</div>
+      <div className="p-4">{children}</div>
     </div>
   );
 };
