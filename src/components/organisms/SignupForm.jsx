@@ -41,7 +41,7 @@ const SignupForm = () => {
   };
 
   return (
-    <Box className="grid gap-14">
+    <Box className="p-14 grid gap-14">
       <h1 className="font-bold text-2xl text-center">회원가입</h1>
 
       <form
