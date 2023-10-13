@@ -38,7 +38,7 @@ const RegisterForm = () => {
   ];
 
   return (
-    <Box className="grid gap-8">
+    <Box className="p-14 grid gap-8">
       {/*제목 텍스트*/}
       <div className="text-center grid gap-4">
         <h1 className="text-3xl font-bold">입점을 환영합니다!</h1>
