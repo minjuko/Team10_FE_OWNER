@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TextInput from "../atoms/TextInput";
 import Button from "../atoms/Button";
-import { TextArea } from "../atoms/TextArea";
+import TextArea from "../atoms/TextArea";
 import Box from "../atoms/Box";
 import TimeSelector from "../molecules/TimeSelector";
 import FileUploader from "../molecules/FileUploader";
@@ -38,9 +38,9 @@ const RegisterForm = () => {
   ];
 
   return (
-    <Box className="p-14 grid gap-8">
+    <Box className="grid gap-8 p-14">
       {/*제목 텍스트*/}
-      <div className="text-center grid gap-4">
+      <div className="grid gap-4 text-center">
         <h1 className="text-3xl font-bold">입점을 환영합니다!</h1>
         <div className="text-gray-500">아래 정보들을 입력해주세요.</div>
       </div>
@@ -104,13 +104,13 @@ const RegisterForm = () => {
             </div>
             {/* 영업시간 */}
             <div className="grid gap-2">
-              <div className="w-96 flex justify-between">
+              <div className="flex justify-between w-96">
                 <label className="text-gray-700">영업시간</label>
                 <Checkbox>24시간 영업</Checkbox>
               </div>
               {/* 평일 */}
-              <div className="w-96 flex items-center gap-2">
-                <label className="shrink-0 text-gray-700">평일</label>
+              <div className="flex items-center gap-2 w-96">
+                <label className="text-gray-700 shrink-0">평일</label>
                 <TextInput
                   type="time"
                   step="1800"
@@ -125,11 +125,11 @@ const RegisterForm = () => {
                   {...register("weekdayEndTime")}
                 />
               </div>
-              <div className="w-96 flex justify-end">
+              <div className="flex justify-end w-96">
                 <Checkbox>24시간 영업</Checkbox>
               </div>
-              <div className="w-96 flex items-center gap-2">
-                <label className="shrink-0 text-gray-700">주말</label>
+              <div className="flex items-center gap-2 w-96">
+                <label className="text-gray-700 shrink-0">주말</label>
                 <TextInput
                   type="time"
                   step="1800"
@@ -153,7 +153,7 @@ const RegisterForm = () => {
             </div>
             {/*키포인트*/}
             <div className="">
-              <label className="text-start text-gray-700 text-base">
+              <label className="text-base text-gray-700 text-start">
                 키포인트
               </label>
               <KeyPointSelector
@@ -167,10 +167,8 @@ const RegisterForm = () => {
                 매장 설명
               </label>
               <textarea
-                className="block w-96 h-44 p-4 text-black rounded-xl border border-gray-300 bg-gray-100 outline-none"
+                className="block p-4 text-black bg-gray-100 border border-gray-300 outline-none resize-none w-96 h-44 rounded-xl"
                 id="carwashDescription"
-                cols="3"
-                rows="10"
                 placeholder="매장 설명"
                 {...register("carwashDescription")}></textarea>
             </div>

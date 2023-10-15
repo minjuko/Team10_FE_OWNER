@@ -1,5 +1,5 @@
 import Box from "../atoms/Box";
-import Photo from "../atoms/Photo";
+import Image from "../atoms/Image";
 import ProfileIcon from "/profile.svg";
 
 /**
@@ -25,14 +25,14 @@ const SalesItem = ({
   endTime,
 }) => {
   return (
-    <Box className="w-auto p-4 grid gap-4">
+    <Box className="grid w-auto gap-4 p-4">
       <div className="text-xl text-gray-400">#{reservationId}</div>
       <div className="flex justify-between">
         <div className="text-xl">
           {carwashName}: 베이 {bayNo}
         </div>
-        <div className="flex gap-2 items-center">
-          <Photo src={ProfileIcon} alt="profile" />
+        <div className="flex items-center gap-2">
+          <Image src={ProfileIcon} alt="profile" />
           <div className="text-xl">{nickname}</div>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import Photo from "./Photo";
+import Image from "./Image";
 
 const DashboardItem = ({ label, number, percentage, icon }) => {
   return (
-    <div className="w-96 flex items-center justify-between p-4 bg-white rounded-xl">
+    <div className="flex items-center justify-between p-4 bg-white w-96 rounded-xl">
       <div>
         <div>{label}</div>
         <div className="text-3xl font-bold">{number}</div>
@@ -11,7 +11,7 @@ const DashboardItem = ({ label, number, percentage, icon }) => {
           {percentage + "%"}
         </div>
       </div>
-      <Photo src={icon} alt={label} />
+      <Image src={icon} alt={label} />
     </div>
   );
 };

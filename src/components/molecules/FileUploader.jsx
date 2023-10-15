@@ -49,7 +49,7 @@ const FileUploader = () => {
           + 추가
         </Button>
       </div>
-      <div className="file-container flex gap-4">
+      <div className="flex gap-4 file-container">
         {fileList?.map((item, index) => (
           <div className="file-wrapper" key={index}>
             {item.type === "image" ? (
