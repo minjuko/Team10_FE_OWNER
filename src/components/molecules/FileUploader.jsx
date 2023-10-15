@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Button } from '../atoms/Button';
+import { useEffect, useRef, useState } from "react";
+import { Button } from "../atoms/Button";
 import "./FileUploader.css";
 
 const FileUploader = () => {
   const [fileList, setFileList] = useState([]);
-  let inputRef;
+  const inputRef = useRef();
 
   const saveImage = (e) => {
     e.preventDefault();
@@ -12,8 +12,9 @@ const FileUploader = () => {
     const files = e.target.files;
     if (files) {
       for (let i = 0; i < files.length; i++) {
-        const preview_URL = URL.createObjectURL(files[i]);
-        const fileType = files[i].type.split("/")[0];
+        const file = files[i];
+        const preview_URL = URL.createObjectURL(file);
+        const fileType = file.type.split("/")[0];
         if (fileType === "image") {
           tmpFileList.push({
             fileObject: files[i],
@@ -30,45 +31,60 @@ const FileUploader = () => {
     const tmpFileList = [...fileList];
     tmpFileList.splice(index, 1);
     setFileList(tmpFileList);
-  }
+  };
 
   useEffect(() => {
     return () => {
       fileList?.forEach((item) => {
         URL.revokeObjectURL(item.preview_URL);
-      })
-    }
-  }, [])
+      });
+    };
+  }, []);
 
   return (
     <div className="uploader-wrapper">
-      <div className="flex items-center mt-8">
-        <label className="text-start text-gray-800 text-base pl-6 mr-10">매장 사진</label>
-        <Button type="addPhoto" label="+" onClick={() => inputRef.click()} />
-      </div>
-      <div>
-        <input
-          type="file" multiple={true} accept="image/*"
-          onChange={saveImage}
-          onClick={(e) => e.target.value = null}
-          ref={(refParam) => (inputRef = refParam)}
-          className="hidden"
-        />
-        <div className="file-container">
+      <div className="flex flex-col mt-2">
+        <div className="flex flex-item gap-[220px]">
+          <label className="text-start text-gray-700 text-base">매장사진</label>
+          <Button
+            type="addPhoto"
+            label="+ 추가"
+            onClick={() => inputRef.current.click()}>
+            추가
+          </Button>
+        </div>
+        <div className="file-container overflow-x-auto flex gap-4">
           {fileList?.map((item, index) => (
             <div className="file-wrapper" key={index}>
               {item.type === "image" ? (
-                <img src={item.preview_URL} alt={`Preview of ${index}`} />
+                <img
+                  src={item.preview_URL}
+                  alt={`Preview of ${index}`}
+                  className="square-image"
+                />
               ) : null}
-              <div className="delete-button" onClick={() => { deleteImage(index) }}>
-                <Button type="small" label="삭제" />
-              </div>
+              <Button
+                type="deletePhoto"
+                className="delete-button"
+                label="X"
+                onClick={() => {
+                  deleteImage(index);
+                }}></Button>
             </div>
           ))}
         </div>
       </div>
+      <input
+        type="file"
+        multiple={true}
+        accept="image/*"
+        onChange={saveImage}
+        onClick={(e) => (e.target.value = null)}
+        ref={inputRef}
+        className="hidden"
+      />
     </div>
   );
-}
+};
 
 export default FileUploader;

@@ -9,24 +9,25 @@ const getType = (type) => {
     case "small":
       return "block w-24 h-14 p-4 bg-gray-600 text-white font-semibold rounded-none";
     case "addPhoto":
-      return "block w-16 h-16 p-4 bg-gray-100 text-gray-600 font-semibold rounded-none";
+      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center border border-gray-300 bg-gray-100";
+    case "deletePhoto":
+      return "flex items-center align-middle w-20 h-6 px-3.5 py-1 leading-normal text-center border border-gray-300 bg-gray-100";
     case "withTextInput":
-      return "w-28 h-14 px-4 rounded-xl bg-blue-100 text-blue-500";
+      return "w-28 h-14 px-4 rounded-xl bg-sky-100 text-sky-500";
   }
 };
 
-export const Button = ({ type, label, ...props }) => {
+export const Button = ({ type, label, onClick, ...props }) => {
   return (
     <button
       type={type}
       label={label}
-      className={`${getType(type)} `}
+      className={getType(type)}
       {...props}
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
-      }}
-    >
+      }}>
       {label}
     </button>
   );
