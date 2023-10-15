@@ -41,8 +41,8 @@ const SignupForm = () => {
   };
 
   return (
-    <Box className="p-14 grid gap-14">
-      <h1 className="font-bold text-2xl text-center">회원가입</h1>
+    <Box className="grid p-14 gap-14">
+      <h1 className="text-2xl font-bold text-center">회원가입</h1>
 
       <form
         noValidate
@@ -51,7 +51,7 @@ const SignupForm = () => {
           await new Promise((r) => setTimeout(r, 1000));
           alert(JSON.stringify(data));
         })}>
-        <div className="w-96 flex gap-4">
+        <div className="flex gap-4 w-96">
           <TextInput
             type="text"
             placeholder="닉네임"
@@ -73,7 +73,7 @@ const SignupForm = () => {
           </small>
         )}
 
-        <div className="w-96 flex gap-4">
+        <div className="flex gap-4 w-96">
           <TextInput
             type="email"
             placeholder="이메일"

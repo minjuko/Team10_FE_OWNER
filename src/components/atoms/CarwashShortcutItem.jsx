@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 
 const CarwashShortcutItem = ({ carwash }) => {
   return (
-    <Link className="w-96 flex items-center gap-4 rounded-xl overflow-auto">
+    <Link className="flex items-center gap-4 overflow-auto w-96 rounded-xl">
       <div className="relative w-36 h-36">
         <img
           src={carwash.imageUrl}
           alt={carwash.name}
-          className="absolute w-36 h-36 object-cover"
+          className="absolute object-cover w-36 h-36"
         />
       </div>
-      <div className="w-52 grid gap-1">
-        <div className="text-2xl font-bold text-ellipsis whitespace-nowrap overflow-hidden">
+      <div className="grid gap-1 w-52">
+        <div className="overflow-hidden text-2xl font-bold text-ellipsis whitespace-nowrap">
           {carwash.name}
         </div>
         <div className="flex justify-between">

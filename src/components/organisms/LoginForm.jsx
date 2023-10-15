@@ -1,6 +1,6 @@
 import Button from "../atoms/Button";
 import Box from "../atoms/Box";
-import Photo from "../atoms/Photo";
+import Image from "../atoms/Image";
 import Logo from "/logo.svg";
 import TextInput from "../atoms/TextInput";
 import { useNavigate } from "react-router-dom";
@@ -15,8 +15,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   return (
-    <Box className="p-14 grid gap-14">
-      <Photo className="flex justify-center" src={Logo} />
+    <Box className="grid p-14 gap-14">
+      <Image className="flex justify-center" src={Logo} />
 
       <form
         noValidate

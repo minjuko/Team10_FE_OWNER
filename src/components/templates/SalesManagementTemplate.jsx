@@ -14,14 +14,14 @@ import SalesItem from "../organisms/SalesItem";
 const SalesManagementTemplate = ({ response }) => {
   return (
     <div className="flex gap-16">
-      <aside className="flex-shrink-0 flex-grow-0 flex flex-col gap-4">
+      <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
         <MonthSelectorCard />
         <Card title="매장별 선택">
           <Checkbox>용봉세차타운</Checkbox>
           <Checkbox>수완세차타운</Checkbox>
         </Card>
       </aside>
-      <section className="flex-grow grid gap-4">
+      <section className="grid flex-grow gap-4">
         {response.map((item) => {
           return (
             <SalesItem
