@@ -37,7 +37,7 @@ const MonthSelectorCard = () => {
     <Card
       // 월 선택
       title={
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <Button id="-" className="w-6 h-12 select-none" onClick={handleClick}>
             ◀
           </Button>
@@ -51,7 +51,7 @@ const MonthSelectorCard = () => {
         </div>
       }>
       {/* 해당 월 매출 금액 */}
-      <div className="text-primary text-2xl font-semibold text-center">
+      <div className="text-2xl font-semibold text-center text-primary">
         1,170,000원
       </div>
     </Card>
