@@ -43,7 +43,7 @@ const TimeSelector = ({ startTime, setStartTime, endTime, setEndTime }) => {
                 showTimeSelectOnly
                 timeIntervals={30}
                 timeCaption="시작 시간"
-                className="w-32 h-14 px-4 rounded-xl border border-gray-300 bg-gray-100"
+                className="w-32 px-4 bg-gray-100 border border-gray-300 h-14 rounded-xl"
                 disabled={is24Hour}
               />
             </div>

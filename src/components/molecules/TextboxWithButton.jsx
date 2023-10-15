@@ -8,7 +8,6 @@ const TextboxWithButton = ({
   label,
   value,
   onChange,
-  buttontype,
   buttonlabel,
   onClick,
 }) => {

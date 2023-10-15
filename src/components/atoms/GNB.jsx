@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Photo from "./Photo";
+import Image from "./Image";
 import Logo from "/logo.svg";
 import Button from "./Button";
 
@@ -28,9 +28,9 @@ const GNB = () => {
   return (
     <nav className="border-b border-gray-300">
       <div className="w-[1280px] mx-auto flex justify-between items-center px-4">
-        <section className="flex gap-12 items-center">
+        <section className="flex items-center gap-12">
           <Link to="/">
-            <Photo src={Logo} alt="뽀득뽀득 사장님 페이지 로고" />
+            <Image src={Logo} alt="뽀득뽀득 사장님 페이지 로고" />
           </Link>
 
           <ul className="flex">
