@@ -1,6 +1,7 @@
+import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
 
-const CarwashBayItem = ({ bay }) => {
+const CarwashBayItem = ({ start_time, end_time, bay }) => {
   return (
     <div className="p-4 shadow-xl rounded-xl">
       <div className="flex justify-between">
@@ -17,15 +18,12 @@ const CarwashBayItem = ({ bay }) => {
           </button>
         </div>
       </div>
-      <div>
-        {bay.bay_bookedTime.map((item, index) => {
-          return (
-            <div key={index}>
-              {item.start_time}~{item.end_time}
-            </div>
-          );
-        })}
-      </div>
+
+      <TimeTable
+        start_time={start_time}
+        end_time={end_time}
+        bookedTime={bay.bay_bookedTime}
+      />
     </div>
   );
 };
