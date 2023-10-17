@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import MultipleTimeTable from "../molecules/MultipleTimeTable";
 
 const CarwashItem = ({ carwash }) => {
   return (
@@ -9,18 +10,7 @@ const CarwashItem = ({ carwash }) => {
           {carwash.name}
         </div>
         <div className="p-4">
-          {carwash.bay_list.map((item) => {
-            return (
-              <div key={item.bay_no} className="flex gap-4">
-                <div>{item.bay_no}</div>
-                {item.bay_bookedTime.map((item, index) => (
-                  <div key={index}>
-                    {item.start_time}~{item.end_time}
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+          <MultipleTimeTable carwash={carwash} />
         </div>
       </div>
     </Link>
