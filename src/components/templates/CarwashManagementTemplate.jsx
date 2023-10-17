@@ -1,4 +1,3 @@
-import Card from "../molecules/Card";
 import CarwashItem from "../organisms/CarwashItem";
 import CarwashImage from "/carwashImage.png";
 
@@ -9,6 +8,8 @@ const CarwashManagementTemplate = ({
     {
       image: CarwashImage,
       name: "용봉세차타운",
+      start_time: "1970-01-01T07:00",
+      end_time: "1970-01-01T22:00",
       bay_list: [
         {
           bay_no: 8,
@@ -41,6 +42,8 @@ const CarwashManagementTemplate = ({
     {
       image: CarwashImage,
       name: "수완세차타운",
+      start_time: "1970-01-01T07:00",
+      end_time: "1970-01-01T22:00",
       bay_list: [
         {
           bay_no: 4,
