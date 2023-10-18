@@ -1,12 +1,15 @@
+# Build stage
+FROM krmp-d2hub-idock.9rum.cc/goorm/node:16 AS build
+WORKDIR /usr/src/app
+COPY krampoline/package*.json ./
+RUN npm ci
+COPY krampoline/ ./
+RUN npm run build
+
+# Run stage
 FROM krmp-d2hub-idock.9rum.cc/goorm/node:16
 WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm i
-COPY . .
-RUN apt-get update && \
-    apt-get install -y nginx && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm /etc/nginx/sites-enabled/default
-COPY default.conf /etc/nginx/conf.d/
+COPY --from=build /usr/src/app/dist ./dist
 RUN npm install -g serve
-CMD npm run build && service nginx start && serve -s build
+EXPOSE 3000
+CMD ["serve", "-s", "dist"]
