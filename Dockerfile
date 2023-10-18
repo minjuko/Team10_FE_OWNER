@@ -13,3 +13,5 @@ COPY --from=build /usr/src/app/dist ./dist
 RUN npm install -g serve
 EXPOSE 3000
 CMD ["serve", "-s", "dist"]
+
+ENV VITE_APP_PATH=/your-app-path
