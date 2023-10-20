@@ -26,9 +26,9 @@ export const handlers = [
 
   // 매출관리 페이지
   rest.get("/owner/sales", (req, res, ctx) => {
-    if (req.body) {
-      return res(ctx.status(200), ctx.json(sales));
-    }
+    const selected_date = req.url.searchParams.get("selected-date");
+    const carwash_id = req.url.searchParams.get("carwash-id");
+    return res(ctx.status(200), ctx.json({ sales }));
   }),
 
   rest.get("/owner/carwashes/:carwash_id", (req, res, ctx) => {

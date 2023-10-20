@@ -11,8 +11,10 @@ export const setBayStatus = (bay_id, status) => {
 };
 
 // 매출관리 데이터
-export const getSales = () => {
-  return instance.get("/owner/sales");
+export const getSales = (carwash_id, selected_date) => {
+  return instance.get(
+    `/owner/sales?carwash-id=${carwash_id}&selected-date=${selected_date}`
+  );
 };
 
 // 월 매출 데이터
