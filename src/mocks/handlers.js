@@ -25,13 +25,13 @@ export const handlers = [
   }),
 
   // 매출관리 페이지
-  rest.get("owner/sales", (req, res, ctx) => {
+  rest.get("/owner/sales", (req, res, ctx) => {
     if (req.body) {
       return res(ctx.status(200), ctx.json(sales));
     }
   }),
 
-  rest.get("owner/carwashes/:carwash_id", (req, res, ctx) => {
+  rest.get("/owner/carwashes/:carwash_id", (req, res, ctx) => {
     const carwash_id = req.params.carwash_id;
     // carwash_id로 특정 세차장 가져오는 코드 추가하기
     if (req.body) {
@@ -40,7 +40,7 @@ export const handlers = [
   }),
 
   // 총 매출 금액 조회
-  rest.get("owner/revenue", (req, res, ctx) => {
+  rest.get("/owner/revenue", (req, res, ctx) => {
     if (req.body) {
       return res(ctx.status(200), ctx.json(revenue));
     }
@@ -48,14 +48,14 @@ export const handlers = [
 
   // *********** POST ***********
   // 로그인
-  rest.post("/owner/login", (req, res, ctx) => {
+  rest.post("/login/owner", (req, res, ctx) => {
     if (req.body) {
       return res(ctx.status(200));
     }
   }),
 
   // 회원가입
-  rest.post("/owner/signup", (req, res, ctx) => {
+  rest.post("/join/owner", (req, res, ctx) => {
     if (req.body) {
       return res(ctx.status(200));
     }
@@ -84,7 +84,7 @@ export const handlers = [
   }),
 
   // 베이 활성화/비활성화
-  rest.put("owner/bays/:bay_id/status", (req, res, ctx) => {
+  rest.put("/owner/bays/:bay_id/status", (req, res, ctx) => {
     if (req.body) {
       return res(ctx.status(200));
     }
