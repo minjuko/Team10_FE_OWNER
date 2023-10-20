@@ -41,9 +41,9 @@ export const handlers = [
 
   // 총 매출 금액 조회
   rest.get("/owner/revenue", (req, res, ctx) => {
-    if (req.body) {
-      return res(ctx.status(200), ctx.json(revenue));
-    }
+    const selected_date = req.url.searchParams.get("selected-date");
+    const carwash_id = req.url.searchParams.get("carwash-id");
+    return res(ctx.status(200), ctx.json({ revenue }));
   }),
 
   // *********** POST ***********

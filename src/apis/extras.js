@@ -19,5 +19,7 @@ export const getSales = (carwash_id, selected_date) => {
 
 // 월 매출 데이터
 export const getRevenue = (carwash_id, selected_date) => {
-  return instance.get("/owner/revenue", { carwash_id, selected_date });
+  return instance.get(
+    `/owner/revenue?carwash-id=${carwash_id}&selected-date=${selected_date}`
+  );
 };
