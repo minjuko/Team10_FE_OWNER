@@ -8,6 +8,9 @@ import Checkbox from "../atoms/CheckBox";
 import DaumPostcode from "react-daum-postcode";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { postRegister } from "../../apis/carwashes";
 
 /**
  * RegisterForm
@@ -18,9 +21,18 @@ import "react-datepicker/dist/react-datepicker.css";
  * @todo 매장사진 가로 스크롤 항상 표시되도록 수정 필요
  * @toto 매장 사진 required 처리 필요
  * @todo Organism에서 Template으로 격상 필요
- * @togo 복잡한 로직은 컴포넌트로 분리 필요(운영시간, 매장사진, 키포인트)
+ * @todo 복잡한 로직은 컴포넌트로 분리 필요(운영시간, 매장사진, 키포인트)
+ * @todo isSubmitting 상태에 따라 입점신청 버튼 스타일 변경 필요
  */
 const RegisterForm = () => {
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      postRegister(data);
+    },
+  });
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -119,7 +131,15 @@ const RegisterForm = () => {
       <form
         className="grid gap-8"
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          mutation.mutate(data, {
+            onSuccess: () => {
+              navigate("/");
+            },
+            onError: (error) => {
+              // TODO: 입점신청 실패 시 에러 처리 필요
+              console.log(error);
+            },
+          });
         })}>
         {/* Wrapper */}
         <div className="flex gap-8">
