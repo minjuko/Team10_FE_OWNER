@@ -13,7 +13,8 @@ export const putCarwashesDetails = (carwash_id, data) => {
 };
 
 export const postRegister = (data) => {
-  return instance.post("/owner/register", data);
+  console.log(data);
+  return instance.post("/owner/carwashes/register", data);
 };
 
 export const addBays = (carwash_id, bay_number) => {
