@@ -7,5 +7,5 @@ export const login = (data) => {
 
 export const signup = (data) => {
   const { nickname, email, password, tel } = data;
-  return instance.post("/signup/owner", { nickname, email, password, tel });
+  return instance.post("/join/owner", { nickname, email, password, tel });
 };

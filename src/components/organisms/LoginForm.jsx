@@ -14,6 +14,7 @@ import { login } from "../../apis/user";
  * 이메일, 비밀번호 입력창, 로그인 버튼, 회원가입 링크를 담고 있는 박스입니다.
  *
  * @todo 로그인에 실패했을 때 에러처리 (form onSubmit 부분)
+ * @todo 로그인 시 즉시 메인 페이지로 이동하는데, 이 부분에서 localStorage에 토큰을 저장하는 로직 필요
  */
 const LoginForm = () => {
   const mutation = useMutation({
@@ -22,12 +23,13 @@ const LoginForm = () => {
     },
   });
 
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
   } = useForm();
-  const navigate = useNavigate();
 
   return (
     <Box className="grid p-14 gap-14">
