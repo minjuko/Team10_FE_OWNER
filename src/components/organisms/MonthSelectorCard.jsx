@@ -8,7 +8,7 @@ import Card from "../molecules/Card";
  *
  * @todo 월 선택시 카드 하단에 해당 월 매출 금액 조회 구현
  */
-const MonthSelectorCard = ({ setDate }) => {
+const MonthSelectorCard = ({ setDate, monthlyRevenue }) => {
   const today = new Date();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -73,7 +73,7 @@ const MonthSelectorCard = ({ setDate }) => {
       }>
       {/* 해당 월 매출 금액 */}
       <div className="text-2xl font-semibold text-center text-primary">
-        1,170,000원
+        {monthlyRevenue.toLocaleString()}원
       </div>
     </Card>
   );

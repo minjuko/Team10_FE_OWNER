@@ -1,10 +1,11 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQueries, useSuspenseQuery } from "@tanstack/react-query";
 import Checkbox from "../atoms/CheckBox";
 import Card from "../molecules/Card";
 import MonthSelectorCard from "../organisms/MonthSelectorCard";
 import SalesItem from "../organisms/SalesItem";
-import { getSales } from "../../apis/extras";
+import { getRevenue, getSales } from "../../apis/extras";
 import { useState } from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 /**
  * SalesManagementTemplate 템플릿
@@ -23,22 +24,33 @@ const SalesManagementTemplate = () => {
     setSelectedDate(newDate);
   };
 
-  const { data } = useSuspenseQuery({
-    queryKey: ["sales", selectedCarwash, selectedDate],
-    queryFn: () => getSales(selectedCarwash, selectedDate),
+  const [salesData, revenueData] = useSuspenseQueries({
+    queries: [
+      {
+        queryKey: ["sales", selectedCarwash, selectedDate],
+        queryFn: () => getSales(selectedCarwash, selectedDate),
+      },
+      {
+        queryKey: ["revenue", selectedCarwash, selectedDate],
+        queryFn: () => getRevenue(selectedCarwash, selectedDate),
+      },
+    ],
   });
 
   return (
     <div className="flex gap-16">
       <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
-        <MonthSelectorCard setDate={setDate} />
+        <MonthSelectorCard
+          setDate={setDate}
+          monthlyRevenue={revenueData.data.data.revenue.response.revenue}
+        />
         <Card title="매장별 선택">
           <Checkbox>용봉세차타운</Checkbox>
           <Checkbox>수완세차타운</Checkbox>
         </Card>
       </aside>
       <section className="grid flex-grow gap-4">
-        {data.data.sales.response.map((item) => {
+        {salesData.data.data.sales.response.map((item) => {
           return (
             // carwash_id 관련 추가 필요
             <SalesItem
