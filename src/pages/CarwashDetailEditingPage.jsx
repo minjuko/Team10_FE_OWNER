@@ -1,8 +1,11 @@
+import { Suspense } from "react";
+import CarwashDetailEditingTemplate from "../components/templates/CarwashDetailEditingTemplate";
+
 const CarwashDetailEditingPage = () => {
   return (
-    <div>
-      <h1>CarwashDetailEditingPage</h1>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <CarwashDetailEditingTemplate />
+    </Suspense>
   );
 };
 
