@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Card from "../molecules/Card";
 import CarwashBayItem from "../organisms/CarwashBayItem";
 import CarwashImage from "/carwashImage.png";
@@ -59,6 +60,8 @@ const CarwashItemManagementTemplate = ({
     ],
   },
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex gap-16">
       <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
@@ -77,6 +80,7 @@ const CarwashItemManagementTemplate = ({
           className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
           onClick={(e) => {
             e.preventDefault();
+            navigate("/manage/item/edit");
           }}>
           세차장 정보 수정
         </button>
