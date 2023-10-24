@@ -7,6 +7,7 @@ import SalesManagementPage from "./pages/SalesManagementPage";
 import MainLayout from "./layouts/MainLayout";
 import CarwashManagementPage from "./pages/CarwashManagementPage";
 import CarwashItemManagementPage from "./pages/CarwashItemManagementPage";
+import CarwashDetailEditingPage from "./pages/CarwashDetailEditingPage";
 
 const App = () => {
   return (
@@ -20,6 +21,9 @@ const App = () => {
             <Route
               path="/manage/item"
               element={<CarwashItemManagementPage />}></Route>
+            <Route
+              path="/manage/item/edit"
+              element={<CarwashDetailEditingPage />}></Route>
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
