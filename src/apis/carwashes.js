@@ -5,15 +5,14 @@ export const getCarwashes = () => {
 };
 
 export const getCarwashesDetails = (carwash_id) => {
-  return instance.get(`/owner/${carwash_id}/carwashes`);
+  return instance.get(`/owner/carwashes/${carwash_id}/details`);
 };
 
 export const putCarwashesDetails = (carwash_id, data) => {
-  return instance.put(`/owner/${carwash_id}/carwashes`, data);
+  return instance.put(`/owner/carwashes/${carwash_id}/details`, data);
 };
 
 export const postRegister = (data) => {
-  console.log(data);
   return instance.post("/owner/carwashes/register", data);
 };
 
