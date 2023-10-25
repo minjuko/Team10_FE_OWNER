@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Badge from "../atoms/Badge";
 
-const KeyPointSelector = ({ value, pointLabels, onChange }) => {
+const KeyPointSelector = ({ value, pointLabels, handleChange }) => {
   const [selected, setSelected] = useState(value || []);
 
   return (
@@ -20,7 +20,7 @@ const KeyPointSelector = ({ value, pointLabels, onChange }) => {
               }
               valueCopy.sort((a, b) => a - b);
               setSelected(valueCopy);
-              onChange(valueCopy);
+              handleChange("keypoint", valueCopy);
             }}>
             {label}
           </Badge>
