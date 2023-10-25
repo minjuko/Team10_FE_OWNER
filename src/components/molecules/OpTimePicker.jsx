@@ -1,49 +1,86 @@
 import { useState } from "react";
 import Checkbox from "../atoms/CheckBox";
 import TimePicker from "../atoms/TimePicker";
+import RegisterFormItemStructure from "../atoms/RegisterFormItemStructure";
 
 const OpTimePicker = ({
-  label,
-  openTime,
-  closeTime,
-  onChangeOpenTime,
-  onChangeCloseTime,
+  weekdayOpenTime,
+  weekdayCloseTime,
+  weekendOpenTime,
+  weekendCloseTime,
+  onChange,
 }) => {
-  const [disabled, setDisabled] = useState(false);
+  const [isWeekday24hours, setIsWeekday24hours] = useState(false);
+  const [isWeekend24hours, setIsWeekend24hours] = useState(false);
 
   return (
-    <>
-      <div className="flex justify-between">
-        <label className="text-gray-700">{label}</label>
-        <Checkbox
-          onChange={(e) => {
-            if (e.target.checked) {
-              setDisabled(true);
-              onChangeOpenTime("00:00");
-              onChangeCloseTime("23:59");
-            } else {
-              setDisabled(false);
-              onChangeOpenTime("");
-              onChangeCloseTime("");
-            }
-          }}>
-          24시간 영업
-        </Checkbox>
-      </div>
-      <div className="flex items-center justify-between">
-        <TimePicker
-          value={openTime}
-          onChange={onChangeOpenTime}
-          disabled={disabled}
-        />
-        ~
-        <TimePicker
-          value={closeTime}
-          onChange={onChangeCloseTime}
-          disabled={disabled}
-        />
-      </div>
-    </>
+    <div className="grid gap-2">
+      <RegisterFormItemStructure
+        label="평일 영업시간"
+        besideLabel={
+          <Checkbox
+            onChange={(e) => {
+              if (e.target.checked) {
+                setIsWeekday24hours(true);
+                onChange("weekdayOpenTime", "00:00");
+                onChange("weekdayCloseTime", "23:59");
+              } else {
+                setIsWeekday24hours(false);
+              }
+            }}>
+            24시간 운영
+          </Checkbox>
+        }>
+        <div className="flex items-center justify-between">
+          <TimePicker
+            name="weekdayOpenTime"
+            value={weekdayOpenTime}
+            onChange={onChange}
+            disabled={isWeekday24hours}
+          />
+          {"~"}
+          <TimePicker
+            name="weekdayCloseTime"
+            value={weekdayCloseTime}
+            onChange={onChange}
+            disabled={isWeekday24hours}
+          />
+        </div>
+      </RegisterFormItemStructure>
+
+      <RegisterFormItemStructure
+        label="주말 영업시간"
+        besideLabel={
+          <Checkbox
+            onChange={(e) => {
+              if (e.target.checked) {
+                setIsWeekend24hours(true);
+                onChange("weekendOpenTime", "00:00");
+                onChange("weekendCloseTime", "23:59");
+              } else {
+                setIsWeekend24hours(false);
+              }
+            }}>
+            24시간 운영
+          </Checkbox>
+        }>
+        <div className="flex items-center justify-between">
+          <TimePicker
+            name="weekendOpenTime"
+            value={weekendOpenTime}
+            onChange={onChange}
+            disabled={isWeekend24hours}
+          />
+          {"~"}
+          <TimePicker
+            name="weekendCloseTime"
+            value={weekendCloseTime}
+            onChange={onChange}
+            disabled={isWeekend24hours}
+          />
+        </div>
+      </RegisterFormItemStructure>
+    </div>
   );
 };
 

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
 
-const TimePicker = ({ value, onChange, disabled = false }) => {
+const TimePicker = ({ value, onChange, name, disabled = false }) => {
   const [time, setTime] = useState(value || "");
   const [showTimePicker, setShowTimePicker] = useState(false);
 
+  // 컴포넌트 밖을 클릭하면 타임피커를 닫는다.
   const timePickerRef = useClickOutside(() => {
     setShowTimePicker(false);
   });
@@ -21,8 +22,8 @@ const TimePicker = ({ value, onChange, disabled = false }) => {
             className="text-center select-none hover:bg-gray-100"
             onClick={() => {
               setTime(timeStr);
-              onChange(timeStr);
               setShowTimePicker(false);
+              onChange(name, timeStr);
             }}>
             {timeStr}
           </div>
@@ -50,7 +51,6 @@ const TimePicker = ({ value, onChange, disabled = false }) => {
           {generateTime()}
         </div>
       )}
-      <input value={time} hidden readOnly name="time" disabled={disabled} />
     </div>
   );
 };
