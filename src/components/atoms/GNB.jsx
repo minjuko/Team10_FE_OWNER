@@ -20,7 +20,7 @@ const GNB = () => {
 
   return (
     <nav className="border-b border-gray-300">
-      <div className="w-[1280px] mx-auto flex justify-between items-center px-4">
+      <div className="w-[1280px] mx-auto flex justify-between items-center px-4 bg-white">
         <section className="flex items-center gap-12">
           <Link to="/">
             <Image src={Logo} alt="뽀득뽀득 사장님 페이지 로고" />
@@ -32,9 +32,8 @@ const GNB = () => {
                 <Link key={index} to={menu.path}>
                   <li
                     className={`${
-                      location.pathname === menu.path
-                        ? "border-b-8 border-primary text-primary"
-                        : ""
+                      location.pathname === menu.path &&
+                      "border-b-8 border-primary text-primary"
                     } text-xl p-8`}>
                     {menu.label}
                   </li>

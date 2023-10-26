@@ -7,10 +7,45 @@ import AC from "/MobilePreview/ac.svg";
 import Garage from "/MobilePreview/garage.svg";
 import Light from "/MobilePreview/light.svg";
 import Tel from "/MobilePreview/tel.svg";
+import Underside from "/MobilePreview/underside.svg";
+import Tapwater from "/MobilePreview/tapwater.svg";
+import Breakroom from "/MobilePreview/breakroom.svg";
+import Waterproof from "/MobilePreview/waterproof.svg";
 
 const MobilePreview = ({ inputs }) => {
+  const keypoints = [
+    <div className="flex gap-2">
+      <img src={Underside} alt="하부세차 아이콘" width={16} />
+      <div>하부세차</div>
+    </div>,
+    <div className="flex gap-2">
+      <img src={Garage} alt="차고 아이콘" width={16} />
+      <div>개러지형 독립공간</div>
+    </div>,
+    <div className="flex gap-2">
+      <img src={Light} alt="전구 아이콘" width={16} />
+      <div>야간조명</div>
+    </div>,
+    <div className="flex gap-2">
+      <img src={Tapwater} alt="물방울 아이콘" width={16} />
+      <div>100% 수돗물</div>
+    </div>,
+    <div className="flex gap-2">
+      <img src={Breakroom} alt="커피잔 아이콘" width={16} />
+      <div>휴게실</div>
+    </div>,
+    <div className="flex gap-2">
+      <img src={AC} alt="에어컨 아이콘" width={16} />
+      <div>에어컨</div>
+    </div>,
+    <div className="flex gap-2">
+      <img src={Waterproof} alt="방수 아이콘" width={16} />
+      <div>발수코팅건</div>
+    </div>,
+  ];
+
   return (
-    <div className="overflow-auto bg-white shadow-xl rounded-xl grow">
+    <div className="relative overflow-auto bg-white shadow-xl rounded-xl grow">
       <Carousel
         showArrows={true}
         showStatus={false}
@@ -47,11 +82,27 @@ const MobilePreview = ({ inputs }) => {
           <div className="flex gap-2">
             <img src={Time} alt="시계 아이콘" />
             <div>
-              <div>
-                평일 {inputs.weekdayOpenTime}~{inputs.weekdayCloseTime}
+              <div className="flex gap-1">
+                <div>평일</div>
+                {inputs.weekdayOpenTime === "00:00" &&
+                inputs.weekdayCloseTime === "23:59" ? (
+                  <div>24시간 운영</div>
+                ) : (
+                  <div>
+                    {inputs.weekdayOpenTime}~{inputs.weekdayCloseTime}
+                  </div>
+                )}
               </div>
-              <div>
-                주말 {inputs.weekendOpenTime}~{inputs.weekendCloseTime}
+              <div className="flex gap-1">
+                <div>주말</div>
+                {inputs.weekendOpenTime === "00:00" &&
+                inputs.weekendCloseTime === "23:59" ? (
+                  <div>24시간 운영</div>
+                ) : (
+                  <div>
+                    {inputs.weekendOpenTime}~{inputs.weekendCloseTime}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -68,26 +119,17 @@ const MobilePreview = ({ inputs }) => {
         {/* 키포인트 */}
         <div className="grid gap-2 p-4 bg-gray-100 rounded-xl">
           <div className="font-bold">키포인트</div>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="flex gap-2">
-              <img src={AC} alt="에어컨 아이콘" width={16} />
-              <div className="text-xs">에어컨</div>
-            </div>
-            <div className="flex gap-2">
-              <img src={Garage} alt="차고 아이콘" width={16} />
-              <div className="text-xs">개러지형 독립공간</div>
-            </div>
-            <div className="flex gap-2">
-              <img src={Light} alt="전구 아이콘" width={16} />
-              <div className="text-xs">야간조명</div>
-            </div>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            {keypoints.map((keypoint, index) => {
+              if (inputs.keypoint.includes(index)) return keypoint;
+            })}
           </div>
         </div>
 
         {/* 세차장 설명 */}
-        <div className="overflow-auto text-sm h-80">
+        <p className="overflow-auto text-sm whitespace-pre-wrap h-60">
           {inputs.carwashDescription}
-        </div>
+        </p>
       </div>
     </div>
   );

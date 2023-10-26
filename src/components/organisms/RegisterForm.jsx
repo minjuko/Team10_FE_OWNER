@@ -14,9 +14,7 @@ import OpTimePicker from "../molecules/OpTimePicker";
  *
  * @todo 각 input에 대한 validation 필요
  */
-const RegisterForm = ({ inputs, onChange, mutation }) => {
-  const navigate = useNavigate();
-
+const RegisterForm = ({ inputs, onChange, mutation, buttonLabel }) => {
   const pointLabels = [
     "하부세차",
     "개러지형 독립공간",
@@ -32,6 +30,7 @@ const RegisterForm = ({ inputs, onChange, mutation }) => {
       className="grid gap-8"
       onSubmit={(e) => {
         e.preventDefault();
+        mutation.mutate(inputs);
       }}>
       {/* Wrapper */}
       <div className="flex gap-8">
@@ -85,8 +84,6 @@ const RegisterForm = ({ inputs, onChange, mutation }) => {
           </RegisterFormItemStructure>
 
           {/* 영업시간 */}
-          {/* 24시간 운영 체크박스 해제하면 원래 시간으로 돌아가게 수정 필요함 */}
-          {/* 원래 시간으로 돌아가려면 24시간 운영에 체크하기 전 데이터를 저장할 곳이 필요함 */}
           <OpTimePicker
             weekdayOpenTime={inputs.weekdayOpenTime}
             weekdayCloseTime={inputs.weekdayCloseTime}
@@ -128,7 +125,7 @@ const RegisterForm = ({ inputs, onChange, mutation }) => {
       {/* 하단 버튼 */}
       <div className="flex justify-center">
         <Button type="submit" style="long">
-          입점신청
+          {buttonLabel}
         </Button>
       </div>
     </form>

@@ -4,12 +4,28 @@ import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getCarwashesDetails, putCarwashesDetails } from "../../apis/carwashes";
 import MobilePreview from "../organisms/MobilePreview";
 import useRegisterForm from "../../hooks/useRegisterForm";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CarwashDetailEditingTemplate = () => {
+  const navigate = useNavigate();
+
   const { data } = useSuspenseQuery({
     queryKey: ["getCarwashDetail"],
     queryFn: getCarwashesDetails,
+  });
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      putCarwashesDetails(data);
+    },
+    onSuccess: () => {
+      alert("정상적으로 수정되었습니다.");
+      navigate("/manage/item");
+    },
+    onError: (error) => {
+      // 에러 처리 필요
+      alert(error);
+    },
   });
 
   const carwashDetail = data?.data?.response;
@@ -30,16 +46,6 @@ const CarwashDetailEditingTemplate = () => {
 
   const [inputs, handleChange] = useRegisterForm(initialValue);
 
-  const mutation = useMutation({
-    mutationFn: (data) => {
-      putCarwashesDetails(data);
-    },
-  });
-
-  useEffect(() => {
-    console.log("inputs", inputs);
-  }, [inputs]);
-
   return (
     <div className="flex gap-8">
       <Box className="grid gap-8 p-14">
@@ -48,6 +54,7 @@ const CarwashDetailEditingTemplate = () => {
           inputs={inputs}
           onChange={handleChange}
           mutation={mutation}
+          buttonLabel="수정하기"
         />
       </Box>
       <MobilePreview inputs={inputs} />
