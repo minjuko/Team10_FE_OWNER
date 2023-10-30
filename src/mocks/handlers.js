@@ -68,7 +68,7 @@ export const handlers = [
   rest.post("/login/owner", (req, res, ctx) => {
     const { email, password } = req.body;
 
-    if (email !== "user@nate.com" || password !== "user1234!") {
+    if (email !== "owner@nate.com" || password !== "owner1234!") {
       return res(
         ctx.status(401),
         ctx.json({
