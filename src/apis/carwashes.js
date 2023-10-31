@@ -12,7 +12,7 @@ export const putCarwashesDetails = (carwash_id, data) => {
   return instance.put(`/owner/carwashes/${carwash_id}/details`, data);
 };
 
-export const postRegister = (data) => {
+export const register = (data) => {
   return instance.post("/owner/carwashes/register", data);
 };
 
