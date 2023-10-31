@@ -2,13 +2,13 @@ import React from "react";
 import RegisterForm from "../components/organisms/RegisterForm";
 import Box from "../components/atoms/Box";
 import { useMutation } from "@tanstack/react-query";
-import { postRegister } from "../apis/carwashes";
+import { register } from "../apis/carwashes";
 import useRegisterForm from "../hooks/useRegisterForm";
 
 const RegisterPage = () => {
   const mutation = useMutation({
     mutationFn: (data) => {
-      postRegister(data);
+      register(data);
     },
   });
 
