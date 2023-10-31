@@ -249,7 +249,41 @@ export const handlers = [
       );
     }
 
-    return res(ctx.status(200), ctx.json({ sales }));
+    return res(
+      ctx.status(200),
+      ctx.json({
+        success: true,
+        response: {
+          carwashList: [
+            {
+              carwashId: 2,
+              name: "하이세차장",
+            },
+            {
+              carwashId: 3,
+              name: "세차장",
+            },
+          ],
+          response: [
+            {
+              reservation: {
+                reservationId: 138,
+                bayNo: 2,
+                nickname: "imnewuser",
+                totalPrice: 4000,
+                startTime: "2023-10-18T11:40",
+                endTime: "2023-10-18T12:10",
+              },
+              carwash: {
+                carwashId: 3,
+                name: "세차장",
+              },
+            },
+          ],
+        },
+        error: null,
+      })
+    );
   }),
 
   // 매장 관리 - 세차장 별
