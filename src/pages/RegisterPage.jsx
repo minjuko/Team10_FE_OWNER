@@ -20,8 +20,8 @@ const RegisterPage = () => {
           region: {
             placeName: inputs.carwashName,
             address: inputs.carwashAddress,
-            latitude: 0,
-            longitude: 0,
+            latitude: inputs.latitude,
+            longitude: inputs.longitude,
           },
           price: inputs.pricePer30min,
           optime: {
@@ -47,6 +47,8 @@ const RegisterPage = () => {
   const initialValue = {
     carwashName: "",
     carwashAddress: "",
+    latitude: "",
+    longitude: "",
     carwashTel: "",
     pricePer30min: "",
     weekdayOpenTime: "",
