@@ -16,8 +16,9 @@ export const register = async (data) => {
   return instance.post("/owner/carwashes/register", data);
 };
 
-export const addBays = async (carwash_id, bay_number) => {
-  return instance.post(`/owner/carwashes/${carwash_id}}/bays`, bay_number);
+export const addBays = async (data) => {
+  const { carwash_id, bay_number } = data;
+  return instance.post(`/owner/carwashes/${carwash_id}/bays`, bay_number);
 };
 
 export const getCarwashItem = async (carwash_id) => {

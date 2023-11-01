@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Card from "../molecules/Card";
 import CarwashBayItem from "../organisms/CarwashBayItem";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getCarwashItem } from "../../apis/carwashes";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { addBays, getCarwashItem } from "../../apis/carwashes";
 
 const CarwashItemManagementTemplate = () => {
   const { carwash_id } = useParams();
@@ -11,6 +11,10 @@ const CarwashItemManagementTemplate = () => {
   const { data } = useSuspenseQuery({
     queryKey: ["carwashItem"],
     queryFn: () => getCarwashItem(carwash_id),
+  });
+
+  const mutate = useMutation({
+    mutationFn: (data) => addBays(data),
   });
 
   const carwashItemData = data.data.response;
@@ -51,6 +55,16 @@ const CarwashItemManagementTemplate = () => {
           className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
           onClick={(e) => {
             e.preventDefault();
+
+            const bayNo = Number(
+              window.prompt("추가할 베이 번호를 입력하세요.")
+            );
+
+            if (!isNaN(bayNo)) {
+              mutate.mutate({ carwash_id, bay_number: bayNo });
+            } else {
+              alert("베이 번호는 숫자로 입력해주세요.");
+            }
           }}>
           베이 추가
         </button>
