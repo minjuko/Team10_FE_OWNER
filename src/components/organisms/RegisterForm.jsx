@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import TextInput from "../atoms/TextInput";
 import Button from "../atoms/Button";
 import KeyPointSelector from "../molecules/KeyPointSelector";
@@ -6,6 +5,7 @@ import RegisterFormItemStructure from "../atoms/RegisterFormItemStructure";
 import DaumPostcodePicker from "../molecules/DaumPostcodePicker";
 import ImageUploader from "../molecules/ImageUploader";
 import OpTimePicker from "../molecules/OpTimePicker";
+import { useEffect } from "react";
 
 /**
  * RegisterForm
@@ -24,6 +24,17 @@ const RegisterForm = ({ inputs, onChange, mutation, buttonLabel }) => {
     "에어컨",
     "발수코팅건",
   ];
+
+  useEffect(() => {
+    const geocoder = new kakao.maps.services.Geocoder();
+
+    geocoder.addressSearch(inputs.carwashAddress, function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        onChange("latitude", result[0].y);
+        onChange("longitude", result[0].x);
+      }
+    });
+  }, [inputs.carwashAddress]);
 
   return (
     <form
