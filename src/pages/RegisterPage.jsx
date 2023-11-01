@@ -7,8 +7,40 @@ import useRegisterForm from "../hooks/useRegisterForm";
 
 const RegisterPage = () => {
   const mutation = useMutation({
-    mutationFn: (data) => {
-      register(data);
+    mutationFn: (inputs) => {
+      const formData = new FormData();
+      inputs.carwashImage.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      formData.append(
+        "carwash",
+        JSON.stringify({
+          name: inputs.carwashName,
+          region: {
+            placeName: inputs.carwashName,
+            address: inputs.carwashAddress,
+            latitude: 0,
+            longitude: 0,
+          },
+          price: inputs.pricePer30min,
+          optime: {
+            weekday: {
+              start: inputs.weekdayOpenTime,
+              end: inputs.weekdayCloseTime,
+            },
+            weekend: {
+              start: inputs.weekendOpenTime,
+              end: inputs.weekendCloseTime,
+            },
+          },
+          keywordId: inputs.keypoint,
+          description: inputs.carwashDescription,
+          tel: inputs.carwashTel,
+        })
+      );
+
+      return register(formData);
     },
   });
 
