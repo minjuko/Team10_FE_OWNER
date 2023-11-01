@@ -1,10 +1,10 @@
 import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
 
-const CarwashBayItem = ({ start_time, end_time, bay }) => {
+const CarwashBayItem = ({ optime, bay }) => {
   return (
-    <div className="p-4 shadow-xl rounded-xl">
-      <div className="flex justify-between">
+    <div className="grid h-40 gap-4 p-4 shadow-xl rounded-xl">
+      <div className="flex items-center justify-between">
         <div className="text-xl font-semibold">베이 {bay.bay_no}</div>
         <div className="flex gap-4">
           <Toggle />
@@ -19,11 +19,7 @@ const CarwashBayItem = ({ start_time, end_time, bay }) => {
         </div>
       </div>
 
-      <TimeTable
-        start_time={start_time}
-        end_time={end_time}
-        bookedTime={bay.bay_bookedTime}
-      />
+      <TimeTable optime={optime} bookedTime={bay.bay_bookedTime} />
     </div>
   );
 };
