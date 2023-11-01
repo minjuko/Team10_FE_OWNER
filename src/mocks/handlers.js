@@ -199,8 +199,9 @@ export const handlers = [
   }),
 
   // 베이 활성화/비활성화
-  rest.put("/owner/bays/:bay_id/status", (req, res, ctx) => {
-    const { bay_id, status } = req.params;
+  rest.put("/owner/bays/:bay_id", (req, res, ctx) => {
+    const bay_id = req.params;
+    const status = req.url.searchParams.get("status");
     const token = req.headers.get("Authorization");
 
     console.log("변경된 베이 상태: ", status);
@@ -319,7 +320,9 @@ export const handlers = [
           monthly_reservation_by_store: 45,
           bay_list: [
             {
+              bay_id: 12,
               bay_no: 8,
+              status: 1,
               bay_bookedTime: [
                 // 전날 오후 11시 ~ 오늘 오전 2시
                 {
@@ -350,7 +353,9 @@ export const handlers = [
               ],
             },
             {
+              bay_id: 13,
               bay_no: 9,
+              status: 0,
               bay_bookedTime: [
                 {
                   start_time: "2023-10-16T19:00:00",

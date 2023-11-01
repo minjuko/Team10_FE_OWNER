@@ -6,8 +6,10 @@ export const getHome = async () => {
 };
 
 // 베이 활성화 비활성화
-export const setBayStatus = async (bay_id, status) => {
-  return instance.get(`/owner/bays/${bay_id}}/status`, { status });
+export const setBayStatus = async (data) => {
+  // console.log(bay_id, status);
+  const { bay_id, status } = data;
+  return instance.put(`/owner/bays/${bay_id}?status=${status}`);
 };
 
 // 매출관리 데이터

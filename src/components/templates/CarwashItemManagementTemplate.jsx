@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Card from "../molecules/Card";
 import CarwashBayItem from "../organisms/CarwashBayItem";
-import CarwashImage from "/carwashImage.png";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getCarwashItem } from "../../apis/carwashes";
 
