@@ -22,7 +22,7 @@ const App = () => {
               path="/manage/item/:carwash_id"
               element={<CarwashItemManagementPage />}></Route>
             <Route
-              path="/manage/item/edit"
+              path="/manage/item/:carwash_id/edit"
               element={<CarwashDetailEditingPage />}></Route>
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>

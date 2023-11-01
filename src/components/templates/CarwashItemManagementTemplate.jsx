@@ -46,7 +46,7 @@ const CarwashItemManagementTemplate = () => {
           className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
           onClick={(e) => {
             e.preventDefault();
-            navigate("/manage/item/edit");
+            navigate(`/manage/item/${carwash_id}/edit`);
           }}>
           세차장 정보 수정
         </button>

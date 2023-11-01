@@ -9,11 +9,19 @@ export const getCarwashesDetails = async (carwash_id) => {
 };
 
 export const putCarwashesDetails = async (carwash_id, data) => {
-  return instance.put(`/owner/carwashes/${carwash_id}/details`, data);
+  return instance.put(`/owner/carwashes/${carwash_id}/details`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export const register = async (data) => {
-  return instance.post("/owner/carwashes/register", data);
+  return instance.post("/owner/carwashes/register", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export const addBays = async (data) => {
