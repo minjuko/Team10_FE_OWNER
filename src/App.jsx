@@ -19,7 +19,7 @@ const App = () => {
             <Route path="/sales" element={<SalesManagementPage />}></Route>
             <Route path="/manage" element={<CarwashManagementPage />}></Route>
             <Route
-              path="/manage/item"
+              path="/manage/item/:carwash_id"
               element={<CarwashItemManagementPage />}></Route>
             <Route
               path="/manage/item/edit"

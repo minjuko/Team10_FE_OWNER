@@ -298,7 +298,75 @@ export const handlers = [
       );
     }
 
-    return res(ctx.status(200), ctx.json(carwashesDetails));
+    return res(
+      ctx.status(200),
+      ctx.json({
+        success: true,
+        response: {
+          id: 2,
+          name: "용봉세차타운",
+          optime: {
+            weekday: {
+              start_time: "06:00:00",
+              end_time: "22:00:00",
+            },
+            weekend: {
+              start_time: "06:00:00",
+              end_time: "23:00:00",
+            },
+          },
+          monthly_sales_by_store: 450000,
+          monthly_reservation_by_store: 45,
+          bay_list: [
+            {
+              bay_no: 8,
+              bay_bookedTime: [
+                // 전날 오후 11시 ~ 오늘 오전 2시
+                {
+                  start_time: "2023-10-15T23:00:00",
+                  end_time: "2023-10-16T02:00:00",
+                },
+                {
+                  start_time: "2023-10-16T07:00:00",
+                  end_time: "2023-10-16T09:00:00",
+                },
+                {
+                  start_time: "2023-10-16T04:00:00",
+                  end_time: "2023-10-16T06:00:00",
+                },
+                {
+                  start_time: "2023-10-16T20:00:00",
+                  end_time: "2023-10-16T21:00:00",
+                },
+                {
+                  start_time: "2023-10-16T19:00:00",
+                  end_time: "2023-10-16T20:00:00",
+                },
+                // 오늘 오후 11시 ~ 다음날 오전 1시 30분
+                {
+                  start_time: "2023-10-16T23:00:00",
+                  end_time: "2023-10-17T01:30:00",
+                },
+              ],
+            },
+            {
+              bay_no: 9,
+              bay_bookedTime: [
+                {
+                  start_time: "2023-10-16T19:00:00",
+                  end_time: "2023-10-16T20:00:00",
+                },
+                {
+                  start_time: "2023-10-16T20:00:00",
+                  end_time: "2023-10-16T21:00:00",
+                },
+              ],
+            },
+          ],
+        },
+        error: null,
+      })
+    );
   }),
 
   // 총 매출 금액 조회
