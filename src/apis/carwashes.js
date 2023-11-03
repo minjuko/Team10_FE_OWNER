@@ -1,15 +1,15 @@
 import { instance } from "./instance";
 
 export const getCarwashes = async () => {
-  return instance.get("/owner/carwashes");
+  return instance.get("/api/owner/carwashes");
 };
 
 export const getCarwashesDetails = async (carwash_id) => {
-  return instance.get(`/owner/carwashes/${carwash_id}/details`);
+  return instance.get(`/api/owner/carwashes/${carwash_id}/details`);
 };
 
 export const putCarwashesDetails = async (carwash_id, data) => {
-  return instance.put(`/owner/carwashes/${carwash_id}/details`, data, {
+  return instance.put(`/api/owner/carwashes/${carwash_id}/details`, data, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -17,7 +17,7 @@ export const putCarwashesDetails = async (carwash_id, data) => {
 };
 
 export const register = async (data) => {
-  return instance.post("/owner/carwashes/register", data, {
+  return instance.post("/api/owner/carwashes/register", data, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -26,9 +26,13 @@ export const register = async (data) => {
 
 export const addBays = async (data) => {
   const { carwash_id, bay_number } = data;
-  return instance.post(`/owner/carwashes/${carwash_id}/bays`, bay_number);
+  return instance.post(`/api/owner/carwashes/${carwash_id}/bays`, bay_number);
 };
 
 export const getCarwashItem = async (carwash_id) => {
-  return instance.get(`/owner/carwashes/${carwash_id}`);
+  return instance.get(`/api/owner/carwashes/${carwash_id}`);
+};
+
+export const getCarwashBayReservationHistory = async (carwash_id, bay_id) => {
+  return instance.get(`/api/owner/carwashes/${carwash_id}/${bay_id}`);
 };

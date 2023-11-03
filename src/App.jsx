@@ -24,6 +24,9 @@ const App = () => {
             <Route
               path="/manage/item/:carwash_id/edit"
               element={<CarwashDetailEditingPage />}></Route>
+            <Route
+              path="/manage/item/:bay_id"
+              element={<CarwashDetailEditingPage />}></Route>
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
