@@ -8,6 +8,7 @@ import MainLayout from "./layouts/MainLayout";
 import CarwashManagementPage from "./pages/CarwashManagementPage";
 import CarwashItemManagementPage from "./pages/CarwashItemManagementPage";
 import CarwashDetailEditingPage from "./pages/CarwashDetailEditingPage";
+import CarwashBayReservationHistoryPage from "./pages/CarwashBayReservationHistoryPage";
 
 const App = () => {
   return (
@@ -25,8 +26,8 @@ const App = () => {
               path="/manage/item/:carwash_id/edit"
               element={<CarwashDetailEditingPage />}></Route>
             <Route
-              path="/manage/item/:bay_id"
-              element={<CarwashDetailEditingPage />}></Route>
+              path="/manage/item/:carwash_id/:bay_id"
+              element={<CarwashBayReservationHistoryPage />}></Route>
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>

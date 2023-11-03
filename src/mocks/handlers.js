@@ -465,7 +465,7 @@ export const handlers = [
               },
               carwash: {
                 carwashId: 3,
-                name: ㅇㅇ세차장,
+                name: "ㅇㅇ세차장",
               },
             },
             {
@@ -480,7 +480,7 @@ export const handlers = [
               },
               carwash: {
                 carwashId: 3,
-                name: ㅇㅇ세차장,
+                name: "ㅇㅇ세차장",
               },
             },
             {
@@ -495,7 +495,7 @@ export const handlers = [
               },
               carwash: {
                 carwashId: 3,
-                name: ㅇㅇ세차장,
+                name: "ㅇㅇ세차장",
               },
             },
           ],
