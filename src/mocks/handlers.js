@@ -454,35 +454,72 @@ export const handlers = [
         response: {
           reservationList: [
             {
-              reservation_id: "65",
-              bay_no: "3",
-              bay_id: "1",
-              nickname: "용봉동세차킹",
-              total_price: 10000,
-              start_time: "2023-10-20T10:00:00",
-              end_time: "2023-10-20T11:00:00",
+              reservation: {
+                reservationId: 138,
+                bayNo: 2,
+                bayId: 1,
+                nickname: "imnewuser",
+                totalPrice: 4000,
+                startTime: "2023-10-18T11:40",
+                endTime: "2023-10-18T12:10",
+              },
+              carwash: {
+                carwashId: 3,
+                name: ㅇㅇ세차장,
+              },
             },
             {
-              reservation_id: "66",
-              bay_no: "3",
-              bay_id: "1",
-              nickname: "세차왕",
-              total_price: 30000,
-              start_time: "2023-10-20T10:00:00",
-              end_time: "2023-10-20T11:00:00",
+              reservation: {
+                reservationId: 138,
+                bayNo: 2,
+                bayId: 1,
+                nickname: "imnewuser",
+                totalPrice: 4000,
+                startTime: "2023-10-18T11:40",
+                endTime: "2023-10-18T12:10",
+              },
+              carwash: {
+                carwashId: 3,
+                name: ㅇㅇ세차장,
+              },
             },
             {
-              reservation_id: "67",
-              bay_no: "3",
-              bay_id: "1",
-              nickname: "용봉동세차킹",
-              total_price: 10000,
-              start_time: "2023-10-20T10:00:00",
-              end_time: "2023-10-20T11:00:00",
+              reservation: {
+                reservationId: 138,
+                bayNo: 2,
+                bayId: 1,
+                nickname: "imnewuser",
+                totalPrice: 4000,
+                startTime: "2023-10-18T11:40",
+                endTime: "2023-10-18T12:10",
+              },
+              carwash: {
+                carwashId: 3,
+                name: ㅇㅇ세차장,
+              },
             },
           ],
         },
+        error: null,
       })
     );
   }),
 ];
+
+// "reservationList":[
+//   {
+//       "reservation": {
+//           "reservationId":138,
+//           "bayNo": 2,
+//           "bayId": 1,
+//           "nickname":"imnewuser",
+//           "totalPrice":4000,
+//           "startTime":"2023-10-18T11:40",
+//           "endTime":"2023-10-18T12:10"
+//       },
+//       "carwash": {
+//           "carwashId": 3,
+//           "name": 세차장
+//       }
+//   }
+// ]
