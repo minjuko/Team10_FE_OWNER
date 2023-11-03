@@ -1,13 +1,11 @@
 import { rest } from "msw";
 import { home } from "./responses/home";
 import { carwashes } from "./responses/carwashes";
-import { carwashesDetails } from "./responses/carwashesDetails";
 import { revenue } from "./responses/revenue";
-import { sales } from "./responses/sales";
 
 export const handlers = [
   // 회원가입
-  rest.post("/join/owner", (req, res, ctx) => {
+  rest.post("/api/join/owner", (req, res, ctx) => {
     const { username, email, password, tel } = req.body;
 
     const regex = {
@@ -65,7 +63,7 @@ export const handlers = [
   }),
 
   // 로그인
-  rest.post("/login/owner", (req, res, ctx) => {
+  rest.post("/api/login/owner", (req, res, ctx) => {
     const { email, password } = req.body;
 
     if (email !== "owner@nate.com" || password !== "owner1234!") {
@@ -93,7 +91,7 @@ export const handlers = [
     );
   }),
   // 매장 정보 수정(기존 정보 가져오기)
-  rest.get("/owner/carwashes/:carwash_id/details", (req, res, ctx) => {
+  rest.get("/api/owner/carwashes/:carwash_id/details", (req, res, ctx) => {
     const carwash_id = req.params;
     // carwash_id로 특정 세차장 가져오는 코드 추가하기
     return res(
@@ -135,7 +133,7 @@ export const handlers = [
 
   // 매장 정보 수정
   // 백엔드 단에서 Validation 필요함
-  rest.put("/owner/carwashes/:carwash_id/details", (req, res, ctx) => {
+  rest.put("/api/owner/carwashes/:carwash_id/details", (req, res, ctx) => {
     const carwash_id = req.params;
     const token = req.headers.get("Authorization");
     const modifiedInfo = req.body;
@@ -157,7 +155,7 @@ export const handlers = [
 
   // 입점신청
   // 사진 업로드는 multipart/form-data
-  rest.post("/owner/carwashes/register", (req, res, ctx) => {
+  rest.post("/api/owner/carwashes/register", (req, res, ctx) => {
     const token = req.headers.get("Authorization");
     const formData = req.body;
 
@@ -177,7 +175,7 @@ export const handlers = [
   }),
 
   // 베이 추가
-  rest.post("/owner/carwashes/:carwash_id/bays", (req, res, ctx) => {
+  rest.post("/api/owner/carwashes/:carwash_id/bays", (req, res, ctx) => {
     const carwash_id = req.params;
     const token = req.headers.get("Authorization");
 
@@ -199,7 +197,7 @@ export const handlers = [
   }),
 
   // 베이 활성화/비활성화
-  rest.put("/owner/bays/:bay_id", (req, res, ctx) => {
+  rest.put("/api/owner/bays/:bay_id", (req, res, ctx) => {
     const bay_id = req.params;
     const status = req.url.searchParams.get("status");
     const token = req.headers.get("Authorization");
@@ -220,7 +218,7 @@ export const handlers = [
   }),
 
   // 매장 관리 - owner 별
-  rest.get("/owner/carwashes", (req, res, ctx) => {
+  rest.get("/api/owner/carwashes", (req, res, ctx) => {
     const token = req.headers.get("Authorization");
 
     if (!token) {
@@ -234,7 +232,7 @@ export const handlers = [
   }),
 
   // 매출관리 페이지
-  rest.get("/owner/sales", (req, res, ctx) => {
+  rest.get("/api/owner/sales", (req, res, ctx) => {
     const selected_date = req.url.searchParams.get("selected-date");
     const carwash_id = req.url.searchParams.get("carwash-id");
 
@@ -288,7 +286,7 @@ export const handlers = [
   }),
 
   // 매장 관리 - 세차장 별
-  rest.get("/owner/carwashes/:carwash_id", (req, res, ctx) => {
+  rest.get("/api/owner/carwashes/:carwash_id", (req, res, ctx) => {
     const carwash_id = req.params.carwash_id;
     const token = req.headers.get("Authorization");
 
@@ -375,7 +373,7 @@ export const handlers = [
   }),
 
   // 총 매출 금액 조회
-  rest.get("/owner/revenue", (req, res, ctx) => {
+  rest.get("/api/owner/revenue", (req, res, ctx) => {
     const selected_date = req.url.searchParams.get("selected-date");
     const carwash_id = req.url.searchParams.get("carwash-id");
 
@@ -395,7 +393,7 @@ export const handlers = [
   }),
 
   // 사장님 홈
-  rest.get("/owner/home", (req, res, ctx) => {
+  rest.get("/api/owner/home", (req, res, ctx) => {
     const token = req.headers.get("Authorization");
 
     if (!token) {
@@ -409,7 +407,7 @@ export const handlers = [
   }),
 
   // 예약 취소
-  rest.delete("/reservations/:reservation_id", (req, res, ctx) => {
+  rest.delete("/api/reservations/:reservation_id", (req, res, ctx) => {
     const reservation_id = req.params.reservation_id;
     const token = req.headers.get("Authorization");
 
@@ -425,13 +423,65 @@ export const handlers = [
     return res(ctx.status(200));
   }),
 
-  rest.post("/user/check", (req, res, ctx) => {
+  rest.post("/api/user/check", (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
         success: true,
         response: null,
         error: null,
+      })
+    );
+  }),
+
+  // 예약 목록 조회 - 세차장별 (베이별)
+  rest.get("/api/owner/reservation/:carwash_id/:bay_id", (req, res, ctx) => {
+    const carwash_id = req.params.carwash_id;
+    const bay_id = req.params.bay_id;
+    const token = req.headers.get("Authorization");
+
+    if (!token) {
+      return res(
+        ctx.status(401),
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+      );
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        success: true,
+        response: {
+          reservationList: [
+            {
+              reservation_id: "65",
+              bay_no: "3",
+              bay_id: "1",
+              nickname: "용봉동세차킹",
+              total_price: 10000,
+              start_time: "2023-10-20T10:00:00",
+              end_time: "2023-10-20T11:00:00",
+            },
+            {
+              reservation_id: "66",
+              bay_no: "3",
+              bay_id: "1",
+              nickname: "세차왕",
+              total_price: 30000,
+              start_time: "2023-10-20T10:00:00",
+              end_time: "2023-10-20T11:00:00",
+            },
+            {
+              reservation_id: "67",
+              bay_no: "3",
+              bay_id: "1",
+              nickname: "용봉동세차킹",
+              total_price: 10000,
+              start_time: "2023-10-20T10:00:00",
+              end_time: "2023-10-20T11:00:00",
+            },
+          ],
+        },
       })
     );
   }),
