@@ -55,7 +55,11 @@ const MobilePreview = ({ inputs }) => {
         showThumbs={false}>
         {inputs.carwashImage.map((image, index) => (
           <div key={index}>
-            <img src={image} alt="이미지" className="h-56" />
+            <img
+              src={image instanceof File ? URL.createObjectURL(image) : image}
+              alt="이미지"
+              className="h-56"
+            />
           </div>
         ))}
       </Carousel>

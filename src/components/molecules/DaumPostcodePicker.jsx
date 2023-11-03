@@ -37,6 +37,7 @@ const DaumPostcodePicker = ({ value, onChange }) => {
           </div>
           <DaumPostcode
             onComplete={(data) => {
+              console.log(data);
               onChange("carwashAddress", data.address);
               setOpenPostcode(false);
             }}

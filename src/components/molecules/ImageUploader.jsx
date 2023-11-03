@@ -9,7 +9,7 @@ const ImageUploader = ({ value = [], onChange }) => {
     const files = e.target.files;
 
     Array.from(files).forEach((file) => {
-      onChange("carwashImage", [...value, URL.createObjectURL(file)]);
+      onChange("carwashImage", [...value, file]);
     });
   };
 
@@ -51,6 +51,7 @@ const ImageUploader = ({ value = [], onChange }) => {
         onChange={handleChangeData}
         hidden
       />
+      {/* URL.createObjectURL(file) */}
       <div className="flex gap-4 p-4 overflow-x-auto overflow-y-hidden bg-gray-100 border border-gray-300 outline-none w-96 rounded-xl h-28">
         {value.map((item, index) => {
           return (
@@ -62,7 +63,7 @@ const ImageUploader = ({ value = [], onChange }) => {
               }}>
               <img
                 className="absolute object-cover w-full h-full"
-                src={item}
+                src={item instanceof File ? URL.createObjectURL(item) : item}
                 alt={`미리보기 ${index}}`}
               />
               {index === 0 && (

@@ -2,19 +2,53 @@ import React from "react";
 import RegisterForm from "../components/organisms/RegisterForm";
 import Box from "../components/atoms/Box";
 import { useMutation } from "@tanstack/react-query";
-import { postRegister } from "../apis/carwashes";
+import { register } from "../apis/carwashes";
 import useRegisterForm from "../hooks/useRegisterForm";
 
 const RegisterPage = () => {
   const mutation = useMutation({
-    mutationFn: (data) => {
-      postRegister(data);
+    mutationFn: (inputs) => {
+      const formData = new FormData();
+      inputs.carwashImage.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      formData.append(
+        "carwash",
+        JSON.stringify({
+          name: inputs.carwashName,
+          region: {
+            placeName: inputs.carwashName,
+            address: inputs.carwashAddress,
+            latitude: inputs.latitude,
+            longitude: inputs.longitude,
+          },
+          price: inputs.pricePer30min,
+          optime: {
+            weekday: {
+              start: inputs.weekdayOpenTime,
+              end: inputs.weekdayCloseTime,
+            },
+            weekend: {
+              start: inputs.weekendOpenTime,
+              end: inputs.weekendCloseTime,
+            },
+          },
+          keywordId: inputs.keypoint,
+          description: inputs.carwashDescription,
+          tel: inputs.carwashTel,
+        })
+      );
+
+      return register(formData);
     },
   });
 
   const initialValue = {
     carwashName: "",
     carwashAddress: "",
+    latitude: "",
+    longitude: "",
     carwashTel: "",
     pricePer30min: "",
     weekdayOpenTime: "",

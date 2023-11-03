@@ -2,10 +2,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Image from "./Image";
 import Logo from "/logo.svg";
 import Button from "./Button";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/slices/authSlice";
 
 const GNB = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userName = useSelector((state) => state.auth.user);
 
   const menus = [
     {
@@ -45,8 +49,15 @@ const GNB = () => {
 
         <section className="flex gap-6">
           <div className="text-right">
-            <div className="text-xl">김춘식 사장님</div>
-            <Button className="text-gray-500">로그아웃</Button>
+            <div className="text-xl">{userName} 사장님</div>
+            <Button
+              className="text-gray-500"
+              onClick={() => {
+                dispatch(logout());
+                navigate("/login");
+              }}>
+              로그아웃
+            </Button>
           </div>
           <Button
             style="cta"
