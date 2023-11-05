@@ -26,7 +26,9 @@ export const register = async (data) => {
 
 export const addBays = async (data) => {
   const { carwash_id, bay_number } = data;
-  return instance.post(`/api/owner/carwashes/${carwash_id}/bays`, bay_number);
+  return instance.post(`/api/owner/carwashes/${carwash_id}/bays`, {
+    bayNum: bay_number,
+  });
 };
 
 export const getCarwashItem = async (carwash_id) => {
