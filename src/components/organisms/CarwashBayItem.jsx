@@ -11,11 +11,11 @@ const CarwashBayItem = ({ optime, bay }) => {
   return (
     <div className="grid h-40 gap-4 p-4 shadow-xl rounded-xl">
       <div className="flex items-center justify-between">
-        <div className="text-xl font-semibold">베이 {bay.bay_no}</div>
-        <Toggle bay_id={bay.bay_id} status={bay.status} mutation={mutation} />
+        <div className="text-xl font-semibold">베이 {bay.bayNo}</div>
+        <Toggle bay_id={bay.bayId} status={bay.status} mutation={mutation} />
       </div>
 
-      <TimeTable optime={optime} bookedTime={bay.bay_bookedTime} />
+      <TimeTable optime={optime} bookedTime={bay.bayBookedTime} />
     </div>
   );
 };
