@@ -22,19 +22,19 @@ const CarwashItemManagementTemplate = () => {
   return (
     <div className="flex gap-16">
       <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
-        <Card title="용봉세차타운">
+        <Card title={carwashItemData.name}>
           <div className="grid gap-2">
             <div>
               <div className="flex justify-between">
                 <div className="font-semibold">이번 달 매출</div>
                 <div>
-                  {carwashItemData.monthly_sales_by_store.toLocaleString()}원
+                  {carwashItemData?.monthly_sales_by_store?.toLocaleString()}원
                 </div>
               </div>
               <div className="flex justify-between">
                 <div className="font-semibold">이번 달 예약</div>
                 <div>
-                  {carwashItemData.monthly_reservation_by_store.toLocaleString()}
+                  {carwashItemData?.monthly_reservation_by_store?.toLocaleString()}
                   건
                 </div>
               </div>
@@ -70,10 +70,10 @@ const CarwashItemManagementTemplate = () => {
         </button>
       </aside>
       <section className="grid flex-grow gap-4">
-        {carwashItemData.bay_list.map((bay) => {
+        {carwashItemData.bays.map((bay) => {
           return (
             <CarwashBayItem
-              key={bay.bay_no}
+              key={bay.bayNo}
               optime={carwashItemData.optime}
               bay={bay}
             />
