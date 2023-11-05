@@ -8,10 +8,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const CarwashDetailEditingTemplate = () => {
   const navigate = useNavigate();
-  const carwash_id = useParams().carwash_id;
+  const { carwash_id } = useParams();
 
   const { data } = useSuspenseQuery({
-    queryKey: ["getCarwashDetail"],
+    queryKey: ["getCarwashDetail", carwash_id],
     queryFn: () => getCarwashesDetails(carwash_id),
   });
 
@@ -27,30 +27,35 @@ const CarwashDetailEditingTemplate = () => {
         const response = await fetch(fileOrUrl);
         const blob = await response.blob();
         const filename = fileOrUrl.split("/").pop(); // URL에서 파일명 추출
-        formData.append("images", new File([blob], filename));
+        formData.append(
+          "images",
+          new File([blob], filename, { type: blob.type })
+        );
       } catch (error) {
         console.error("File download failed:", error);
       }
     }
+
+    return formData;
   }
 
   const mutation = useMutation({
-    mutationFn: (inputs) => {
+    mutationFn: async (inputs) => {
       const formData = new FormData();
-      console.log("inputs.carwashImage", inputs.carwashImage);
-      inputs.carwashImage.forEach((file) => {
-        appendFilesToFormData(formData, file);
-      });
+
+      for (const file of inputs.carwashImage) {
+        await appendFilesToFormData(formData, file);
+      }
 
       formData.append(
-        "carwash",
+        "updateData",
         JSON.stringify({
           name: inputs.carwashName,
           region: {
             placeName: inputs.carwashName,
             address: inputs.carwashAddress,
-            latitude: 0,
-            longitude: 0,
+            latitude: inputs.latitude,
+            longitude: inputs.longitude,
           },
           price: inputs.pricePer30min,
           optime: {
@@ -76,7 +81,7 @@ const CarwashDetailEditingTemplate = () => {
       navigate(`/manage/item/${carwash_id}`);
     },
     onError: (error) => {
-      alert(error);
+      alert(`수정에 실패하였습니다. ${error.message}`);
     },
   });
 
@@ -84,16 +89,18 @@ const CarwashDetailEditingTemplate = () => {
 
   const initialValue = {
     carwashName: carwashDetail.name,
-    carwashAddress: carwashDetail.location.address,
+    carwashAddress: carwashDetail.locationDTO.address,
+    latitude: "",
+    longitude: "",
     carwashTel: carwashDetail.tel,
     pricePer30min: carwashDetail.price,
     weekdayOpenTime: carwashDetail.optime.weekday.start,
     weekdayCloseTime: carwashDetail.optime.weekday.end,
     weekendOpenTime: carwashDetail.optime.weekend.start,
     weekendCloseTime: carwashDetail.optime.weekend.end,
-    keypoint: carwashDetail.optime.keypointId,
-    carwashImage: carwashDetail.image,
-    carwashDescription: carwashDetail.optime.des,
+    keypoint: carwashDetail.keywordId,
+    carwashImage: carwashDetail.imageFiles,
+    carwashDescription: carwashDetail.description,
   };
 
   const [inputs, handleChange] = useRegisterForm(initialValue);
