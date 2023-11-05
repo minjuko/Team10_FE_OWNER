@@ -4,7 +4,7 @@ import MultipleTimeTable from "../molecules/MultipleTimeTable";
 const CarwashItem = ({ carwash }) => {
   return (
     <Link
-      to={`/manage/item/${carwash.carwash_id}`}
+      to={`/manage/item/${carwash.id}`}
       className="flex overflow-auto shadow-xl rounded-xl">
       <div className="relative w-48">
         <img
