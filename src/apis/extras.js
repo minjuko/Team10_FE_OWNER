@@ -9,7 +9,7 @@ export const getHome = async () => {
 export const setBayStatus = async (data) => {
   // console.log(bay_id, status);
   const { bay_id, status } = data;
-  return instance.put(`/api/owner/bays/${bay_id}?status=${status}`);
+  return instance.put(`/api/owner/bays/${bay_id}/status?status=${status}`);
 };
 
 // 매출관리 데이터
