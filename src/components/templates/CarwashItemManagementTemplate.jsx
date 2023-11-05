@@ -27,15 +27,12 @@ const CarwashItemManagementTemplate = () => {
             <div>
               <div className="flex justify-between">
                 <div className="font-semibold">이번 달 매출</div>
-                <div>
-                  {carwashItemData?.monthly_sales_by_store?.toLocaleString()}원
-                </div>
+                <div>{carwashItemData?.monthlySales?.toLocaleString()}원</div>
               </div>
               <div className="flex justify-between">
                 <div className="font-semibold">이번 달 예약</div>
                 <div>
-                  {carwashItemData?.monthly_reservation_by_store?.toLocaleString()}
-                  건
+                  {carwashItemData?.monthlyReservations?.toLocaleString()}건
                 </div>
               </div>
             </div>
