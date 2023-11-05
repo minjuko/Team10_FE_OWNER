@@ -6,6 +6,6 @@ export const login = async (data) => {
 };
 
 export const signup = async (data) => {
-  const { nickname, email, password, tel } = data;
-  return instance.post("/api/owner/join", { nickname, email, password, tel });
+  const { username, email, password, tel } = data;
+  return instance.post("/api/owner/join", { username, email, password, tel });
 };
