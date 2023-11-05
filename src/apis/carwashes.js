@@ -1,19 +1,15 @@
-import { instance } from "./instance";
+import { fileInstance, instance } from "./instance";
 
 export const getCarwashes = async () => {
   return instance.get("/api/owner/carwashes");
 };
 
 export const getCarwashesDetails = async (carwash_id) => {
-  return instance.get(`/api/owner/carwashes/${carwash_id}/details`);
+  return fileInstance.get(`/api/owner/carwashes/${carwash_id}/details`);
 };
 
 export const putCarwashesDetails = async (carwash_id, data) => {
-  return instance.put(`/api/owner/carwashes/${carwash_id}/details`, data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return fileInstance.put(`/api/owner/carwashes/${carwash_id}/details`, data);
 };
 
 export const register = async (data) => {
