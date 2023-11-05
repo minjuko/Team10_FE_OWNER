@@ -9,9 +9,19 @@ const CarwashBayItem = ({ optime, bay }) => {
   });
 
   return (
-    <div className="grid h-40 gap-4 p-4 shadow-xl rounded-xl">
+    <div
+      className={`grid h-40 gap-4 p-4 shadow-xl rounded-xl ${
+        bay.status === 0 && "bg-gray-400"
+      }`}>
       <div className="flex items-center justify-between">
-        <div className="text-xl font-semibold">베이 {bay.bayNo}</div>
+        <div className="flex items-center gap-4">
+          <div className="text-xl font-semibold">베이 {bay.bayNo}</div>
+          {bay.status === 0 && (
+            <small className="text-red-500 ">
+              베이가 활성화 될 때까지 예약을 받을 수 없습니다.
+            </small>
+          )}
+        </div>
         <Toggle bay_id={bay.bayId} status={bay.status} mutation={mutation} />
       </div>
 
