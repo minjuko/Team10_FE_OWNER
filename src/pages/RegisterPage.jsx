@@ -4,43 +4,54 @@ import Box from "../components/atoms/Box";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../apis/carwashes";
 import useRegisterForm from "../hooks/useRegisterForm";
+import { useSelector } from "react-redux";
 
 const RegisterPage = () => {
+  const userName = useSelector((state) => state.auth.userName);
   const mutation = useMutation({
     mutationFn: (inputs) => {
       const formData = new FormData();
+      const blob = new Blob(
+        [
+          JSON.stringify({
+            name: inputs.carwashName,
+            location: {
+              placeName: inputs.carwashName,
+              address: inputs.carwashAddress,
+              latitude: inputs.latitude,
+              longitude: inputs.longitude,
+            },
+            price: inputs.pricePer30min,
+            optime: {
+              weekday: {
+                start: inputs.weekdayOpenTime,
+                end: inputs.weekdayCloseTime,
+              },
+              weekend: {
+                start: inputs.weekendOpenTime,
+                end: inputs.weekendCloseTime,
+              },
+            },
+            keywordId: inputs.keypoint,
+            description: inputs.carwashDescription,
+            tel: inputs.carwashTel,
+          }),
+        ],
+        { type: "application/json" }
+      );
+
       inputs.carwashImage.forEach((file) => {
         formData.append("images", file);
       });
-
-      formData.append(
-        "carwash",
-        JSON.stringify({
-          name: inputs.carwashName,
-          region: {
-            placeName: inputs.carwashName,
-            address: inputs.carwashAddress,
-            latitude: inputs.latitude,
-            longitude: inputs.longitude,
-          },
-          price: inputs.pricePer30min,
-          optime: {
-            weekday: {
-              start: inputs.weekdayOpenTime,
-              end: inputs.weekdayCloseTime,
-            },
-            weekend: {
-              start: inputs.weekendOpenTime,
-              end: inputs.weekendCloseTime,
-            },
-          },
-          keywordId: inputs.keypoint,
-          description: inputs.carwashDescription,
-          tel: inputs.carwashTel,
-        })
-      );
+      formData.append("carwash", blob);
 
       return register(formData);
+    },
+    onSuccess: () => {
+      alert("정상적으로 등록되었습니다.");
+    },
+    onError: (error) => {
+      alert("등록에 실패하였습니다.", error.message);
     },
   });
 
@@ -67,7 +78,9 @@ const RegisterPage = () => {
       <Box className="grid gap-8 p-14">
         {/*제목 텍스트*/}
         <div className="grid gap-4 text-center">
-          <h1 className="text-3xl font-bold">입점을 환영합니다!</h1>
+          <h1 className="text-3xl font-bold">
+            {userName} 사장님, 입점을 환영합니다!
+          </h1>
           <div className="text-gray-500">아래 정보들을 입력해주세요.</div>
         </div>
         <RegisterForm

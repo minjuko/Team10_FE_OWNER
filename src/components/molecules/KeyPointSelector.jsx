@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import Badge from "../atoms/Badge";
 
+/**
+ * KeyPointSelector 키포인트 선택기
+ *
+ * RegisterForm에서 키포인트를 선택할 수 있는 컴포넌트입니다.
+ * DB에 키포인트 인덱스가 1부터 시작하므로, 임의로 index에 1을 더해줍니다.
+ *
+ * @param {boolean} value
+ * @param {string[]} pointLabels
+ * @param {function} handleChange
+ */
+
 const KeyPointSelector = ({ value, pointLabels, handleChange }) => {
   const [selected, setSelected] = useState(value || []);
 
@@ -9,14 +20,14 @@ const KeyPointSelector = ({ value, pointLabels, handleChange }) => {
       <div className="flex flex-wrap justify-center gap-4">
         {pointLabels.map((label, index) => (
           <Badge
-            key={index}
-            value={selected.includes(index)}
+            key={index + 1}
+            value={selected.includes(index + 1)}
             onChange={(e) => {
               const valueCopy = [...selected];
               if (e.target.checked) {
-                valueCopy.push(index);
+                valueCopy.push(index + 1);
               } else {
-                valueCopy.splice(valueCopy.indexOf(index), 1);
+                valueCopy.splice(valueCopy.indexOf(index + 1), 1);
               }
               valueCopy.sort((a, b) => a - b);
               setSelected(valueCopy);
