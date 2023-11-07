@@ -13,3 +13,7 @@ export const signup = async (data) => {
 export const getUserInfo = async () => {
   return instance.get("/api/user/info");
 };
+
+export const checkUniqueEmail = async (email) => {
+  return instance.post("/api/user/check", { email });
+};
