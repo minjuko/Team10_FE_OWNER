@@ -36,49 +36,48 @@ const GNB = () => {
   ];
 
   return (
-    <nav className="border-b border-gray-300">
-      <div className="bg-white">
-        <div className="w-[1280px] flex items-center justify-between mx-auto px-4">
-          <section className="flex items-center gap-4">
-            <Link to="/">
-              <Image src={Logo} alt="뽀득뽀득 사장님 페이지 로고" />
-            </Link>
+    <nav className="flex h-24 bg-white border-b border-gray-300 min-w-min">
+      <div className="w-[1280px] flex items-center justify-between mx-auto px-4">
+        <section className="flex items-center gap-8">
+          <Link to="/">
+            <Image src={Logo} alt="뽀득뽀득 사장님 페이지 로고" />
+          </Link>
 
+          <div>
             {menus.map((menu, index) => (
               <Link
-                className={`text-xl p-8 ${
-                  location.pathname === menu.path
-                    ? "border-b-8 border-primary text-primary"
-                    : "border-b-8 border-white"
+                className={`text-xl p-6 rounded-t-xl hover:bg-gray-100 ${
+                  location.pathname === menu.path &&
+                  "border-b-8 border-primary text-primary"
                 } `}
                 key={index}
                 to={menu.path}>
                 {menu.label}
               </Link>
             ))}
-          </section>
+          </div>
+        </section>
 
-          <section className="flex gap-6">
-            <div className="text-right">
-              <div className="text-xl">{userName} 사장님</div>
-              <Button
-                className="text-gray-500"
-                onClick={() => {
-                  dispatch(logout());
-                  navigate("/login");
-                }}>
-                로그아웃
-              </Button>
-            </div>
+        <section className="flex gap-6">
+          <div className="text-right">
+            <div className="text-xl">{userName} 사장님</div>
             <Button
-              style="cta"
+              className="text-gray-500"
               onClick={() => {
-                navigate("/register");
+                dispatch(logout());
+                navigate("/login");
               }}>
-              입점하기
+              로그아웃
             </Button>
-          </section>
-        </div>
+          </div>
+          <Button
+            style="cta"
+            onClick={() => {
+              navigate("/register");
+            }}>
+            입점하기
+          </Button>
+        </section>
       </div>
     </nav>
   );
