@@ -47,7 +47,7 @@ const GNB = () => {
             {menus.map((menu, index) => (
               <Link
                 className={`text-xl p-6 rounded-t-xl hover:bg-gray-100 ${
-                  location.pathname === menu.path &&
+                  location.pathname.startsWith(menu.path) &&
                   "border-b-8 border-primary text-primary"
                 } `}
                 key={index}
