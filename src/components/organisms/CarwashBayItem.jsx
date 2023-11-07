@@ -12,7 +12,7 @@ const CarwashBayItem = ({ optime, bay }) => {
   return (
     <div
       className={`grid h-40 gap-4 p-4 shadow-xl rounded-xl ${
-        bay.status === 0 && "bg-gray-400"
+        !bay.status && "bg-gray-400"
       }`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
