@@ -3,7 +3,8 @@ import Image from "./Image";
 import Logo from "/logo.svg";
 import Button from "./Button";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../store/slices/authSlice";
+import { getUserInfoThunk, logout } from "../../store/slices/authSlice";
+import { useEffect } from "react";
 
 /**
  * GNB 컴포넌트
@@ -17,7 +18,11 @@ const GNB = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userName = useSelector((state) => state.auth.user);
+  const userName = useSelector((state) => state.auth.userName);
+
+  useEffect(() => {
+    dispatch(getUserInfoThunk());
+  }, []);
 
   const menus = [
     {
