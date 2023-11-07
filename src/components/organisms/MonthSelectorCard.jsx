@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../atoms/Button";
 import Card from "../molecules/Card";
+import dayjs from "dayjs";
 
 /**
  * MonthSelectorCard 컴포넌트
@@ -9,44 +10,25 @@ import Card from "../molecules/Card";
  * @todo 월 선택시 카드 하단에 해당 월 매출 금액 조회 구현
  */
 const MonthSelectorCard = ({ setDate, monthlyRevenue }) => {
-  const today = new Date();
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [yearMonth, setYearMonth] = useState(dayjs().format("YYYY-MM"));
 
   const handleClickDecrease = () => {
-    let updatedYear = year;
-    let updatedMonth = month;
-
-    if (month === 1) {
-      updatedYear = year - 1;
-      updatedMonth = 12;
-    } else {
-      updatedMonth = month - 1;
-    }
-
-    setDate(updatedYear + "-" + updatedMonth + "-01");
-    setYear(updatedYear);
-    setMonth(updatedMonth);
+    let newDate = dayjs(yearMonth).subtract(1, "month");
+    setYearMonth(newDate.format("YYYY-MM"));
+    setDate(newDate.format("YYYY-MM-DD"));
   };
 
   const handleClickIncrease = () => {
+    let newDate = dayjs(yearMonth).add(1, "month");
     // 이번 달 이후로는 조회 불가능
-    if (year >= today.getFullYear() && month >= today.getMonth() + 1) return;
-
-    let updatedYear = year;
-    let updatedMonth = month;
-
-    if (month === 12) {
-      updatedYear = year + 1;
-      updatedMonth = 1;
-    } else {
-      updatedMonth = month + 1;
+    if (newDate.isAfter(dayjs().startOf("month"), "month")) {
+      return;
     }
-
-    setDate(updatedYear + "-" + updatedMonth + "-01");
-    setYear(updatedYear);
-    setMonth(updatedMonth);
+    setYearMonth(newDate.format("YYYY-MM"));
+    setDate(newDate.format("YYYY-MM-DD"));
   };
+
+  const [year, month] = yearMonth.split("-");
 
   return (
     <Card
