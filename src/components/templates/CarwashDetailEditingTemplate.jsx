@@ -105,7 +105,7 @@ const CarwashDetailEditingTemplate = () => {
     carwashDescription: carwashDetail.description,
   };
 
-  const [inputs, handleChange] = useRegisterForm(initialValue);
+  const { inputs, handleChange, isDirty } = useRegisterForm(initialValue);
 
   return (
     <div className="flex gap-8">
@@ -115,6 +115,7 @@ const CarwashDetailEditingTemplate = () => {
           inputs={inputs}
           onChange={handleChange}
           mutation={mutation}
+          isDirty={isDirty}
           buttonLabel="수정하기"
         />
       </Box>

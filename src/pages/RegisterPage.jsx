@@ -5,9 +5,11 @@ import { useMutation } from "@tanstack/react-query";
 import { register } from "../apis/carwashes";
 import useRegisterForm from "../hooks/useRegisterForm";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const userName = useSelector((state) => state.auth.userName);
+  const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: (inputs) => {
       const formData = new FormData();
@@ -49,6 +51,7 @@ const RegisterPage = () => {
     },
     onSuccess: () => {
       alert("정상적으로 등록되었습니다.");
+      navigate("/");
     },
     onError: (error) => {
       alert("등록에 실패하였습니다.", error.message);
@@ -71,7 +74,7 @@ const RegisterPage = () => {
     carwashDescription: "",
   };
 
-  const [inputs, handleChange] = useRegisterForm(initialValue);
+  const { inputs, handleChange, isDirty } = useRegisterForm(initialValue);
 
   return (
     <div className="flex items-center justify-center w-screen h-screen">
@@ -87,6 +90,7 @@ const RegisterPage = () => {
           inputs={inputs}
           onChange={handleChange}
           mutation={mutation}
+          isDirty={isDirty}
           buttonLabel="입점신청"
         />
       </Box>
