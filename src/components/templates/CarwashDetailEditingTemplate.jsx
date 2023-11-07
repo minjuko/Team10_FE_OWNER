@@ -42,37 +42,39 @@ const CarwashDetailEditingTemplate = () => {
   const mutation = useMutation({
     mutationFn: async (inputs) => {
       const formData = new FormData();
+      const blob = new Blob(
+        [
+          JSON.stringify({
+            name: inputs.carwashName,
+            price: inputs.pricePer30min,
+            tel: inputs.carwashTel,
+            locationDTO: {
+              placeName: inputs.carwashName,
+              address: inputs.carwashAddress,
+              latitude: inputs.latitude,
+              longitude: inputs.longitude,
+            },
+            optime: {
+              weekday: {
+                start: inputs.weekdayOpenTime,
+                end: inputs.weekdayCloseTime,
+              },
+              weekend: {
+                start: inputs.weekendOpenTime,
+                end: inputs.weekendCloseTime,
+              },
+            },
+            keywordId: inputs.keypoint,
+            description: inputs.carwashDescription,
+          }),
+        ],
+        { type: "application/json" }
+      );
 
       for (const file of inputs.carwashImage) {
         await appendFilesToFormData(formData, file);
       }
-
-      formData.append(
-        "updateData",
-        JSON.stringify({
-          name: inputs.carwashName,
-          region: {
-            placeName: inputs.carwashName,
-            address: inputs.carwashAddress,
-            latitude: inputs.latitude,
-            longitude: inputs.longitude,
-          },
-          price: inputs.pricePer30min,
-          optime: {
-            weekday: {
-              start: inputs.weekdayOpenTime,
-              end: inputs.weekdayCloseTime,
-            },
-            weekend: {
-              start: inputs.weekendOpenTime,
-              end: inputs.weekendCloseTime,
-            },
-          },
-          keywordId: inputs.keypoint,
-          description: inputs.carwashDescription,
-          tel: inputs.carwashTel,
-        })
-      );
+      formData.append("updateData", blob);
 
       return putCarwashesDetails(carwash_id, formData);
     },

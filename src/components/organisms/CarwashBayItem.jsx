@@ -5,6 +5,7 @@ import { setBayStatus } from "../../apis/extras";
 
 const CarwashBayItem = ({ optime, bay }) => {
   const mutation = useMutation({
+    queryKey: ["setBayStatus"],
     mutationFn: (data) => setBayStatus(data),
   });
 
