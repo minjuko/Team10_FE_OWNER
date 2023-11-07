@@ -1,12 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
 import { setBayStatus } from "../../apis/extras";
 
 const CarwashBayItem = ({ optime, bay }) => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     queryKey: ["setBayStatus"],
     mutationFn: (data) => setBayStatus(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["carwashItem"]);
+    },
   });
 
   return (
