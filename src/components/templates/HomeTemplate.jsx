@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const HomeTemplate = () => {
   const { data } = useSuspenseQuery({ queryKey: ["home"], queryFn: getHome });
-  const userName = useSelector((state) => state.auth.user);
+  const userName = useSelector((state) => state.auth.userName);
 
   return (
     <div>
