@@ -1,6 +1,10 @@
 import RegisterForm from "../organisms/RegisterForm";
 import Box from "../atoms/Box";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { getCarwashesDetails, putCarwashesDetails } from "../../apis/carwashes";
 import MobilePreview from "../organisms/MobilePreview";
 import useRegisterForm from "../../hooks/useRegisterForm";
@@ -9,6 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const CarwashDetailEditingTemplate = () => {
   const navigate = useNavigate();
   const { carwash_id } = useParams();
+  const queryClient = useQueryClient();
 
   const { data } = useSuspenseQuery({
     queryKey: ["getCarwashDetail", carwash_id],
@@ -80,6 +85,7 @@ const CarwashDetailEditingTemplate = () => {
     },
     onSuccess: () => {
       alert("정상적으로 수정되었습니다.");
+      queryClient.invalidateQueries(["carwashItem"]);
       navigate(`/manage/item/${carwash_id}`);
     },
     onError: (error) => {

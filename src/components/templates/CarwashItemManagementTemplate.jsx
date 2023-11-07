@@ -1,10 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Card from "../molecules/Card";
 import CarwashBayItem from "../organisms/CarwashBayItem";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { addBays, getCarwashItem } from "../../apis/carwashes";
 
 const CarwashItemManagementTemplate = () => {
+  const queryClient = useQueryClient();
   const { carwash_id } = useParams();
   const navigate = useNavigate();
 
@@ -15,6 +20,9 @@ const CarwashItemManagementTemplate = () => {
 
   const mutate = useMutation({
     mutationFn: (data) => addBays(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["carwashItem"]);
+    },
   });
 
   const carwashItemData = data.data.response;
