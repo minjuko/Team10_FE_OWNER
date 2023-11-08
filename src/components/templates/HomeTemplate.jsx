@@ -19,12 +19,14 @@ const HomeTemplate = () => {
             label="이번 달 전체 판매"
             icon={SalesIcon}
             number={data.data.response.monthlySales}
+            unit="원"
             percentage={data.data.response.salesGrowthPercentage}
           />
           <DashboardItem
             label="이번 달 전체 예약"
             icon={ReservationIcon}
             number={data.data.response.monthlyReservations}
+            unit="건"
             percentage={data.data.response.reservationGrowthPercentage}
           />
         </div>
@@ -34,7 +36,7 @@ const HomeTemplate = () => {
         <h2 className="text-2xl font-bold">{userName} 사장님의 매장</h2>
         <div className="flex flex-wrap gap-12">
           {data.data.response.myStores.map((store) => (
-            <CarwashShortcutItem key={store.name} carwash={store} />
+            <CarwashShortcutItem key={store.carwashId} carwash={store} />
           ))}
         </div>
       </section>
