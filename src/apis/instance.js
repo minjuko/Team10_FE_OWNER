@@ -18,3 +18,15 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+instance.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    if (error.response.data.error.status === 401) {
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
