@@ -1,28 +1,32 @@
 import axios from "axios";
 
-const token = localStorage.getItem("Token");
-
 export const instance = axios.create({
   timeout: 5000,
   baseURL: "https://k92309e2e8ca6a.user-app.krampoline.com",
   headers: {
     "Content-Type": "application/json",
-    authorization: token,
   },
 });
 
-export const fileInstance = axios.create({
-  timeout: 5000,
-  baseURL: "https://k92309e2e8ca6a.user-app.krampoline.com",
-  headers: {
-    authorization: token,
+instance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("Token");
+    config.headers.Authorization = token;
+    return config;
   },
-});
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-// export const instance = axios.create({
-//   timeout: 5000,
-//   headers: {
-//     "Content-Type": "application/json",
-//     authorization: token,
-//   },
-// });
+instance.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    if (error.response.data.error.status === 401) {
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);

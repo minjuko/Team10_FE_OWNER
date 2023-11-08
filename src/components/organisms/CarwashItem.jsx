@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import MultipleTimeTable from "../molecules/MultipleTimeTable";
+import { isEmpty } from "../../utils/isEmpty";
 
 const CarwashItem = ({ carwash }) => {
   return (
@@ -14,11 +15,15 @@ const CarwashItem = ({ carwash }) => {
         />
       </div>
       <div className="flex-grow">
-        <div className="p-4 text-2xl font-bold text-white bg-primary">
+        <div className="p-4 text-2xl font-bold text-white bg-primary filter">
           {carwash.name}
         </div>
         <div className="p-4">
-          <MultipleTimeTable carwash={carwash} />
+          {isEmpty(carwash.bays) ? (
+            <div>예약 가능한 베이가 없습니다.</div>
+          ) : (
+            <MultipleTimeTable carwash={carwash} />
+          )}
         </div>
       </div>
     </Link>

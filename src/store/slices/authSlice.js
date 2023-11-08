@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login } from "../../apis/user";
+import { getUserInfo, login } from "../../apis/user";
 
 export const loginThunk = createAsyncThunk(
   "auth/login",
@@ -14,28 +14,54 @@ export const loginThunk = createAsyncThunk(
   }
 );
 
+export const getUserInfoThunk = createAsyncThunk(
+  "auth/getUserInfo",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getUserInfo();
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null,
+    isLoggedIn: !!localStorage.getItem("Token"),
     isLoading: false,
+    userName: "",
     error: null,
   },
   reducers: {
     logout: (state) => {
       localStorage.removeItem("Token");
-      state.user = null;
+      state.isLoggedIn = false;
+      state.userName = "";
     },
   },
   extraReducers: {
     [loginThunk.pending]: (state) => {
       state.isLoading = true;
     },
-    [loginThunk.fulfilled]: (state, action) => {
+    [loginThunk.fulfilled]: (state) => {
+      state.isLoggedIn = true;
       state.isLoading = false;
-      state.user = action.meta.arg.email;
     },
     [loginThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload.error;
+    },
+    [getUserInfoThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getUserInfoThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isLoggedIn = true;
+      state.userName = action.payload.response.name;
+    },
+    [getUserInfoThunk.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload.error;
     },
