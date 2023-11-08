@@ -4,15 +4,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const MainLayout = () => {
-  const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/login");
-    }
-  }, [navigate]);
-
   return (
     <>
       <GNB />
