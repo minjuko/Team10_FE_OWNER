@@ -9,6 +9,7 @@ import CarwashManagementPage from "./pages/CarwashManagementPage";
 import CarwashItemManagementPage from "./pages/CarwashItemManagementPage";
 import CarwashDetailEditingPage from "./pages/CarwashDetailEditingPage";
 import CarwashBayReservationHistoryPage from "./pages/CarwashBayReservationHistoryPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route
               path="/manage/item/:carwash_id/:bay_id"
               element={<CarwashBayReservationHistoryPage />}></Route>
+            <Route path="*" element={<NotFoundPage />}></Route>
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
