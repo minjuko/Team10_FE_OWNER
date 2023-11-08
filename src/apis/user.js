@@ -9,3 +9,11 @@ export const signup = async (data) => {
   const { username, email, password, tel } = data;
   return instance.post("/api/owner/join", { username, email, password, tel });
 };
+
+export const getUserInfo = async () => {
+  return instance.get("/api/user/info");
+};
+
+export const checkUniqueEmail = async (email) => {
+  return instance.post("/api/user/check", { email });
+};
