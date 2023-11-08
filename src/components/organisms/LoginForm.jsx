@@ -9,13 +9,12 @@ import { loginThunk } from "../../store/slices/authSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import WarningMessage from "../atoms/WarningMessage";
 
 /**
  * LoginForm 로그인 폼
  *
  * 이메일, 비밀번호 입력창, 로그인 버튼, 회원가입 링크를 담고 있는 박스입니다.
- *
- * @todo errorMessage를 react-hook-form의 에러 메시지로 변경 필요
  */
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -55,9 +54,7 @@ const LoginForm = () => {
           })}
         />
         {errors.email && (
-          <small className="text-red-500" role="alert">
-            {errors.email.message}
-          </small>
+          <WarningMessage>{errors.email.message}</WarningMessage>
         )}
 
         <TextInput
@@ -68,16 +65,10 @@ const LoginForm = () => {
           })}
         />
         {errors.password && (
-          <small className="text-red-500" role="alert">
-            {errors.password.message}
-          </small>
+          <WarningMessage>{errors.password.message}</WarningMessage>
         )}
 
-        {errorMessage && (
-          <small className="text-red-500" role="alert">
-            {errorMessage}
-          </small>
-        )}
+        {errorMessage && <WarningMessage>{errorMessage}</WarningMessage>}
 
         <Button type="submit" disabled={isSubmitting} style="long">
           로그인

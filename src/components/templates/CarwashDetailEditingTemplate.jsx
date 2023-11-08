@@ -1,6 +1,10 @@
 import RegisterForm from "../organisms/RegisterForm";
 import Box from "../atoms/Box";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { getCarwashesDetails, putCarwashesDetails } from "../../apis/carwashes";
 import MobilePreview from "../organisms/MobilePreview";
 import useRegisterForm from "../../hooks/useRegisterForm";
@@ -9,6 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const CarwashDetailEditingTemplate = () => {
   const navigate = useNavigate();
   const { carwash_id } = useParams();
+  const queryClient = useQueryClient();
 
   const { data } = useSuspenseQuery({
     queryKey: ["getCarwashDetail", carwash_id],
@@ -42,42 +47,45 @@ const CarwashDetailEditingTemplate = () => {
   const mutation = useMutation({
     mutationFn: async (inputs) => {
       const formData = new FormData();
+      const blob = new Blob(
+        [
+          JSON.stringify({
+            name: inputs.carwashName,
+            price: inputs.pricePer30min,
+            tel: inputs.carwashTel,
+            locationDTO: {
+              placeName: inputs.carwashName,
+              address: inputs.carwashAddress,
+              latitude: inputs.latitude,
+              longitude: inputs.longitude,
+            },
+            optime: {
+              weekday: {
+                start: inputs.weekdayOpenTime,
+                end: inputs.weekdayCloseTime,
+              },
+              weekend: {
+                start: inputs.weekendOpenTime,
+                end: inputs.weekendCloseTime,
+              },
+            },
+            keywordId: inputs.keypoint,
+            description: inputs.carwashDescription,
+          }),
+        ],
+        { type: "application/json" }
+      );
 
       for (const file of inputs.carwashImage) {
         await appendFilesToFormData(formData, file);
       }
-
-      formData.append(
-        "updateData",
-        JSON.stringify({
-          name: inputs.carwashName,
-          region: {
-            placeName: inputs.carwashName,
-            address: inputs.carwashAddress,
-            latitude: inputs.latitude,
-            longitude: inputs.longitude,
-          },
-          price: inputs.pricePer30min,
-          optime: {
-            weekday: {
-              start: inputs.weekdayOpenTime,
-              end: inputs.weekdayCloseTime,
-            },
-            weekend: {
-              start: inputs.weekendOpenTime,
-              end: inputs.weekendCloseTime,
-            },
-          },
-          keywordId: inputs.keypoint,
-          description: inputs.carwashDescription,
-          tel: inputs.carwashTel,
-        })
-      );
+      formData.append("updateData", blob);
 
       return putCarwashesDetails(carwash_id, formData);
     },
     onSuccess: () => {
       alert("정상적으로 수정되었습니다.");
+      queryClient.invalidateQueries(["carwashItem"]);
       navigate(`/manage/item/${carwash_id}`);
     },
     onError: (error) => {
@@ -103,7 +111,7 @@ const CarwashDetailEditingTemplate = () => {
     carwashDescription: carwashDetail.description,
   };
 
-  const [inputs, handleChange] = useRegisterForm(initialValue);
+  const { inputs, handleChange, isDirty } = useRegisterForm(initialValue);
 
   return (
     <div className="flex gap-8">
@@ -113,6 +121,7 @@ const CarwashDetailEditingTemplate = () => {
           inputs={inputs}
           onChange={handleChange}
           mutation={mutation}
+          isDirty={isDirty}
           buttonLabel="수정하기"
         />
       </Box>

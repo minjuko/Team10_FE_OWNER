@@ -1,16 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import GNB from "../components/atoms/GNB";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const MainLayout = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem("Token") === null) {
-      navigate("/login");
-    }
-  }, [navigate]);
-
   return (
     <>
       <GNB />

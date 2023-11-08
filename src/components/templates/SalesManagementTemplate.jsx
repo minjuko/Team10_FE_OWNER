@@ -5,6 +5,11 @@ import MonthSelectorCard from "../organisms/MonthSelectorCard";
 import SalesItem from "../organisms/SalesItem";
 import { getRevenue, getSales } from "../../apis/extras";
 import { useState } from "react";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(customParseFormat);
+dayjs.extend(advancedFormat);
 
 /**
  * SalesManagementTemplate 템플릿
@@ -20,7 +25,7 @@ const SalesManagementTemplate = () => {
   const today = new Date();
   const [selectedCarwash, setSelectedCarwash] = useState([]);
   const [selectedDate, setSelectedDate] = useState(
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-01"
+    dayjs().startOf("month").format("YYYY-MM-DD")
   );
 
   const setDate = (newDate) => {
@@ -58,8 +63,6 @@ const SalesManagementTemplate = () => {
   const revenue = revenueData.data.data.response.revenue;
   const reservationList = salesData.data.data.response.reservationList;
   const carwashList = salesData.data.data.response.carwashList;
-
-  console.log(reservationList);
 
   return (
     <div className="flex gap-16">
