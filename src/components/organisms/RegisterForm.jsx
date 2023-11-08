@@ -5,7 +5,23 @@ import RegisterFormItemStructure from "../atoms/RegisterFormItemStructure";
 import DaumPostcodePicker from "../molecules/DaumPostcodePicker";
 import ImageUploader from "../molecules/ImageUploader";
 import OpTimePicker from "../molecules/OpTimePicker";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { isEmpty } from "../../utils/isEmpty";
+
+const pointLabels = [
+  "하부세차",
+  "개러지형 독립공간",
+  "야간조명",
+  "100% 수돗물",
+  "휴게실",
+  "에어컨",
+  "발수코팅건",
+];
+
+const ERROR_MESSAGE = {
+  required: "필수 항목이 입력되지 않았습니다.",
+  onlyNumber: "전화번호는 숫자만 입력해주세요.",
+};
 
 /**
  * RegisterForm
@@ -14,16 +30,37 @@ import { useEffect } from "react";
  *
  * @todo 각 input에 대한 validation 필요
  */
-const RegisterForm = ({ inputs, onChange, mutation, buttonLabel }) => {
-  const pointLabels = [
-    "하부세차",
-    "개러지형 독립공간",
-    "야간조명",
-    "100% 수돗물",
-    "휴게실",
-    "에어컨",
-    "발수코팅건",
-  ];
+const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const validate = () => {
+    if (
+      inputs.carwashName === "" ||
+      inputs.carwashAddress === "" ||
+      inputs.carwashTel === "" ||
+      inputs.pricePer30min === "" ||
+      inputs.weekdayOpenTime === "" ||
+      inputs.weekdayCloseTime === "" ||
+      inputs.weekendOpenTime === "" ||
+      inputs.weekendCloseTime === "" ||
+      isEmpty(inputs.keypoint) ||
+      isEmpty(inputs.carwashImage) ||
+      inputs.carwashDescription === ""
+    ) {
+      setErrorMessage(ERROR_MESSAGE.required);
+      return false;
+    } else if (isNaN(inputs.carwashTel)) {
+      setErrorMessage(ERROR_MESSAGE.onlyNumber);
+      return false;
+    }
+    setErrorMessage("");
+    return true;
+  };
+
+  useEffect(() => {
+    validate() ? setIsDisabled(false) : setIsDisabled(true);
+  }, [inputs]);
 
   useEffect(() => {
     const geocoder = new kakao.maps.services.Geocoder();
@@ -41,7 +78,8 @@ const RegisterForm = ({ inputs, onChange, mutation, buttonLabel }) => {
       className="grid gap-8"
       onSubmit={(e) => {
         e.preventDefault();
-        mutation.mutate(inputs);
+        if (isDirty) mutation.mutate(inputs);
+        else alert("변경사항이 없습니다.");
       }}>
       {/* Wrapper */}
       <div className="flex gap-8">
@@ -134,8 +172,9 @@ const RegisterForm = ({ inputs, onChange, mutation, buttonLabel }) => {
       </div>
 
       {/* 하단 버튼 */}
-      <div className="flex justify-center">
-        <Button type="submit" style="long">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <small className="text-red-500">{errorMessage}</small>
+        <Button type="submit" style="long" disabled={isDisabled}>
           {buttonLabel}
         </Button>
       </div>
