@@ -61,14 +61,14 @@ const CarwashItemManagementTemplate = () => {
           onClick={(e) => {
             e.preventDefault();
 
-            const bayNo = Number(
-              window.prompt("추가할 베이 번호를 입력하세요.")
-            );
+            const bayNo = window.prompt("추가할 베이 번호를 입력하세요.");
 
-            if (!isNaN(bayNo)) {
-              mutate.mutate({ carwash_id, bay_number: bayNo });
-            } else {
-              alert("베이 번호는 숫자로 입력해주세요.");
+            if (bayNo) {
+              if (!isNaN(bayNo)) {
+                mutate.mutate({ carwash_id, bay_number: bayNo });
+              } else {
+                alert("베이 번호는 숫자로 입력해주세요.");
+              }
             }
           }}>
           베이 추가
