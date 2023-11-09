@@ -7,6 +7,9 @@
     <script type="module">
       const VITE_KAKAOMAP_API_KEY = import.meta.env.VITE_KAKAOMAP_API_KEY;
       let script = document.createElement("script");
+
+      console.log("VITE API KEY: ", VITE_KAKAOMAP_API_KEY);
+
       script.type = "text/javascript";
       script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${VITE_KAKAOMAP_API_KEY}&libraries=services`;
       script.onload = () => {
