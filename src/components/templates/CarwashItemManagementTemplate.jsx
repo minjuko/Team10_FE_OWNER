@@ -7,6 +7,7 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { addBays, getCarwashItem } from "../../apis/carwashes";
+import { isEmpty } from "../../utils/isEmpty";
 
 const CarwashItemManagementTemplate = () => {
   const queryClient = useQueryClient();
@@ -18,7 +19,7 @@ const CarwashItemManagementTemplate = () => {
     queryFn: () => getCarwashItem(carwash_id),
   });
 
-  const mutate = useMutation({
+  const mutation = useMutation({
     mutationFn: (data) => addBays(data),
     onSuccess: () => {
       queryClient.invalidateQueries(["carwashItem"]);
@@ -65,7 +66,7 @@ const CarwashItemManagementTemplate = () => {
 
             if (bayNo) {
               if (!isNaN(bayNo)) {
-                mutate.mutate({ carwash_id, bay_number: bayNo });
+                mutation.mutate({ carwash_id, bay_number: bayNo });
               } else {
                 alert("베이 번호는 숫자로 입력해주세요.");
               }
@@ -75,15 +76,23 @@ const CarwashItemManagementTemplate = () => {
         </button>
       </aside>
       <section className="grid flex-grow gap-4">
-        {carwashItemData.bays.map((bay) => {
-          return (
-            <CarwashBayItem
-              key={bay.bayNo}
-              optime={carwashItemData.optime}
-              bay={bay}
-            />
-          );
-        })}
+        {isEmpty(carwashItemData.bays) ? (
+          <div className="flex flex-col items-center justify-center w-auto h-screen gap-8">
+            <div className="text-xl">
+              등록된 베이가 없습니다. 먼저 베이를 추가해주세요.
+            </div>
+          </div>
+        ) : (
+          carwashItemData.bays.map((bay) => {
+            return (
+              <CarwashBayItem
+                key={bay.bayNo}
+                optime={carwashItemData.optime}
+                bay={bay}
+              />
+            );
+          })
+        )}
       </section>
     </div>
   );
