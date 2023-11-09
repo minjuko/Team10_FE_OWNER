@@ -79,7 +79,7 @@ const CarwashItemManagementTemplate = () => {
       </AsideLayout>
       <MainContentLayout>
         {isEmpty(carwashItemData.bays) ? (
-          <div className="flex flex-col items-center justify-center w-auto h-screen gap-8">
+          <div className="flex flex-col items-center justify-center w-auto gap-8">
             <div className="text-xl">
               등록된 베이가 없습니다. 먼저 베이를 추가해주세요.
             </div>
