@@ -5,16 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module">
-      const VITE_KAKAOMAP_API_KEY = import.meta.env.VITE_KAKAOMAP_API_KEY;
-
-      const importmeta = import.meta;
-      const importmetaenv = import.meta.env;
-
       let script = document.createElement("script");
-
-      console.log("VITE API KEY: ", VITE_KAKAOMAP_API_KEY);
-      console.log("importmeta", importmeta);
-      console.log("importmetaenv", importmetaenv);
+      const VITE_KAKAOMAP_API_KEY = import.meta.env.VITE_KAKAOMAP_API_KEY;
 
       script.type = "text/javascript";
       script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${VITE_KAKAOMAP_API_KEY}&libraries=services&autoload=false`;
