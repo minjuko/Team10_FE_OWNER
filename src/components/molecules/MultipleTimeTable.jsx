@@ -143,7 +143,7 @@ const MultipleTimeTable = ({ carwash }) => {
       <tbody>
         {carwash.bays.map((item) => {
           return (
-            <tr key={item.bay_no}>
+            <tr key={item.bayId}>
               {minuteLoop(
                 startMinute,
                 endMinute,
