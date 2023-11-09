@@ -5,11 +5,9 @@ import LoadingAnimation from "../components/atoms/LoadingAnimation";
 
 const CarwashDetailEditingPage = () => {
   return (
-    <ErrorBoundary fallback={<div>Error occurred!</div>}>
-      <Suspense fallback={<LoadingAnimation />}>
-        <CarwashDetailEditingTemplate />
-      </Suspense>
-    </ErrorBoundary>
+    <Suspense fallback={<LoadingAnimation />}>
+      <CarwashDetailEditingTemplate />
+    </Suspense>
   );
 };
 
