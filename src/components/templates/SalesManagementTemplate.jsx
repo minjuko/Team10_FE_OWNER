@@ -19,13 +19,8 @@ dayjs.extend(advancedFormat);
  *
  * aside 영역과 section 영역으로 구성되어 있습니다.
  * aside 영역에는 월 선택 카드와 매장 선택 체크박스가 있고, section 영역에는 개별 매출내역 아이템들이 보여집니다.
- *
- * @todo 입점신청하기 전 월로 이동하지 못하게 처리 필요
- * @todo 날짜를 dayjs로 변환 필요 (YYYY-MM-DD)
- *
  */
 const SalesManagementTemplate = () => {
-  const today = new Date();
   const [selectedCarwash, setSelectedCarwash] = useState([]);
   const [selectedDate, setSelectedDate] = useState(
     dayjs().startOf("month").format("YYYY-MM-DD")
@@ -70,7 +65,7 @@ const SalesManagementTemplate = () => {
   return (
     <div className="flex gap-16">
       <AsideLayout>
-        <MonthSelectorCard setDate={setDate} monthlyRevenue={revenue} />
+        <MonthSelectorCard onChange={setDate} monthlyRevenue={revenue} />
         <Card title="매장별 선택">
           <div className="flex flex-col">
             {carwashList.map((item) => (
