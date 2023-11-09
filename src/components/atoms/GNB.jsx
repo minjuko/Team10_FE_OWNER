@@ -3,15 +3,12 @@ import Image from "./Image";
 import Logo from "/logo.svg";
 import Button from "./Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfoThunk, logout } from "../../store/slices/authSlice";
-import { useEffect } from "react";
+import { logout } from "../../store/slices/authSlice";
 
 /**
  * GNB 컴포넌트
  *
  * 사장님 사이트에서 전역적으로 상단에 표시되는 네비게이션 바입니다.
- *
- * @todo 로그아웃 버튼 클릭 시 로그아웃 처리\
  */
 
 const GNB = () => {
@@ -19,10 +16,6 @@ const GNB = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.auth.userName);
-
-  useEffect(() => {
-    dispatch(getUserInfoThunk());
-  }, []);
 
   const menus = [
     {
