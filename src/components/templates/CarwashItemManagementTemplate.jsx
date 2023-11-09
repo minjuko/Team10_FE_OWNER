@@ -10,6 +10,7 @@ import { addBays, getCarwashItem } from "../../apis/carwashes";
 import { isEmpty } from "../../utils/isEmpty";
 import AsideLayout from "../atoms/AsideLayout";
 import MainContentLayout from "../atoms/MainContentLayout";
+import Button from "../atoms/Button";
 
 const CarwashItemManagementTemplate = () => {
   const queryClient = useQueryClient();
@@ -49,7 +50,7 @@ const CarwashItemManagementTemplate = () => {
             </div>
           </div>
         </Card>
-        <button
+        <Button
           type="button"
           className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
           onClick={(e) => {
@@ -57,8 +58,8 @@ const CarwashItemManagementTemplate = () => {
             navigate(`/manage/item/${carwash_id}/edit`);
           }}>
           세차장 정보 수정
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
           onClick={(e) => {
@@ -75,7 +76,7 @@ const CarwashItemManagementTemplate = () => {
             }
           }}>
           베이 추가
-        </button>
+        </Button>
       </AsideLayout>
       <MainContentLayout>
         {isEmpty(carwashItemData.bays) ? (

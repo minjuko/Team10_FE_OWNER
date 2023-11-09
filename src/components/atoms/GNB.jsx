@@ -64,7 +64,7 @@ const GNB = () => {
             </Button>
           </div>
           <Button
-            style="cta"
+            variant="cta"
             onClick={() => {
               navigate("/register");
             }}>

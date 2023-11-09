@@ -82,12 +82,12 @@ const LoginForm = () => {
           </div>
         )}
 
-        <Button type="submit" disabled={isSubmitting} style="long">
+        <Button type="submit" disabled={isSubmitting} variant="long">
           로그인
         </Button>
 
         <Button
-          style="longwhite"
+          variant="longwhite"
           onClick={() => {
             navigate("/signup");
           }}>
