@@ -36,7 +36,7 @@ const GNB = () => {
   ];
 
   return (
-    <nav className="flex h-24 bg-white border-b border-gray-300 min-w-min">
+    <nav className="fixed top-0 z-50 flex w-full h-24 bg-white border-b border-gray-300 min-w-min">
       <div className="w-[1280px] flex items-center justify-between mx-auto px-4">
         <section className="flex items-center gap-8">
           <Link to="/">
