@@ -14,7 +14,7 @@ spec:
       containers:
         - name: frontend
           # 여러분의 image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b1bd77111cf8
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b6486185f919
           env:
             - name: VITE_KAKAOMAP_API_KEY
               valueFrom:
