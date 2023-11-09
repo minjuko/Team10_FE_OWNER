@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { loginThunk } from "../../store/slices/authSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WarningMessage from "../atoms/WarningMessage";
 
 /**
@@ -24,18 +24,27 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { isSubmitting, errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      const resultAction = await dispatch(loginThunk(data));
-      unwrapResult(resultAction); // loginThunk가 무조건 success를 반환하므로, unwrapResult를 사용하여 resultAction을 반환합니다.
-      navigate("/");
-    } catch (error) {
-      setErrorMessage(error.error);
-    }
+  const onSubmit = (data) => {
+    dispatch(loginThunk(data))
+      .then(unwrapResult)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        setErrorMessage(error.error.message);
+      });
   };
+
+  const email = watch("email");
+  const password = watch("password");
+
+  useEffect(() => {
+    setErrorMessage("");
+  }, [email, password]);
 
   return (
     <Box className="grid p-14 gap-14">
@@ -67,8 +76,11 @@ const LoginForm = () => {
         {errors.password && (
           <WarningMessage>{errors.password.message}</WarningMessage>
         )}
-
-        {errorMessage && <WarningMessage>{errorMessage}</WarningMessage>}
+        {errorMessage && (
+          <div className="w-96">
+            <WarningMessage>{errorMessage}</WarningMessage>
+          </div>
+        )}
 
         <Button type="submit" disabled={isSubmitting} style="long">
           로그인
