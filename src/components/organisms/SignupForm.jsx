@@ -114,7 +114,7 @@ const SignupForm = () => {
           />
           <Button
             className="shrink-0"
-            style="small"
+            variant="small"
             type="button"
             onClick={checkEmail}
             disabled={isSubmitting || !email || errors.email}>
@@ -186,7 +186,7 @@ const SignupForm = () => {
         />
         {errors.tel && <WarningMessage>{errors.tel.message}</WarningMessage>}
 
-        <Button type="submit" disabled={isSubmitting} style="long">
+        <Button type="submit" disabled={isSubmitting} variant="long">
           회원가입
         </Button>
       </form>

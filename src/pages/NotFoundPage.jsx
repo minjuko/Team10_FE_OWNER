@@ -10,7 +10,7 @@ const NotFoundPage = () => {
       <img src={NotFound} alt="에러코드 404" className="w-64" />
       <p className="text-xl">페이지를 찾을 수 없습니다.</p>
       <Button
-        style="long"
+        variant="long"
         onClick={() => {
           navigate("/");
         }}>

@@ -23,7 +23,7 @@ const CarwashManagementTemplate = () => {
             등록된 세차장이 없습니다. 먼저 입점신청 후 접속해주세요.
           </div>
           <Button
-            style="long"
+            variant="long"
             onClick={() => {
               navigate("/register");
             }}>

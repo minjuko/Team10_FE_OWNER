@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import Box from "../atoms/Box";
 import Image from "../atoms/Image";
 import ProfileIcon from "/profile.svg";
+import Button from "../atoms/Button";
 
 const ReservationItem = ({
   reservationId,
@@ -24,9 +25,9 @@ const ReservationItem = ({
     <Box className="grid w-auto h-40 gap-4 p-4">
       <div className="flex justify-between">
         <div className="text-xl text-gray-400">#{reservationId}</div>
-        <button className="px-4 border border-black rounded-full">
+        <Button className="px-4 border border-black rounded-full">
           예약취소
-        </button>
+        </Button>
       </div>
       <div className="flex justify-between">
         <div className="text-xl">
