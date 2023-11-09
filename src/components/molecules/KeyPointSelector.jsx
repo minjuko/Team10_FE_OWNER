@@ -20,14 +20,14 @@ const KeyPointSelector = ({ value, pointLabels, handleChange }) => {
       <div className="flex flex-wrap justify-center gap-4">
         {pointLabels.map((label, index) => (
           <Badge
-            key={index + 1}
-            value={selected.includes(index + 1)}
+            key={index + 8}
+            value={selected.includes(index + 8)}
             onChange={(e) => {
               const valueCopy = [...selected];
               if (e.target.checked) {
-                valueCopy.push(index + 1);
+                valueCopy.push(index + 8);
               } else {
-                valueCopy.splice(valueCopy.indexOf(index + 1), 1);
+                valueCopy.splice(valueCopy.indexOf(index + 8), 1);
               }
               valueCopy.sort((a, b) => a - b);
               setSelected(valueCopy);
