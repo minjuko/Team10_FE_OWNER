@@ -29,7 +29,7 @@ export const getUserInfoThunk = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isLoggedIn: !!localStorage.getItem("Token"),
+    isLoggedIn: false,
     isLoading: false,
     userName: "",
     error: null,
@@ -41,30 +41,30 @@ const authSlice = createSlice({
       state.userName = "";
     },
   },
-  extraReducers: {
-    [loginThunk.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(loginThunk.pending, (state) => {
       state.isLoading = true;
-    },
-    [loginThunk.fulfilled]: (state) => {
-      state.isLoggedIn = true;
-      state.isLoading = false;
-    },
-    [loginThunk.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload.error;
-    },
-    [getUserInfoThunk.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [getUserInfoThunk.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.isLoggedIn = true;
-      state.userName = action.payload.response.name;
-    },
-    [getUserInfoThunk.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload.error;
-    },
+    }),
+      builder.addCase(loginThunk.fulfilled, (state) => {
+        state.isLoggedIn = true;
+        state.isLoading = false;
+      }),
+      builder.addCase(loginThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload.error;
+      }),
+      builder.addCase(getUserInfoThunk.pending, (state) => {
+        state.isLoading = true;
+      }),
+      builder.addCase(getUserInfoThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.userName = action.payload.response.name;
+      }),
+      builder.addCase(getUserInfoThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload.error;
+      });
   },
 });
 
