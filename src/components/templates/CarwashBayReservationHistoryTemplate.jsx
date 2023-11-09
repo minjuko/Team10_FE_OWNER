@@ -3,6 +3,8 @@ import Card from "../molecules/Card";
 import { getCarwashBayReservationHistory } from "../../apis/carwashes";
 import { useParams } from "react-router-dom";
 import ReservationItem from "../organisms/ReservationItem";
+import AsideLayout from "../atoms/AsideLayout";
+import MainContentLayout from "../atoms/MainContentLayout";
 
 const CarwashBayReservationHistoryTemplate = () => {
   const carwash_id = useParams().carwash_id;
@@ -18,7 +20,7 @@ const CarwashBayReservationHistoryTemplate = () => {
 
   return (
     <div className="flex gap-16">
-      <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
+      <AsideLayout>
         <Card title={carwashName}>
           <div className="grid gap-2">
             <div>
@@ -33,8 +35,8 @@ const CarwashBayReservationHistoryTemplate = () => {
             </div>
           </div>
         </Card>
-      </aside>
-      <section className="grid flex-grow gap-4">
+      </AsideLayout>
+      <MainContentLayout>
         {reservationList.map((item) => {
           return (
             <ReservationItem
@@ -49,7 +51,7 @@ const CarwashBayReservationHistoryTemplate = () => {
             />
           );
         })}
-      </section>
+      </MainContentLayout>
     </div>
   );
 };

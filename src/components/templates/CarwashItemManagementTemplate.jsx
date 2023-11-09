@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-query";
 import { addBays, getCarwashItem } from "../../apis/carwashes";
 import { isEmpty } from "../../utils/isEmpty";
+import AsideLayout from "../atoms/AsideLayout";
+import MainContentLayout from "../atoms/MainContentLayout";
 
 const CarwashItemManagementTemplate = () => {
   const queryClient = useQueryClient();
@@ -30,7 +32,7 @@ const CarwashItemManagementTemplate = () => {
 
   return (
     <div className="flex gap-16">
-      <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
+      <AsideLayout>
         <Card title={carwashItemData.name}>
           <div className="grid gap-2">
             <div>
@@ -74,8 +76,8 @@ const CarwashItemManagementTemplate = () => {
           }}>
           베이 추가
         </button>
-      </aside>
-      <section className="grid flex-grow gap-4">
+      </AsideLayout>
+      <MainContentLayout>
         {isEmpty(carwashItemData.bays) ? (
           <div className="flex flex-col items-center justify-center w-auto h-screen gap-8">
             <div className="text-xl">
@@ -93,7 +95,7 @@ const CarwashItemManagementTemplate = () => {
             );
           })
         )}
-      </section>
+      </MainContentLayout>
     </div>
   );
 };

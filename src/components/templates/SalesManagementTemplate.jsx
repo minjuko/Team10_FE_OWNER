@@ -8,6 +8,9 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import { isEmpty } from "../../utils/isEmpty";
+import MainContentLayout from "../atoms/MainContentLayout";
+import AsideLayout from "../atoms/AsideLayout";
 dayjs.extend(customParseFormat);
 dayjs.extend(advancedFormat);
 
@@ -66,7 +69,7 @@ const SalesManagementTemplate = () => {
 
   return (
     <div className="flex gap-16">
-      <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
+      <AsideLayout>
         <MonthSelectorCard setDate={setDate} monthlyRevenue={revenue} />
         <Card title="매장별 선택">
           <div className="flex flex-col">
@@ -79,9 +82,11 @@ const SalesManagementTemplate = () => {
             ))}
           </div>
         </Card>
-      </aside>
-      <section className="grid flex-grow gap-4">
-        {reservationList.length !== 0 ? (
+      </AsideLayout>
+      <MainContentLayout>
+        {isEmpty(reservationList.length) ? (
+          <div>데이터가 없습니다.</div>
+        ) : (
           reservationList.map((item) => {
             return (
               <SalesItem
@@ -96,10 +101,8 @@ const SalesManagementTemplate = () => {
               />
             );
           })
-        ) : (
-          <div>데이터가 없습니다.</div>
         )}
-      </section>
+      </MainContentLayout>
     </div>
   );
 };
