@@ -1,7 +1,5 @@
-import { Outlet, useNavigate } from "react-router-dom";
 import GNB from "../components/atoms/GNB";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
