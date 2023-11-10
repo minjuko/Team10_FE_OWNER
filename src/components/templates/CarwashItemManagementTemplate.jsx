@@ -8,6 +8,9 @@ import {
 } from "@tanstack/react-query";
 import { addBays, getCarwashItem } from "../../apis/carwashes";
 import { isEmpty } from "../../utils/isEmpty";
+import AsideLayout from "../atoms/AsideLayout";
+import MainContentLayout from "../atoms/MainContentLayout";
+import Button from "../atoms/Button";
 
 const CarwashItemManagementTemplate = () => {
   const queryClient = useQueryClient();
@@ -27,10 +30,11 @@ const CarwashItemManagementTemplate = () => {
   });
 
   const carwashItemData = data.data.response;
+  console.log(carwashItemData);
 
   return (
     <div className="flex gap-16">
-      <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
+      <AsideLayout>
         <Card title={carwashItemData.name}>
           <div className="grid gap-2">
             <div>
@@ -47,7 +51,7 @@ const CarwashItemManagementTemplate = () => {
             </div>
           </div>
         </Card>
-        <button
+        <Button
           type="button"
           className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
           onClick={(e) => {
@@ -55,8 +59,8 @@ const CarwashItemManagementTemplate = () => {
             navigate(`/manage/item/${carwash_id}/edit`);
           }}>
           세차장 정보 수정
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
           onClick={(e) => {
@@ -73,11 +77,11 @@ const CarwashItemManagementTemplate = () => {
             }
           }}>
           베이 추가
-        </button>
-      </aside>
-      <section className="grid flex-grow gap-4">
+        </Button>
+      </AsideLayout>
+      <MainContentLayout>
         {isEmpty(carwashItemData.bays) ? (
-          <div className="flex flex-col items-center justify-center w-auto h-screen gap-8">
+          <div className="flex flex-col items-center justify-center w-auto gap-8">
             <div className="text-xl">
               등록된 베이가 없습니다. 먼저 베이를 추가해주세요.
             </div>
@@ -86,14 +90,15 @@ const CarwashItemManagementTemplate = () => {
           carwashItemData.bays.map((bay) => {
             return (
               <CarwashBayItem
-                key={bay.bayNo}
+                key={bay.bayId}
+                carwashId={carwashItemData.id}
                 optime={carwashItemData.optime}
                 bay={bay}
               />
             );
           })
         )}
-      </section>
+      </MainContentLayout>
     </div>
   );
 };

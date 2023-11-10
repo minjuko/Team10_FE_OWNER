@@ -2,8 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
 import { setBayStatus } from "../../apis/extras";
+import { Link } from "react-router-dom";
 
-const CarwashBayItem = ({ optime, bay }) => {
+const CarwashBayItem = ({ carwashId, optime, bay }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -15,7 +16,8 @@ const CarwashBayItem = ({ optime, bay }) => {
   });
 
   return (
-    <div
+    <Link
+      to={`/manage/item/${carwashId}/${bay.bayId}`}
       className={`grid h-40 gap-4 p-4 shadow-xl rounded-xl ${
         !bay.status && "bg-gray-400"
       }`}>
@@ -32,7 +34,7 @@ const CarwashBayItem = ({ optime, bay }) => {
       </div>
 
       <TimeTable optime={optime} bookedTime={bay.bayBookedTime} />
-    </div>
+    </Link>
   );
 };
 

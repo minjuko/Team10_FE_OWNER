@@ -2,7 +2,7 @@ import Loader from "/loader.gif";
 
 const LoadingAnimation = () => {
   return (
-    <div className="relative w-full h-screen">
+    <div className="flex w-full">
       <img
         src={Loader}
         alt="로딩 애니메이션"
