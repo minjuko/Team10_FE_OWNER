@@ -37,6 +37,7 @@ const Toggle = ({ bay_id, status, mutation }) => {
         role="switch"
         checked={checked}
         onChange={handleChecked}
+        onClick={(e) => e.stopPropagation()}
         className="box-content relative w-12 h-6 bg-gray-500 border-2 border-gray-500 rounded-full appearance-none before:transition before:absolute before:w-6 before:h-6 before:bg-white before:rounded-full checked:bg-primary checked:border-2 checked:border-primary checked:before:right-0"
       />
     </form>
