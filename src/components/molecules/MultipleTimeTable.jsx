@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-const MultipleTimeTable = ({ carwash }) => {
+const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 오늘이 주말인지 확인하는 함수
   const isTodayWeekend = () => {
     const today = dayjs();
@@ -20,11 +20,11 @@ const MultipleTimeTable = ({ carwash }) => {
   let endTime;
 
   if (isTodayWeekend()) {
-    startTime = convertToDayjs(carwash.optime.weekend.start);
-    endTime = convertToDayjs(carwash.optime.weekend.end);
+    startTime = convertToDayjs(optime.weekend.start);
+    endTime = convertToDayjs(optime.weekend.end);
   } else {
-    startTime = convertToDayjs(carwash.optime.weekday.start);
-    endTime = convertToDayjs(carwash.optime.weekday.end);
+    startTime = convertToDayjs(optime.weekday.start);
+    endTime = convertToDayjs(optime.weekday.end);
   }
 
   // 시간표 시작 시간과 끝 시간을 시간과 분으로 나눔
@@ -141,13 +141,13 @@ const MultipleTimeTable = ({ carwash }) => {
         <tr className="bg-gray-300">{hourLoop(startHour, endHour)}</tr>
       </thead>
       <tbody>
-        {carwash.bays.map((item) => {
+        {bayReservationList.map((item) => {
           return (
             <tr key={item.bayId}>
               {minuteLoop(
                 startMinute,
                 endMinute,
-                item.bayBookedTime,
+                item.bayBookedTimeList,
                 item.bayNo
               )}
             </tr>
