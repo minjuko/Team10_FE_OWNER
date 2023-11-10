@@ -20,6 +20,7 @@ const DaumPostcodePicker = ({ value, onChange }) => {
           setOpenPostcode((current) => !current);
         }}
         className="shrink-0"
+        type="button"
         variant="small">
         주소검색
       </Button>

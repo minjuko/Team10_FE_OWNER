@@ -35,6 +35,7 @@ const ImageUploader = ({ value = [], onChange }) => {
       label="매장 사진"
       besideLabel={
         <Button
+          type="button"
           onClick={() => {
             fileInputRef.current.click();
           }}
