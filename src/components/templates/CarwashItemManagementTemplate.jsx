@@ -30,7 +30,6 @@ const CarwashItemManagementTemplate = () => {
   });
 
   const carwashItemData = data.data.response;
-  console.log(carwashItemData);
 
   return (
     <div className="flex gap-16">
@@ -40,12 +39,12 @@ const CarwashItemManagementTemplate = () => {
             <div>
               <div className="flex justify-between">
                 <div className="font-semibold">이번 달 매출</div>
-                <div>{carwashItemData?.monthlySales?.toLocaleString()}원</div>
+                <div>{carwashItemData.monthlySales.toLocaleString()}원</div>
               </div>
               <div className="flex justify-between">
                 <div className="font-semibold">이번 달 예약</div>
                 <div>
-                  {carwashItemData?.monthlyReservations?.toLocaleString()}건
+                  {carwashItemData.monthlyReservations.toLocaleString()}건
                 </div>
               </div>
             </div>
@@ -80,20 +79,20 @@ const CarwashItemManagementTemplate = () => {
         </Button>
       </AsideLayout>
       <MainContentLayout>
-        {isEmpty(carwashItemData.bays) ? (
+        {isEmpty(carwashItemData.bayReservationList) ? (
           <div className="flex flex-col items-center justify-center w-auto gap-8">
             <div className="text-xl">
               등록된 베이가 없습니다. 먼저 베이를 추가해주세요.
             </div>
           </div>
         ) : (
-          carwashItemData.bays.map((bay) => {
+          carwashItemData.bayReservationList.map((item) => {
             return (
               <CarwashBayItem
-                key={bay.bayId}
+                key={item.bayId}
                 carwashId={carwashItemData.id}
                 optime={carwashItemData.optime}
-                bay={bay}
+                bay={item}
               />
             );
           })
