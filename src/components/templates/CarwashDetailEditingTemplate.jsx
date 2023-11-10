@@ -51,14 +51,12 @@ const CarwashDetailEditingTemplate = () => {
         [
           JSON.stringify({
             name: inputs.carwashName,
-            price: inputs.pricePer30min,
-            tel: inputs.carwashTel,
             locationDTO: {
-              placeName: inputs.carwashName,
               address: inputs.carwashAddress,
               latitude: inputs.latitude,
               longitude: inputs.longitude,
             },
+            price: inputs.pricePer30min,
             optime: {
               weekday: {
                 start: inputs.weekdayOpenTime,
@@ -71,6 +69,7 @@ const CarwashDetailEditingTemplate = () => {
             },
             keywordId: inputs.keypoint,
             description: inputs.carwashDescription,
+            tel: inputs.carwashTel,
           }),
         ],
         { type: "application/json" }
@@ -93,9 +92,9 @@ const CarwashDetailEditingTemplate = () => {
     },
   });
 
-  const carwashDetail = data?.data?.response;
+  const carwashDetail = data.data.response;
 
-  const imageFiles = carwashDetail.imageFiles.map((item) => {
+  const imageFileList = carwashDetail.imageFileList.map((item) => {
     return item.url;
   });
 
@@ -110,8 +109,8 @@ const CarwashDetailEditingTemplate = () => {
     weekdayCloseTime: carwashDetail.optime.weekday.end,
     weekendOpenTime: carwashDetail.optime.weekend.start,
     weekendCloseTime: carwashDetail.optime.weekend.end,
-    keypoint: carwashDetail.keywordId,
-    carwashImage: imageFiles,
+    keypoint: carwashDetail.keywordIdList,
+    carwashImage: imageFileList,
     carwashDescription: carwashDetail.description,
   };
 
