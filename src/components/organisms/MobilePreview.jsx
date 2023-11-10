@@ -14,6 +14,7 @@ import Waterproof from "/MobilePreview/waterproof.svg";
 import IconWithLabel from "../molecules/IconWIthLabel";
 import NoImage from "/noimage.png";
 import { isEmpty } from "../../utils/isEmpty";
+import { telFormatter } from "../../utils/telFormatter";
 
 const MobilePreview = ({ inputs }) => {
   const KEYPOINT = {
@@ -129,7 +130,7 @@ const MobilePreview = ({ inputs }) => {
           <IconWithLabel
             src={Tel}
             alt="전화 아이콘"
-            label={inputs.carwashTel}
+            label={telFormatter(inputs.carwashTel)}
             size="sm"
           />
           <IconWithLabel
