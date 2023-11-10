@@ -1,5 +1,6 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Star from "/MobilePreview/star.svg";
 import Time from "/MobilePreview/time.svg";
 import Location from "/MobilePreview/location.svg";
 import AC from "/MobilePreview/ac.svg";
@@ -76,6 +77,11 @@ const MobilePreview = ({ inputs }) => {
         <div className="flex justify-between">
           <div>
             <div className="text-xl font-bold">{inputs.carwashName}</div>
+            <div className="flex items-center gap-1">
+              <img src={Star} alt="별점" className="w-4 h-4" />
+              <div className="text-sm">5.0</div>
+              <div className="text-sm text-gray-500">(999)</div>
+            </div>
           </div>
           <div>
             <div className="text-3xl text-center text-primary">4</div>
