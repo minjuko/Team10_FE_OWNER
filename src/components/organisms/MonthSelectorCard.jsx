@@ -5,55 +5,56 @@ import dayjs from "dayjs";
 
 /**
  * MonthSelectorCard 컴포넌트
+ *
  * 월 선택 카드입니다.
  *
- * @todo 월 선택시 카드 하단에 해당 월 매출 금액 조회 구현
+ * @param {Function} onChange - 월 선택 시 호출되는 함수
+ * @param {Number} monthlyRevenue - 월 매출
  */
-const MonthSelectorCard = ({ setDate, monthlyRevenue }) => {
-  const [yearMonth, setYearMonth] = useState(dayjs().format("YYYY-MM"));
+const MonthSelectorCard = ({ onChange, monthlyRevenue }) => {
+  const currentMonthStart = dayjs().startOf("month");
+  const formatYearMonth = (date) => date.format("YYYY-MM");
 
-  const handleClickDecrease = () => {
-    let newDate = dayjs(yearMonth).subtract(1, "month");
-    setYearMonth(newDate.format("YYYY-MM"));
-    setDate(newDate.format("YYYY-MM-DD"));
-  };
+  const [yearMonth, setYearMonth] = useState(formatYearMonth(dayjs()));
 
-  const handleClickIncrease = () => {
-    let newDate = dayjs(yearMonth).add(1, "month");
-    // 이번 달 이후로는 조회 불가능
-    if (newDate.isAfter(dayjs().startOf("month"), "month")) {
+  const incrementMonth = () => {
+    const newDate = dayjs(yearMonth).add(1, "month");
+    // 현재 월 이후로 넘어가지 않도록 제한
+    if (newDate.isAfter(currentMonthStart)) {
       return;
     }
-    setYearMonth(newDate.format("YYYY-MM"));
-    setDate(newDate.format("YYYY-MM-DD"));
+    const formattedDate = formatYearMonth(newDate);
+    setYearMonth(formattedDate);
+    onChange(newDate.format("YYYY-MM-DD"));
+  };
+
+  const decrementMonth = () => {
+    const newDate = dayjs(yearMonth).subtract(1, "month");
+    const formattedDate = formatYearMonth(newDate);
+    setYearMonth(formattedDate);
+    onChange(newDate.format("YYYY-MM-DD"));
   };
 
   const [year, month] = yearMonth.split("-");
 
   return (
     <Card
-      // 월 선택
       title={
+        // 월 선택
         <div className="flex items-center justify-between">
-          <Button
-            id="-"
-            className="w-6 h-12 select-none"
-            onClick={handleClickDecrease}>
+          <Button className="w-6 h-12 select-none" onClick={decrementMonth}>
             ◀
           </Button>
           <div>
             <div>{year}년</div>
             <div className="text-4xl">{month}월</div>
           </div>
-          <Button
-            id="+"
-            className="w-6 h-12 select-none"
-            onClick={handleClickIncrease}>
+          <Button className="w-6 h-12 select-none" onClick={incrementMonth}>
             ▶
           </Button>
         </div>
       }>
-      {/* 해당 월 매출 금액 */}
+      {/* 월 매출 */}
       <div className="text-2xl font-semibold text-center text-primary">
         {monthlyRevenue.toLocaleString()}원
       </div>

@@ -22,12 +22,7 @@ const ReservationItem = ({
 
   return (
     <Box className="grid w-auto h-40 gap-4 p-4">
-      <div className="flex justify-between">
-        <div className="text-xl text-gray-400">#{reservationId}</div>
-        <button className="px-4 border border-black rounded-full">
-          예약취소
-        </button>
-      </div>
+      <div className="text-xl text-gray-400">#{reservationId}</div>
       <div className="flex justify-between">
         <div className="text-xl">
           {carwashName}: 베이 {bayNo}

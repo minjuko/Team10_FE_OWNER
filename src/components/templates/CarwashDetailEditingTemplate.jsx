@@ -95,6 +95,10 @@ const CarwashDetailEditingTemplate = () => {
 
   const carwashDetail = data?.data?.response;
 
+  const imageFiles = carwashDetail.imageFiles.map((item) => {
+    return item.url;
+  });
+
   const initialValue = {
     carwashName: carwashDetail.name,
     carwashAddress: carwashDetail.locationDTO.address,
@@ -107,7 +111,7 @@ const CarwashDetailEditingTemplate = () => {
     weekendOpenTime: carwashDetail.optime.weekend.start,
     weekendCloseTime: carwashDetail.optime.weekend.end,
     keypoint: carwashDetail.keywordId,
-    carwashImage: carwashDetail.imageFiles,
+    carwashImage: imageFiles,
     carwashDescription: carwashDetail.description,
   };
 

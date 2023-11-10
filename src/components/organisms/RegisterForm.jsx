@@ -174,7 +174,7 @@ const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
       {/* 하단 버튼 */}
       <div className="flex flex-col items-center justify-center gap-4">
         <small className="text-red-500">{errorMessage}</small>
-        <Button type="submit" style="long" disabled={isDisabled}>
+        <Button type="submit" variant="long" disabled={isDisabled}>
           {buttonLabel}
         </Button>
       </div>
