@@ -35,10 +35,11 @@ const ImageUploader = ({ value = [], onChange }) => {
       label="매장 사진"
       besideLabel={
         <Button
+          type="button"
           onClick={() => {
             fileInputRef.current.click();
           }}
-          style="addPhoto">
+          variant="addPhoto">
           + 추가
         </Button>
       }>
@@ -72,7 +73,7 @@ const ImageUploader = ({ value = [], onChange }) => {
                 </div>
               )}
               <Button
-                style="deletePhoto"
+                variant="deletePhoto"
                 onClick={(e) => handleClickDelete(e, index)}
                 className="absolute top-1 right-1">
                 ✕

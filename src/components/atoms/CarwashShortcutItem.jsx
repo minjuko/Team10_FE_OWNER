@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
 const CarwashShortcutItem = ({ carwash }) => {
+  console.log(carwash);
   return (
     <Link
       to={`/manage/item/${carwash.carwashId}`}
       className="flex items-center gap-4 overflow-auto bg-white shadow-xl w-96 rounded-xl">
       <div className="relative w-36 h-36">
         <img
-          src={carwash.imageUrl}
+          src={carwash.imageFiles[0].url}
           alt={carwash.name}
           className="absolute object-cover w-36 h-36"
         />

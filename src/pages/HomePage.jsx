@@ -5,11 +5,9 @@ import LoadingAnimation from "../components/atoms/LoadingAnimation";
 
 const HomePage = () => {
   return (
-    <ErrorBoundary fallback={<div>Error occurred!</div>}>
-      <Suspense fallback={<LoadingAnimation />}>
-        <HomeTemplate />
-      </Suspense>
-    </ErrorBoundary>
+    <Suspense fallback={<LoadingAnimation />}>
+      <HomeTemplate />
+    </Suspense>
   );
 };
 

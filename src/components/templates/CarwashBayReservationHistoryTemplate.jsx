@@ -3,23 +3,25 @@ import Card from "../molecules/Card";
 import { getCarwashBayReservationHistory } from "../../apis/carwashes";
 import { useParams } from "react-router-dom";
 import ReservationItem from "../organisms/ReservationItem";
+import AsideLayout from "../atoms/AsideLayout";
+import MainContentLayout from "../atoms/MainContentLayout";
 
 const CarwashBayReservationHistoryTemplate = () => {
-  const carwash_id = useParams().carwash_id;
   const bay_id = useParams().bay_id;
 
   const { data } = useSuspenseQuery({
     queryKey: ["reservationHistory"],
-    queryFn: () => getCarwashBayReservationHistory(carwash_id, bay_id),
+    queryFn: () => getCarwashBayReservationHistory(bay_id),
   });
 
   const reservationList = data.data.response.reservationList;
   const carwashName = data.data.response.reservationList[0].carwash.name;
+  const bayNo = data.data.response.reservationList[0].reservation.bayNo;
 
   return (
     <div className="flex gap-16">
-      <aside className="flex flex-col flex-grow-0 flex-shrink-0 gap-4">
-        <Card title={carwashName}>
+      <AsideLayout>
+        <Card title={carwashName + ": 베이 " + bayNo}>
           <div className="grid gap-2">
             <div>
               <div className="flex justify-between">
@@ -33,12 +35,12 @@ const CarwashBayReservationHistoryTemplate = () => {
             </div>
           </div>
         </Card>
-      </aside>
-      <section className="grid flex-grow gap-4">
+      </AsideLayout>
+      <MainContentLayout>
         {reservationList.map((item) => {
           return (
             <ReservationItem
-              key={item.reservationId}
+              key={item.reservation.reservationId}
               reservationId={item.reservation.reservationId}
               carwashName={item.carwash.name}
               bayNo={item.reservation.bayNo}
@@ -49,7 +51,7 @@ const CarwashBayReservationHistoryTemplate = () => {
             />
           );
         })}
-      </section>
+      </MainContentLayout>
     </div>
   );
 };
