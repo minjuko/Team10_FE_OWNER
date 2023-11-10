@@ -8,9 +8,19 @@ const ImageUploader = ({ value = [], onChange }) => {
   const handleChangeData = (e) => {
     const files = e.target.files;
 
+    if (files[0].size > 200000) {
+      return alert("200kb 이하의 이미지만 업로드 가능합니다.");
+    }
+
+    if (value.some((item) => item.name === files[0].name)) {
+      return alert("이미 같은 이름의 파일이 존재합니다.");
+    }
+
     Array.from(files).forEach((file) => {
       onChange("carwashImage", [...value, file]);
     });
+
+    e.target.value = null; // 파일이 들어있는 input의 value를 초기화
   };
 
   const handleClickDelete = (e, index) => {
@@ -32,7 +42,7 @@ const ImageUploader = ({ value = [], onChange }) => {
 
   return (
     <RegisterFormItemStructure
-      label="매장 사진"
+      label="매장 사진 (200kb 이하)"
       besideLabel={
         <Button
           type="button"
@@ -74,6 +84,7 @@ const ImageUploader = ({ value = [], onChange }) => {
               )}
               <Button
                 variant="deletePhoto"
+                type="button"
                 onClick={(e) => handleClickDelete(e, index)}
                 className="absolute top-1 right-1">
                 ✕

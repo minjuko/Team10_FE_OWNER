@@ -3,6 +3,7 @@ import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
 import { setBayStatus } from "../../apis/extras";
 import { Link } from "react-router-dom";
+import WarningMessage from "../atoms/WarningMessage";
 
 const CarwashBayItem = ({ carwashId, optime, bay }) => {
   const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
     queryKey: ["setBayStatus"],
     mutationFn: (data) => setBayStatus(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(["carwashItem"]);
+      queryClient.refetchQueries(["carwashItem"]);
     },
   });
 
@@ -25,15 +26,15 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
         <div className="flex items-center gap-4">
           <div className="text-xl font-semibold">베이 {bay.bayNo}</div>
           {bay.status === 0 && (
-            <small className="text-red-500 ">
+            <WarningMessage>
               베이가 활성화 될 때까지 예약을 받을 수 없습니다.
-            </small>
+            </WarningMessage>
           )}
         </div>
         <Toggle bay_id={bay.bayId} status={bay.status} mutation={mutation} />
       </div>
 
-      <TimeTable optime={optime} bookedTime={bay.bayBookedTime} />
+      <TimeTable optime={optime} bookedTime={bay.bayBookedTimeList} />
     </Link>
   );
 };

@@ -27,7 +27,7 @@ const App = () => {
               path="/manage/item/:carwash_id/edit"
               element={<CarwashDetailEditingPage />}></Route>
             <Route
-              path="/manage/item/:carwash_id/:bay_id"
+              path="/manage/item/:carwash_id/:bayId"
               element={<CarwashBayReservationHistoryPage />}></Route>
             <Route path="*" element={<NotFoundPage />}></Route>
           </Route>
