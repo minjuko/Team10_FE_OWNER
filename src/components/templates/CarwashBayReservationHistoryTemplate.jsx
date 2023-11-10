@@ -7,21 +7,21 @@ import AsideLayout from "../atoms/AsideLayout";
 import MainContentLayout from "../atoms/MainContentLayout";
 
 const CarwashBayReservationHistoryTemplate = () => {
-  const carwash_id = useParams().carwash_id;
   const bay_id = useParams().bay_id;
 
   const { data } = useSuspenseQuery({
     queryKey: ["reservationHistory"],
-    queryFn: () => getCarwashBayReservationHistory(carwash_id, bay_id),
+    queryFn: () => getCarwashBayReservationHistory(bay_id),
   });
 
   const reservationList = data.data.response.reservationList;
   const carwashName = data.data.response.reservationList[0].carwash.name;
+  const bayNo = data.data.response.reservationList[0].reservation.bayNo;
 
   return (
     <div className="flex gap-16">
       <AsideLayout>
-        <Card title={carwashName}>
+        <Card title={carwashName + ": 베이 " + bayNo}>
           <div className="grid gap-2">
             <div>
               <div className="flex justify-between">
@@ -40,7 +40,7 @@ const CarwashBayReservationHistoryTemplate = () => {
         {reservationList.map((item) => {
           return (
             <ReservationItem
-              key={item.reservationId}
+              key={item.reservation.reservationId}
               reservationId={item.reservation.reservationId}
               carwashName={item.carwash.name}
               bayNo={item.reservation.bayNo}
