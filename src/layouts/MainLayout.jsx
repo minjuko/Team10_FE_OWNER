@@ -11,12 +11,17 @@ const MainLayout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserInfoThunk())
-      .then(unwrapResult)
-      .catch(() => {
-        navigate("/login");
-      });
-  }, []);
+    const token = localStorage.getItem("Token");
+
+    if (token) {
+      dispatch(getUserInfoThunk())
+        .then(unwrapResult)
+        .catch(() => {
+          localStorage.removeItem("Token");
+          navigate("/login");
+        });
+    }
+  }, [dispatch, navigate]);
 
   return (
     <>
