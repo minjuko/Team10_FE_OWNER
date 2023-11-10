@@ -1,6 +1,5 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Star from "/MobilePreview/star.svg";
 import Time from "/MobilePreview/time.svg";
 import Location from "/MobilePreview/location.svg";
 import AC from "/MobilePreview/ac.svg";
@@ -15,37 +14,37 @@ import IconWithLabel from "../molecules/IconWIthLabel";
 
 const MobilePreview = ({ inputs }) => {
   const KEYPOINT = {
-    1: {
+    8: {
       iconSrc: Underside,
       alt: "하부세차 아이콘",
       label: "하부세차",
     },
-    2: {
+    9: {
       iconSrc: Garage,
       alt: "차고 아이콘",
       label: "개러지형 독립공간",
     },
-    3: {
+    10: {
       iconSrc: Light,
       alt: "전구 아이콘",
       label: "야간조명",
     },
-    4: {
+    11: {
       iconSrc: Tapwater,
       alt: "물방울 아이콘",
       label: "100% 수돗물",
     },
-    5: {
+    12: {
       iconSrc: Breakroom,
       alt: "커피잔 아이콘",
       label: "휴게실",
     },
-    6: {
+    13: {
       iconSrc: AC,
       alt: "에어컨 아이콘",
       label: "에어컨",
     },
-    7: {
+    14: {
       iconSrc: Waterproof,
       alt: "방수 아이콘",
       label: "발수코팅건",
@@ -74,14 +73,9 @@ const MobilePreview = ({ inputs }) => {
 
       <div className="grid gap-4 p-4">
         {/* 세차장 이름, 별점, 예약베이 */}
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between">
           <div>
             <div className="text-xl font-bold">{inputs.carwashName}</div>
-            <div className="flex items-center gap-1">
-              <img src={Star} alt="" className="w-3 h-3" />
-              <div className="text-sm">5.0</div>
-              <div className="text-sm text-gray-400">(500)</div>
-            </div>
           </div>
           <div>
             <div className="text-3xl text-center text-primary">4</div>

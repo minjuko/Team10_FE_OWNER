@@ -14,21 +14,23 @@ import Badge from "../atoms/Badge";
 
 const KeyPointSelector = ({ value, pointLabels, handleChange }) => {
   const [selected, setSelected] = useState(value || []);
+  const startingIndexInDB = 8;
 
   return (
     <div className="p-4 bg-gray-100 border border-gray-300 outline-none w-96 rounded-xl">
       <div className="flex flex-wrap justify-center gap-4">
         {pointLabels.map((label, index) => (
           <Badge
-            key={index + 1}
-            value={selected.includes(index + 1)}
+            key={index + startingIndexInDB}
+            value={selected.includes(index + startingIndexInDB)}
             onChange={(e) => {
               const valueCopy = [...selected];
-              if (e.target.checked) {
-                valueCopy.push(index + 1);
-              } else {
-                valueCopy.splice(valueCopy.indexOf(index + 1), 1);
-              }
+              if (e.target.checked) valueCopy.push(index + startingIndexInDB);
+              else
+                valueCopy.splice(
+                  valueCopy.indexOf(index + startingIndexInDB),
+                  1
+                );
               valueCopy.sort((a, b) => a - b);
               setSelected(valueCopy);
               handleChange("keypoint", valueCopy);
