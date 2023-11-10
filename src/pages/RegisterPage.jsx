@@ -17,8 +17,7 @@ const RegisterPage = () => {
         [
           JSON.stringify({
             name: inputs.carwashName,
-            location: {
-              placeName: inputs.carwashName,
+            locationDTO: {
               address: inputs.carwashAddress,
               latitude: inputs.latitude,
               longitude: inputs.longitude,

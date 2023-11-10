@@ -10,6 +10,13 @@ const HomeTemplate = () => {
   const { data } = useSuspenseQuery({ queryKey: ["home"], queryFn: getHome });
   const userName = useSelector((state) => state.auth.userName);
 
+  const carwashInfoList = data.data.response.carwashInfoList;
+  const monthlySales = data.data.response.monthlySales;
+  const monthlyReservations = data.data.response.monthlyReservations;
+  const reservationGrowthPercentage =
+    data.data.response.reservationGrowthPercentage;
+  const salesGrowthPercentage = data.data.response.salesGrowthPercentage;
+
   return (
     <div className="grid gap-8">
       <section className="grid gap-4">
@@ -18,16 +25,16 @@ const HomeTemplate = () => {
           <DashboardItem
             label="이번 달 전체 판매"
             icon={SalesIcon}
-            number={data.data.response.monthlySales}
+            number={monthlySales}
             unit="원"
-            percentage={data.data.response.salesGrowthPercentage}
+            percentage={salesGrowthPercentage}
           />
           <DashboardItem
             label="이번 달 전체 예약"
             icon={ReservationIcon}
-            number={data.data.response.monthlyReservations}
+            number={monthlyReservations}
             unit="건"
-            percentage={data.data.response.reservationGrowthPercentage}
+            percentage={reservationGrowthPercentage}
           />
         </div>
       </section>
@@ -35,8 +42,15 @@ const HomeTemplate = () => {
       <section className="grid gap-4">
         <h2 className="text-2xl font-bold">{userName} 사장님의 매장</h2>
         <div className="flex flex-wrap gap-12">
-          {data.data.response.myStores.map((store) => (
-            <CarwashShortcutItem key={store.carwashId} carwash={store} />
+          {carwashInfoList.map((store) => (
+            <CarwashShortcutItem
+              key={store.carwashId}
+              carwashId={store.carwashId}
+              name={store.name}
+              monthlySales={store.monthlySales}
+              monthlyReservations={store.monthlyReservations}
+              imageFileList={store.imageFileList}
+            />
           ))}
         </div>
       </section>
