@@ -85,7 +85,7 @@ const CarwashDetailEditingTemplate = () => {
     },
     onSuccess: () => {
       alert("정상적으로 수정되었습니다.");
-      queryClient.invalidateQueries(["carwashItem"]);
+      queryClient.refetchQueries(["carwashItem"]);
       navigate(`/manage/item/${carwash_id}`);
     },
     onError: (error) => {
