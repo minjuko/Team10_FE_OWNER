@@ -30,6 +30,7 @@ const CarwashItemManagementTemplate = () => {
   });
 
   const carwashItemData = data.data.response;
+  console.log(carwashItemData);
 
   return (
     <div className="flex gap-16">
@@ -89,7 +90,8 @@ const CarwashItemManagementTemplate = () => {
           carwashItemData.bays.map((bay) => {
             return (
               <CarwashBayItem
-                key={bay.bayNo}
+                key={bay.bayId}
+                carwashId={carwashItemData.id}
                 optime={carwashItemData.optime}
                 bay={bay}
               />
