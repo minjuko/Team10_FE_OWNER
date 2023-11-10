@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import WarningMessage from "../atoms/WarningMessage";
 
 const PATTERNS = {
-  nickname: /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,8}$/,
+  nickname: /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,20}$/,
   email: /\S+@\S+\.\S+/,
   password: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,24}$/,
   tel: /^\d{9,14}$/,
@@ -18,7 +18,7 @@ const PATTERNS = {
 const MESSAGES = {
   username: {
     required: "이름을 입력해주세요.",
-    pattern: "이름은 8자 이상 45자 이하, 영어 또는 한글로 입력해주세요.",
+    pattern: "이름은 2자 이상 20자 이하, 영어 또는 한글로 입력해주세요.",
   },
   email: {
     required: "이메일을 입력해주세요.",
