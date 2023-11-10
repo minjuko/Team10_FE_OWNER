@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 const CarwashBayItem = ({ carwashId, optime, bay }) => {
   const queryClient = useQueryClient();
 
+  console.log("carwashId", carwashId);
+  console.log("bay", bay);
+  console.log("optime", optime);
+
   const mutation = useMutation({
     queryKey: ["setBayStatus"],
     mutationFn: (data) => setBayStatus(data),
@@ -33,7 +37,7 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
         <Toggle bay_id={bay.bayId} status={bay.status} mutation={mutation} />
       </div>
 
-      <TimeTable optime={optime} bookedTime={bay.bayBookedTime} />
+      <TimeTable optime={optime} bookedTime={bay.bayBookedTimeList} />
     </Link>
   );
 };
