@@ -5,11 +5,9 @@ import LoadingAnimation from "../components/atoms/LoadingAnimation";
 
 const CarwashBayReservationHistoryPage = () => {
   return (
-    <ErrorBoundary fallback={<div>Error occurred!</div>}>
-      <Suspense fallback={<LoadingAnimation />}>
-        <CarwashBayReservationHistoryTemplate />
-      </Suspense>
-    </ErrorBoundary>
+    <Suspense fallback={<LoadingAnimation />}>
+      <CarwashBayReservationHistoryTemplate />
+    </Suspense>
   );
 };
 
