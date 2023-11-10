@@ -11,7 +11,7 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
     queryKey: ["setBayStatus"],
     mutationFn: (data) => setBayStatus(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(["carwashItem"]);
+      queryClient.refetchQueries(["carwashItem"]);
     },
   });
 
