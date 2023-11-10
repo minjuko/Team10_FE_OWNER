@@ -20,30 +20,6 @@ const CarwashDetailEditingTemplate = () => {
     queryFn: () => getCarwashesDetails(carwash_id),
   });
 
-  // 이미지 파일 또는 URL을 FormData에 추가하는 함수
-  // URL 형식일 경우 Blob 형태로 변환하여 추가
-  async function appendFilesToFormData(formData, fileOrUrl) {
-    if (fileOrUrl instanceof File) {
-      // 이미 File 객체인 경우
-      formData.append("images", fileOrUrl);
-    } else if (typeof fileOrUrl === "string") {
-      // URL인 경우
-      try {
-        const response = await fetch(fileOrUrl);
-        const blob = await response.blob();
-        const filename = fileOrUrl.split("/").pop(); // URL에서 파일명 추출
-        formData.append(
-          "images",
-          new File([blob], filename, { type: blob.type })
-        );
-      } catch (error) {
-        console.error("File download failed:", error);
-      }
-    }
-
-    return formData;
-  }
-
   const mutation = useMutation({
     mutationFn: async (inputs) => {
       const formData = new FormData();
@@ -76,7 +52,7 @@ const CarwashDetailEditingTemplate = () => {
       );
 
       for (const file of inputs.carwashImage) {
-        await appendFilesToFormData(formData, file);
+        formData.append("images", file);
       }
       formData.append("updateData", blob);
 
@@ -110,7 +86,7 @@ const CarwashDetailEditingTemplate = () => {
     weekendOpenTime: carwashDetail.optime.weekend.start,
     weekendCloseTime: carwashDetail.optime.weekend.end,
     keypoint: carwashDetail.keywordIdList,
-    carwashImage: imageFileList,
+    carwashImage: [],
     carwashDescription: carwashDetail.description,
   };
 
