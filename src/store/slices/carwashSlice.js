@@ -22,7 +22,6 @@ const carwashSlice = createSlice({
     monthlyReservations: 0,
     optime: null,
     bayReservationList: [],
-    image: [],
     isLoading: false,
     error: null,
   },
@@ -37,7 +36,6 @@ const carwashSlice = createSlice({
         state.monthlyReservations = action.payload.monthlyReservations;
         state.optime = action.payload.optime;
         state.bayReservationList = action.payload.bayReservationList;
-        state.image = action.payload.image;
         state.isLoading = false;
       }),
       builder.addCase(getCarwashItemThunk.rejected, (state, action) => {
