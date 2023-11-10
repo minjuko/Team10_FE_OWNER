@@ -27,8 +27,6 @@ const TimeTable = ({ optime, bookedTime }) => {
     end_time = optime.weekday.end;
   }
 
-  console.log(start_time, end_time);
-
   const startTime = new Date();
   const endTime = new Date();
 
