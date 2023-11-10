@@ -3,13 +3,10 @@ import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
 import { setBayStatus } from "../../apis/extras";
 import { Link } from "react-router-dom";
+import WarningMessage from "../atoms/WarningMessage";
 
 const CarwashBayItem = ({ carwashId, optime, bay }) => {
   const queryClient = useQueryClient();
-
-  console.log("carwashId", carwashId);
-  console.log("bay", bay);
-  console.log("optime", optime);
 
   const mutation = useMutation({
     queryKey: ["setBayStatus"],
@@ -29,9 +26,9 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
         <div className="flex items-center gap-4">
           <div className="text-xl font-semibold">베이 {bay.bayNo}</div>
           {bay.status === 0 && (
-            <small className="text-red-500 ">
+            <WarningMessage>
               베이가 활성화 될 때까지 예약을 받을 수 없습니다.
-            </small>
+            </WarningMessage>
           )}
         </div>
         <Toggle bay_id={bay.bayId} status={bay.status} mutation={mutation} />
