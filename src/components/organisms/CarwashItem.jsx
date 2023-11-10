@@ -10,7 +10,7 @@ const CarwashItem = ({ carwash }) => {
       <div className="relative w-48">
         <img
           className="absolute object-cover w-full h-full"
-          src={carwash.image}
+          src={carwash.imageFiles[0].url}
           alt={carwash.name}
         />
       </div>
