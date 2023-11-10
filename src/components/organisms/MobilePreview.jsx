@@ -12,6 +12,8 @@ import Tapwater from "/MobilePreview/tapwater.svg";
 import Breakroom from "/MobilePreview/breakroom.svg";
 import Waterproof from "/MobilePreview/waterproof.svg";
 import IconWithLabel from "../molecules/IconWIthLabel";
+import NoImage from "/noimage.png";
+import { isEmpty } from "../../utils/isEmpty";
 
 const MobilePreview = ({ inputs }) => {
   const KEYPOINT = {
@@ -61,15 +63,18 @@ const MobilePreview = ({ inputs }) => {
         autoPlay={true}
         infiniteLoop={true}
         showThumbs={false}>
-        {inputs.carwashImage.map((image, index) => (
-          <div key={index}>
+        {isEmpty(inputs.carwashImage) ? (
+          <img src={NoImage} alt="등록된 사진 없음" />
+        ) : (
+          inputs.carwashImage.map((image, index) => (
             <img
-              src={image instanceof File ? URL.createObjectURL(image) : image}
+              key={index}
+              src={URL.createObjectURL(image)}
               alt="이미지"
               className="h-56"
             />
-          </div>
-        ))}
+          ))
+        )}
       </Carousel>
 
       <div className="grid gap-4 p-4">
