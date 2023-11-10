@@ -12,7 +12,6 @@ const CarwashManagementTemplate = () => {
   });
 
   const navigate = useNavigate();
-
   const carwash = data.data.response.carwash;
 
   return (
@@ -31,7 +30,7 @@ const CarwashManagementTemplate = () => {
           </Button>
         </div>
       ) : (
-        carwash.map((item) => <CarwashItem key={item.name} carwash={item} />)
+        carwash.map((item) => <CarwashItem key={item.id} carwash={item} />)
       )}
     </div>
   );
