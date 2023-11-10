@@ -11,16 +11,24 @@ import { isEmpty } from "../../utils/isEmpty";
 import AsideLayout from "../atoms/AsideLayout";
 import MainContentLayout from "../atoms/MainContentLayout";
 import Button from "../atoms/Button";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getCarwashItemThunk } from "../../store/slices/carwashSlice";
 
 const CarwashItemManagementTemplate = () => {
   const queryClient = useQueryClient();
   const { carwash_id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { data } = useSuspenseQuery({
     queryKey: ["carwashItem"],
     queryFn: () => getCarwashItem(carwash_id),
   });
+
+  useEffect(() => {
+    dispatch(getCarwashItemThunk(carwash_id));
+  }, [dispatch]);
 
   const mutation = useMutation({
     mutationFn: (data) => addBays(data),
