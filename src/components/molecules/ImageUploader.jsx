@@ -12,9 +12,15 @@ const ImageUploader = ({ value = [], onChange }) => {
       return alert("200kb 이하의 이미지만 업로드 가능합니다.");
     }
 
+    if (value.some((item) => item.name === files[0].name)) {
+      return alert("이미 같은 이름의 파일이 존재합니다.");
+    }
+
     Array.from(files).forEach((file) => {
       onChange("carwashImage", [...value, file]);
     });
+
+    e.target.value = null; // 파일이 들어있는 input의 value를 초기화
   };
 
   const handleClickDelete = (e, index) => {
