@@ -4,7 +4,7 @@ import Card from "../molecules/Card";
 import MonthSelectorCard from "../organisms/MonthSelectorCard";
 import SalesItem from "../organisms/SalesItem";
 import { getRevenue, getSales } from "../../apis/extras";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -43,9 +43,6 @@ const SalesManagementTemplate = () => {
     ],
   });
 
-  console.log("salesData", salesData);
-  console.log("revenueData", revenueData);
-
   // 체크되면 selectedCarwash에 carwashId를 추가하고 항상 오름차순으로 정렬
   const handleCheck = (carwashId) => (e) => {
     let updatedSelectedCarwash;
@@ -64,10 +61,6 @@ const SalesManagementTemplate = () => {
   const carwashList = salesData.data.data.response.carwashList;
   const reservationList = salesData.data.data.response.reservationList;
   const revenue = revenueData.data.data.response.revenue;
-
-  console.log("carwashList", carwashList);
-  console.log("reservationList", reservationList);
-  console.log("revenue", revenue);
 
   return (
     <div className="flex gap-16">
