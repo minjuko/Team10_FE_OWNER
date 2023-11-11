@@ -30,7 +30,7 @@ const SIZES = {
  */
 const IconWithLabel = ({ src, alt, label, size = "md" }) => {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex-items-center-1">
       <img className={SIZES[size].iconSize} src={src} alt={alt} />
       <div className={SIZES[size].labelSize}>{label}</div>
     </div>

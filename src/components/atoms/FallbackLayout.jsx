@@ -6,7 +6,7 @@ const FallbackLayout = ({ message, resetErrorBoundary, buttonLabel, to }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
+    <div className="flex-col justify-center flex-items-center-4">
       <img src={Warning} alt="느낌표" className="w-20" />
 
       <div>{message}</div>

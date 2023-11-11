@@ -41,7 +41,7 @@ const MonthSelectorCard = ({ onChange, monthlyRevenue }) => {
     <Card
       title={
         // 월 선택
-        <div className="flex items-center justify-between">
+        <div className="items-center flex-between">
           <Button className="w-6 h-12 select-none" onClick={decrementMonth}>
             ◀
           </Button>
