@@ -2,7 +2,7 @@ import Image from "./Image";
 
 const DashboardItem = ({ label, number, percentage, unit, icon }) => {
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow-xl w-96 rounded-xl">
+    <div className="items-center p-4 bg-white shadow-xl flex-between w-96 rounded-xl">
       <div>
         <div>{label}</div>
         <div className="text-3xl font-bold">

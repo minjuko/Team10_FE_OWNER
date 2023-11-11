@@ -31,8 +31,8 @@ const GNB = () => {
 
   return (
     <nav className="fixed top-0 z-50 flex w-full h-24 bg-white border-b border-gray-300 min-w-min">
-      <div className="w-[1280px] flex items-center justify-between mx-auto px-4">
-        <section className="flex items-center gap-8">
+      <div className="w-[1280px] items-center flex-between mx-auto px-4">
+        <section className="flex-items-center-8">
           <NavLink to="/">
             <Image src={Logo} alt="뽀득뽀득 사장님 페이지 로고" />
           </NavLink>
@@ -51,7 +51,7 @@ const GNB = () => {
             ))}
           </div>
         </section>
-        <section className="flex gap-6">
+        <section className="flex-4">
           <div className="text-right">
             <div className="text-xl">{userName} 사장님</div>
             <Button className="text-gray-500" onClick={handleLogout}>

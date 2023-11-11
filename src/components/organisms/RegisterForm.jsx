@@ -75,16 +75,16 @@ const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
 
   return (
     <form
-      className="grid gap-8"
+      className="grid-8"
       onSubmit={(e) => {
         e.preventDefault();
         if (isDirty) mutation.mutate(inputs);
         else alert("변경사항이 없습니다.");
       }}>
       {/* Wrapper */}
-      <div className="flex gap-8">
+      <div className="flex-8">
         {/* 왼쪽 영역 */}
-        <section className="grid gap-4">
+        <section className="grid-4">
           {/* 매장명 */}
           <RegisterFormItemStructure label="매장명">
             <TextInput
@@ -143,7 +143,7 @@ const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
         </section>
 
         {/* 오른쪽 영역 */}
-        <section className="grid gap-4">
+        <section className="grid-4">
           {/*매장 사진*/}
           <ImageUploader value={inputs.carwashImage} onChange={onChange} />
 
@@ -172,7 +172,7 @@ const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
       </div>
 
       {/* 하단 버튼 */}
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex-col justify-center flex-items-center-4">
         <small className="text-red-500">{errorMessage}</small>
         <Button type="submit" variant="long" disabled={isDisabled}>
           {buttonLabel}

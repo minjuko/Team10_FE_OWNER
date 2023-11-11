@@ -7,7 +7,7 @@ const DaumPostcodePicker = ({ value, onChange }) => {
   const [openPostcode, setOpenPostcode] = useState(false);
 
   return (
-    <div className="relative flex gap-4 w-96">
+    <div className="relative flex-4 w-96">
       <TextInput
         name="carwashAddress"
         type="text"
@@ -26,7 +26,7 @@ const DaumPostcodePicker = ({ value, onChange }) => {
       </Button>
       {openPostcode && (
         <div className="absolute z-50 overflow-auto bg-white border w-96 rounded-xl">
-          <div className="flex items-center justify-between p-4 bg-gray-100 border-b">
+          <div className="items-center p-4 bg-gray-100 border-b flex-between">
             <div>주소검색</div>
             <Button
               className="text-xl"
