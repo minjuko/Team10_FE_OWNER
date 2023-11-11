@@ -16,7 +16,7 @@ const CarwashItem = ({
       <div className="relative w-48">
         <img
           className="absolute object-cover w-full h-full"
-          src={imageList[0].url}
+          src={imageList[0]?.url}
           alt={name}
         />
       </div>

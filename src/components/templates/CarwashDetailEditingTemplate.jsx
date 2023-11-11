@@ -21,7 +21,7 @@ const CarwashDetailEditingTemplate = () => {
   });
 
   const errorHandler = (error) => {
-    const errorCode = error.response.data.error.code;
+    const errorCode = error?.response?.data?.error?.code;
 
     switch (errorCode) {
       case "1201":
@@ -84,9 +84,9 @@ const CarwashDetailEditingTemplate = () => {
     onError: errorHandler,
   });
 
-  const carwashDetail = data.data.response;
+  const carwashDetail = data?.data?.response;
 
-  const imageFileList = carwashDetail.imageFileList.map((item) => {
+  const imageFileList = carwashDetail?.imageFileList?.map((item) => {
     return item.url;
   });
 

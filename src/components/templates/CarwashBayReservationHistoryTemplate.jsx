@@ -26,8 +26,8 @@ const CarwashBayReservationHistoryTemplate = () => {
     queryFn: () => getCarwashBayReservationHistory(bayId, selectedDate),
   });
 
-  const reservationList = data.data.response.reservationList;
-  const bayNo = data.data.response.bayNo;
+  const reservationList = data?.data?.response?.reservationList;
+  const bayNo = data?.data?.response?.bayNo;
 
   return (
     <div className="flex-16">
@@ -45,14 +45,14 @@ const CarwashBayReservationHistoryTemplate = () => {
           reservationList.map((item) => {
             return (
               <ReservationItem
-                key={item.reservation.reservationId}
-                reservationId={item.reservation.reservationId}
-                carwashName={item.carwash.name}
-                bayNo={item.reservation.bayNo}
-                nickname={item.reservation.nickname}
-                totalPrice={item.reservation.totalPrice}
-                startTime={item.reservation.startTime}
-                endTime={item.reservation.endTime}
+                key={item?.reservation?.reservationId}
+                reservationId={item?.reservation?.reservationId}
+                carwashName={item?.carwash?.name}
+                bayNo={item?.reservation?.bayNo}
+                nickname={item?.reservation?.nickname}
+                totalPrice={item?.reservation?.totalPrice}
+                startTime={item?.reservation?.startTime}
+                endTime={item?.reservation?.endTime}
               />
             );
           })
