@@ -35,8 +35,13 @@ export const getCarwashItem = async (carwash_id) => {
   return instance.get(`/api/owner/carwashes/${carwash_id}`);
 };
 
-export const getCarwashBayReservationHistory = async (bay_id) => {
-  return instance.get(`/api/owner/reservations/${bay_id}`);
+export const getCarwashBayReservationHistory = async (
+  bay_id,
+  selected_date
+) => {
+  return instance.get(
+    `/api/owner/reservations/${bay_id}?selected-date=${selected_date}`
+  );
 };
 
 export const cancelReservation = async (reservation_id) => {
