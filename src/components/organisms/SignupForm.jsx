@@ -118,8 +118,8 @@ const SignupForm = () => {
     <Box className="grid p-14 gap-14">
       <h1 className="text-2xl font-bold text-center">회원가입</h1>
 
-      <form noValidate className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex gap-4 w-96">
+      <form noValidate className="grid-4" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex-4 w-96">
           <TextInput
             type="email"
             placeholder="이메일"

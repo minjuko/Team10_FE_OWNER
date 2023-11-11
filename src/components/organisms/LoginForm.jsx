@@ -75,7 +75,7 @@ const LoginForm = () => {
 
   return (
     <Box className="grid p-14 gap-14">
-      <Image className="flex justify-center" src={Logo} />
+      <Image className="flex-center" src={Logo} />
 
       <form noValidate className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
         <TextInput

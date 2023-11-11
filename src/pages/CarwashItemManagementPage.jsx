@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import CarwashItemManagementTemplate from "../components/templates/CarwashItemManagementTemplate";
 import { ErrorBoundary } from "react-error-boundary";
 import LoadingAnimation from "../components/atoms/LoadingAnimation";
+import FallbackLayout from "../components/atoms/FallbackLayout";
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   const errorCode = error.response.data.error.code;

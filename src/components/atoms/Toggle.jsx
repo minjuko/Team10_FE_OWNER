@@ -27,7 +27,7 @@ const Toggle = ({ bay_id, status, mutation }) => {
   };
 
   return (
-    <form className="flex items-center gap-2">
+    <form className="flex-items-center-2">
       <label htmlFor={id} className="font-semibold text-gray-500 select-none">
         베이 활성화
       </label>

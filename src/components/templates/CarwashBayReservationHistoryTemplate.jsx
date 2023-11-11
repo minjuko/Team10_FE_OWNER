@@ -31,16 +31,16 @@ const CarwashBayReservationHistoryTemplate = () => {
   const bayNo = reservationData.data.data.response.bayNo;
 
   return (
-    <div className="flex gap-16">
+    <div className="flex-16">
       <AsideLayout>
         <Card title={"베이 " + bayNo}>
-          <div className="grid gap-2">
+          <div className="grid-2">
             <div>
-              <div className="flex justify-between">
+              <div className="flex-between">
                 <div className="font-semibold">이번 달 매출</div>
                 <div>{revenue.revenue.toLocaleString()}원</div>
               </div>
-              <div className="flex justify-between">
+              <div className="flex-between">
                 <div className="font-semibold">이번 달 예약</div>
                 <div>{revenue.reservationCnt.toLocaleString()}건</div>
               </div>
@@ -50,7 +50,7 @@ const CarwashBayReservationHistoryTemplate = () => {
       </AsideLayout>
       <MainContentLayout>
         {isEmpty(reservationList) ? (
-          <div className="flex flex-col items-center justify-center w-auto gap-8">
+          <div className="flex-col justify-center w-auto flex-items-center-8">
             <div className="text-xl">예약 내역이 없습니다.</div>
           </div>
         ) : (

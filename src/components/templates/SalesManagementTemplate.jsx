@@ -4,7 +4,7 @@ import Card from "../molecules/Card";
 import MonthSelectorCard from "../organisms/MonthSelectorCard";
 import SalesItem from "../organisms/SalesItem";
 import { getRevenue, getSales } from "../../apis/extras";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -43,13 +43,10 @@ const SalesManagementTemplate = () => {
     ],
   });
 
-  // 체크되면 selectedCarwash에 carwashId를 추가하고 항상 오름차순으로 정렬
   const handleCheck = (carwashId) => (e) => {
     let updatedSelectedCarwash;
     if (e.target.checked) {
-      updatedSelectedCarwash = [...selectedCarwash, carwashId].sort(
-        (a, b) => a - b
-      );
+      updatedSelectedCarwash = [...selectedCarwash, carwashId];
     } else {
       updatedSelectedCarwash = selectedCarwash.filter(
         (item) => item !== carwashId
@@ -63,7 +60,7 @@ const SalesManagementTemplate = () => {
   const revenue = revenueData.data.data.response.revenue;
 
   return (
-    <div className="flex gap-16">
+    <div className="flex-16">
       <AsideLayout>
         <MonthSelectorCard onChange={setDate} monthlyRevenue={revenue} />
         <Card title="매장별 선택">
@@ -80,7 +77,7 @@ const SalesManagementTemplate = () => {
       </AsideLayout>
       <MainContentLayout>
         {isEmpty(reservationList) ? (
-          <div className="flex flex-col items-center justify-center w-auto gap-8">
+          <div className="flex-col justify-center w-auto flex-items-center-8">
             <div className="text-xl">매출내역이 없습니다.</div>
           </div>
         ) : (

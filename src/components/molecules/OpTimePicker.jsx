@@ -77,7 +77,7 @@ const OpTimePicker = ({
             24시간 운영
           </Checkbox>
         }>
-        <div className="flex items-center justify-between">
+        <div className="items-center flex-between">
           <TimePicker
             name="weekendOpenTime"
             value={weekendOpenTime}

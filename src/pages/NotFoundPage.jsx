@@ -6,7 +6,7 @@ const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-8">
+    <div className="flex-col justify-center h-screen flex-items-center-8">
       <img src={NotFound} alt="에러코드 404" className="w-64" />
       <p className="text-xl">페이지를 찾을 수 없습니다.</p>
       <Button
