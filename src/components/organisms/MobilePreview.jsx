@@ -78,12 +78,12 @@ const MobilePreview = ({ inputs }) => {
         )}
       </Carousel>
 
-      <div className="grid gap-4 p-4">
+      <div className="p-4 grid-4">
         {/* 세차장 이름, 별점, 예약베이 */}
-        <div className="flex justify-between">
+        <div className="flex-between">
           <div>
             <div className="text-xl font-bold">{inputs.carwashName}</div>
-            <div className="flex items-center gap-1">
+            <div className="flex-items-center-1">
               <img src={Star} alt="별점" className="w-4 h-4" />
               <div className="text-sm">5.0</div>
               <div className="text-sm text-gray-500">(999)</div>
@@ -96,12 +96,12 @@ const MobilePreview = ({ inputs }) => {
         </div>
 
         {/* 영업시간, 주소 */}
-        <div className="grid gap-1 p-4 text-sm bg-gray-100 rounded-xl">
+        <div className="p-4 text-sm bg-gray-100 grid-1 rounded-xl">
           <IconWithLabel
             src={Time}
             alt="시계 아이콘"
             label={
-              <div className="flex gap-1">
+              <div className="flex-1">
                 <div>평일</div>
                 {inputs.weekdayOpenTime === "00:00" &&
                 inputs.weekdayCloseTime === "23:59" ? (
@@ -116,7 +116,7 @@ const MobilePreview = ({ inputs }) => {
             size="sm"
           />
 
-          <div className="flex gap-1 ml-5">
+          <div className="flex-1 ml-5">
             <div>주말</div>
             {inputs.weekendOpenTime === "00:00" &&
             inputs.weekendCloseTime === "23:59" ? (
@@ -142,9 +142,9 @@ const MobilePreview = ({ inputs }) => {
         </div>
 
         {/* 키포인트 */}
-        <div className="grid gap-2 p-4 bg-gray-100 rounded-xl">
+        <div className="p-4 bg-gray-100 grid-2 rounded-xl">
           <div className="font-bold">키포인트</div>
-          <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="grid-cols-2 text-xs grid-2">
             {Object.keys(KEYPOINT).map((key) => {
               if (inputs.keypoint.includes(Number(key))) {
                 return (

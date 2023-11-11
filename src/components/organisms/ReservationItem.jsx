@@ -27,12 +27,12 @@ const ReservationItem = ({
         <div className="text-xl">
           {carwashName}: 베이 {bayNo}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex-items-center-2">
           <Image src={ProfileIcon} alt="profile" />
           <div className="text-xl">{nickname}</div>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex-between">
         <div className="text-2xl font-semibold text-primary">
           {totalPrice.toLocaleString()}원
         </div>
