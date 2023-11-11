@@ -45,9 +45,28 @@ const MESSAGES = {
  * 닉네임, 이메일, 비밀번호, 비밀번호 확인, 전화번호 입력창, 회원가입 버튼을 담고 있는 박스입니다.
  */
 const SignupForm = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const mutation = useMutation({
     mutationFn: (data) => {
       signup(data);
+    },
+    onSuccess: () => {
+      alert("회원가입이 완료되었습니다. 로그인해주세요.");
+      navigate("/login");
+    },
+    onError: (error) => {
+      let message;
+
+      switch (error.error.code) {
+        case "1001":
+          message = "입력값이 형식에 맞는지 확인해주세요.";
+          break;
+        case "1004":
+          message = "중복된 이메일이 존재합니다.";
+          break;
+      }
+
+      setErrorMessage(message);
     },
   });
 
@@ -71,7 +90,15 @@ const SignupForm = () => {
       if (result.data.success) setEmailChecked(true);
       alert("사용 가능한 이메일입니다. 회원가입을 진행해주세요.");
     } catch (error) {
-      alert("중복된 이메일이 있습니다. 다른 이메일을 입력해주세요.");
+      const errorCode = error.response.data.error.code;
+      switch (errorCode) {
+        case "1001":
+          alert("이메일 형식에 맞게 입력해주세요.");
+          break;
+        case "1004":
+          alert("중복된 이메일이 존재합니다. 다른 이메일을 입력해주세요.");
+          break;
+      }
     }
   };
 
@@ -84,15 +111,7 @@ const SignupForm = () => {
       alert("이메일 중복체크를 해주세요.");
       return;
     }
-    mutation.mutate(data, {
-      onSuccess: () => {
-        alert("회원가입이 완료되었습니다. 로그인해주세요.");
-        navigate("/login");
-      },
-      onError: () => {
-        alert("회원가입에 실패했습니다. 다시 시도해주세요");
-      },
-    });
+    mutation.mutate(data);
   };
 
   return (
@@ -185,6 +204,8 @@ const SignupForm = () => {
           })}
         />
         {errors.tel && <WarningMessage>{errors.tel.message}</WarningMessage>}
+
+        {errorMessage && <WarningMessage>{errorMessage}</WarningMessage>}
 
         <Button type="submit" disabled={isSubmitting} variant="long">
           회원가입
