@@ -18,7 +18,7 @@ const KeyPointSelector = ({ value, pointLabels, handleChange }) => {
 
   return (
     <div className="p-4 bg-gray-100 border border-gray-300 outline-none w-96 rounded-xl">
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex-wrap gap-4 flex-center">
         {pointLabels.map((label, index) => (
           <Badge
             key={index + startingIndexInDB}
