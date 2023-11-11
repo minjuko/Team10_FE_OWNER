@@ -20,6 +20,24 @@ const CarwashDetailEditingTemplate = () => {
     queryFn: () => getCarwashesDetails(carwash_id),
   });
 
+  const errorHandler = (error) => {
+    const errorCode = error.response.data.error.code;
+
+    switch (errorCode) {
+      case "1201":
+        alert("인증에 오류가 발생했습니다. 다시 로그인해주세요.");
+        navigate("/login");
+        break;
+      case "1003":
+        alert("모든 데이터가 입력되지 않았습니다. 다시 시도해주세요.");
+        break;
+      default:
+        alert("알 수 없는 오류가 발생했습니다. 홈화면으로 이동합니다.");
+        navigate("/");
+        break;
+    }
+  };
+
   const mutation = useMutation({
     mutationFn: async (inputs) => {
       const formData = new FormData();
@@ -63,9 +81,7 @@ const CarwashDetailEditingTemplate = () => {
       queryClient.refetchQueries(["carwashItem"]);
       navigate(`/manage/item/${carwash_id}`);
     },
-    onError: (error) => {
-      alert(`수정에 실패하였습니다. ${error.message}`);
-    },
+    onError: errorHandler,
   });
 
   const carwashDetail = data.data.response;
