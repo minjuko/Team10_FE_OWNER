@@ -38,6 +38,10 @@ const CarwashItemManagementTemplate = () => {
         alert("접근 권한이 없습니다. 홈화면으로 이동합니다.");
         navigate("/");
         break;
+      default:
+        alert("알 수 없는 오류가 발생했습니다. 홈화면으로 이동합니다.");
+        navigate("/");
+        break;
     }
   };
 
