@@ -1,5 +1,6 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Star from "/MobilePreview/star.svg";
 import Time from "/MobilePreview/time.svg";
 import Location from "/MobilePreview/location.svg";
 import AC from "/MobilePreview/ac.svg";
@@ -11,6 +12,9 @@ import Tapwater from "/MobilePreview/tapwater.svg";
 import Breakroom from "/MobilePreview/breakroom.svg";
 import Waterproof from "/MobilePreview/waterproof.svg";
 import IconWithLabel from "../molecules/IconWIthLabel";
+import NoImage from "/noimage.png";
+import { isEmpty } from "../../utils/isEmpty";
+import { telFormatter } from "../../utils/telFormatter";
 
 const MobilePreview = ({ inputs }) => {
   const KEYPOINT = {
@@ -60,15 +64,18 @@ const MobilePreview = ({ inputs }) => {
         autoPlay={true}
         infiniteLoop={true}
         showThumbs={false}>
-        {inputs.carwashImage.map((image, index) => (
-          <div key={index}>
+        {isEmpty(inputs.carwashImage) ? (
+          <img src={NoImage} alt="등록된 사진 없음" />
+        ) : (
+          inputs.carwashImage.map((image, index) => (
             <img
-              src={image instanceof File ? URL.createObjectURL(image) : image}
+              key={index}
+              src={URL.createObjectURL(image)}
               alt="이미지"
               className="h-56"
             />
-          </div>
-        ))}
+          ))
+        )}
       </Carousel>
 
       <div className="grid gap-4 p-4">
@@ -76,6 +83,11 @@ const MobilePreview = ({ inputs }) => {
         <div className="flex justify-between">
           <div>
             <div className="text-xl font-bold">{inputs.carwashName}</div>
+            <div className="flex items-center gap-1">
+              <img src={Star} alt="별점" className="w-4 h-4" />
+              <div className="text-sm">5.0</div>
+              <div className="text-sm text-gray-500">(999)</div>
+            </div>
           </div>
           <div>
             <div className="text-3xl text-center text-primary">4</div>
@@ -118,7 +130,7 @@ const MobilePreview = ({ inputs }) => {
           <IconWithLabel
             src={Tel}
             alt="전화 아이콘"
-            label={inputs.carwashTel}
+            label={telFormatter(inputs.carwashTel)}
             size="sm"
           />
           <IconWithLabel
