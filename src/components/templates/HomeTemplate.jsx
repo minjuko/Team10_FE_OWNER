@@ -8,14 +8,15 @@ import { useSelector } from "react-redux";
 
 const HomeTemplate = () => {
   const { data } = useSuspenseQuery({ queryKey: ["home"], queryFn: getHome });
+  console.log(data);
   const userName = useSelector((state) => state.auth.userName);
 
-  const carwashInfoList = data.data.response.carwashInfoList;
-  const monthlySales = data.data.response.monthlySales;
-  const monthlyReservations = data.data.response.monthlyReservations;
+  const carwashInfoList = data?.data?.response?.carwashInfoList;
+  const monthlySales = data?.data?.response?.monthlySales;
+  const monthlyReservations = data?.data?.response?.monthlyReservations;
   const reservationGrowthPercentage =
-    data.data.response.reservationGrowthPercentage;
-  const salesGrowthPercentage = data.data.response.salesGrowthPercentage;
+    data?.data?.response?.reservationGrowthPercentage;
+  const salesGrowthPercentage = data?.data?.response?.salesGrowthPercentage;
 
   return (
     <div className="grid-8">
@@ -44,12 +45,12 @@ const HomeTemplate = () => {
         <div className="flex-wrap flex-12">
           {carwashInfoList.map((store) => (
             <CarwashShortcutItem
-              key={store.carwashId}
-              carwashId={store.carwashId}
-              name={store.name}
-              monthlySales={store.monthlySales}
-              monthlyReservations={store.monthlyReservations}
-              imageFileList={store.imageFileList}
+              key={store?.carwashId}
+              carwashId={store?.carwashId}
+              name={store?.name}
+              monthlySales={store?.monthlySales}
+              monthlyReservations={store?.monthlyReservations}
+              imageFileList={store?.imageFileList}
             />
           ))}
         </div>
