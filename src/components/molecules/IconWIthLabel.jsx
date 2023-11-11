@@ -11,7 +11,7 @@ import MobileSpriteSVG from "/mobile_icons.svg";
 const IconWithLabel = ({ icon, label }) => {
   return (
     <div className="flex-items-center-1">
-      <svg width="20" height="20">
+      <svg width="18" height="18">
         <use href={`${MobileSpriteSVG}#${icon}`} />
       </svg>
       <div>{label}</div>
