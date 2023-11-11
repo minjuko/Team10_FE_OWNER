@@ -74,11 +74,11 @@ const CarwashItemManagementTemplate = () => {
             <div>
               <div className="flex-between">
                 <div className="font-semibold">이번 달 매출</div>
-                <div>{monthlySales.toLocaleString()}원</div>
+                <div>{monthlySales?.toLocaleString()}원</div>
               </div>
               <div className="flex-between">
                 <div className="font-semibold">이번 달 예약</div>
-                <div>{monthlyReservations.toLocaleString()}건</div>
+                <div>{monthlyReservations?.toLocaleString()}건</div>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@ const CarwashItemManagementTemplate = () => {
           bayReservationList.map((item) => {
             return (
               <CarwashBayItem
-                key={item.bayId}
+                key={item?.bayId}
                 carwashId={id}
                 optime={optime}
                 bay={item}

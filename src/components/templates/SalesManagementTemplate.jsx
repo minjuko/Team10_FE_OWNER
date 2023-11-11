@@ -55,9 +55,9 @@ const SalesManagementTemplate = () => {
     setSelectedCarwash(updatedSelectedCarwash);
   };
 
-  const carwashList = salesData.data.data.response.carwashList;
-  const reservationList = salesData.data.data.response.reservationList;
-  const revenue = revenueData.data.data.response.revenue;
+  const carwashList = salesData?.data?.data?.response?.carwashList;
+  const reservationList = salesData?.data?.data?.response?.reservationList;
+  const revenue = revenueData?.data?.data?.response?.revenue;
 
   return (
     <div className="flex-16">
@@ -65,11 +65,11 @@ const SalesManagementTemplate = () => {
         <MonthSelectorCard onChange={setDate} monthlyRevenue={revenue} />
         <Card title="매장별 선택">
           <div className="flex flex-col">
-            {carwashList.map((item) => (
+            {carwashList?.map((item) => (
               <Checkbox
-                key={item.carwashId}
-                onChange={handleCheck(item.carwashId)}>
-                {item.name}
+                key={item?.carwashId}
+                onChange={handleCheck(item?.carwashId)}>
+                {item?.name}
               </Checkbox>
             ))}
           </div>
@@ -84,14 +84,14 @@ const SalesManagementTemplate = () => {
           reservationList.map((item) => {
             return (
               <SalesItem
-                key={item.reservation.reservationId}
-                reservationId={item.reservation.reservationId}
-                carwashName={item.carwash.name}
-                bayNo={item.reservation.bayNo}
-                nickname={item.reservation.nickname}
-                totalPrice={item.reservation.totalPrice}
-                startTime={item.reservation.startTime}
-                endTime={item.reservation.endTime}
+                key={item?.reservation?.reservationId}
+                reservationId={item?.reservation?.reservationId}
+                carwashName={item?.carwash?.name}
+                bayNo={item?.reservation?.bayNo}
+                nickname={item?.reservation?.nickname}
+                totalPrice={item?.reservation?.totalPrice}
+                startTime={item?.reservation?.startTime}
+                endTime={item?.reservation?.endTime}
               />
             );
           })
