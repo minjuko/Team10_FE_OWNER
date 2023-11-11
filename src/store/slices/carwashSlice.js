@@ -25,6 +25,7 @@ const carwashSlice = createSlice({
     isLoading: false,
     error: null,
   },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getCarwashItemThunk.pending, (state) => {
       state.isLoading = true;
