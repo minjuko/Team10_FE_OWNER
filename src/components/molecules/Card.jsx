@@ -15,7 +15,7 @@ const Card = ({ title, children }) => {
       <div className="p-4 text-2xl font-bold text-center text-white bg-primary">
         {title}
       </div>
-      <div className="p-4">{children}</div>
+      {children && <div className="p-4">{children}</div>}
     </div>
   );
 };
