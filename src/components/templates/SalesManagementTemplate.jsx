@@ -4,7 +4,7 @@ import Card from "../molecules/Card";
 import MonthSelectorCard from "../organisms/MonthSelectorCard";
 import SalesItem from "../organisms/SalesItem";
 import { getRevenue, getSales } from "../../apis/extras";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -43,13 +43,10 @@ const SalesManagementTemplate = () => {
     ],
   });
 
-  // 체크되면 selectedCarwash에 carwashId를 추가하고 항상 오름차순으로 정렬
   const handleCheck = (carwashId) => (e) => {
     let updatedSelectedCarwash;
     if (e.target.checked) {
-      updatedSelectedCarwash = [...selectedCarwash, carwashId].sort(
-        (a, b) => a - b
-      );
+      updatedSelectedCarwash = [...selectedCarwash, carwashId];
     } else {
       updatedSelectedCarwash = selectedCarwash.filter(
         (item) => item !== carwashId
