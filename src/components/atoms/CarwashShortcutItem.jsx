@@ -13,7 +13,7 @@ const CarwashShortcutItem = ({
       className="overflow-auto bg-white shadow-xl flex-items-center-4 w-96 rounded-xl">
       <div className="relative w-36 h-36">
         <img
-          src={imageFileList[0].url}
+          src={imageFileList[0]?.url}
           alt={name}
           className="absolute object-cover w-36 h-36"
         />

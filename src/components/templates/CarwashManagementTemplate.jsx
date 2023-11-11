@@ -10,7 +10,7 @@ const CarwashManagementTemplate = () => {
     queryKey: ["carwash"],
     queryFn: getCarwashes,
   });
-  const carwashList = data.data.response.carwashList;
+  const carwashList = data?.data?.response?.carwashList;
 
   const navigate = useNavigate();
 
@@ -32,12 +32,12 @@ const CarwashManagementTemplate = () => {
       ) : (
         carwashList.map((item) => (
           <CarwashItem
-            key={item.id}
-            carwashId={item.id}
-            name={item.name}
-            optime={item.optime}
-            bayReservationList={item.bayReservationList}
-            imageList={item.imageList}
+            key={item?.id}
+            carwashId={item?.id}
+            name={item?.name}
+            optime={item?.optime}
+            bayReservationList={item?.bayReservationList}
+            imageList={item?.imageList}
           />
         ))
       )}
