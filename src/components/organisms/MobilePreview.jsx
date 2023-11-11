@@ -1,16 +1,6 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Star from "/MobilePreview/star.svg";
-import Time from "/MobilePreview/time.svg";
-import Location from "/MobilePreview/location.svg";
-import AC from "/MobilePreview/ac.svg";
-import Garage from "/MobilePreview/garage.svg";
-import Light from "/MobilePreview/light.svg";
-import Tel from "/MobilePreview/tel.svg";
-import Underside from "/MobilePreview/underside.svg";
-import Tapwater from "/MobilePreview/tapwater.svg";
-import Breakroom from "/MobilePreview/breakroom.svg";
-import Waterproof from "/MobilePreview/waterproof.svg";
 import IconWithLabel from "../molecules/IconWIthLabel";
 import NoImage from "/noimage.png";
 import { isEmpty } from "../../utils/isEmpty";
@@ -19,38 +9,31 @@ import { telFormatter } from "../../utils/telFormatter";
 const MobilePreview = ({ inputs }) => {
   const KEYPOINT = {
     8: {
-      iconSrc: Underside,
-      alt: "하부세차 아이콘",
+      icon: "tel",
       label: "하부세차",
     },
     9: {
-      iconSrc: Garage,
-      alt: "차고 아이콘",
+      icon: "garage",
       label: "개러지형 독립공간",
     },
     10: {
-      iconSrc: Light,
-      alt: "전구 아이콘",
+      icon: "light",
       label: "야간조명",
     },
     11: {
-      iconSrc: Tapwater,
-      alt: "물방울 아이콘",
+      icon: "tapwater",
       label: "100% 수돗물",
     },
     12: {
-      iconSrc: Breakroom,
-      alt: "커피잔 아이콘",
+      icon: "breakroom",
       label: "휴게실",
     },
     13: {
-      iconSrc: AC,
-      alt: "에어컨 아이콘",
+      icon: "ac",
       label: "에어컨",
     },
     14: {
-      iconSrc: Waterproof,
-      alt: "방수 아이콘",
+      icon: "waterproof",
       label: "발수코팅건",
     },
   };
@@ -98,8 +81,7 @@ const MobilePreview = ({ inputs }) => {
         {/* 영업시간, 주소 */}
         <div className="p-4 text-sm bg-gray-100 grid-1 rounded-xl">
           <IconWithLabel
-            src={Time}
-            alt="시계 아이콘"
+            icon="time"
             label={
               <div className="flex-1">
                 <div>평일</div>
@@ -113,10 +95,9 @@ const MobilePreview = ({ inputs }) => {
                 )}
               </div>
             }
-            size="sm"
           />
 
-          <div className="flex-1 ml-5">
+          <div className="flex-1 ml-6">
             <div>주말</div>
             {inputs.weekendOpenTime === "00:00" &&
             inputs.weekendCloseTime === "23:59" ? (
@@ -127,18 +108,8 @@ const MobilePreview = ({ inputs }) => {
               </div>
             )}
           </div>
-          <IconWithLabel
-            src={Tel}
-            alt="전화 아이콘"
-            label={telFormatter(inputs.carwashTel)}
-            size="sm"
-          />
-          <IconWithLabel
-            src={Location}
-            alt="위치"
-            label={inputs.carwashAddress}
-            size="sm"
-          />
+          <IconWithLabel icon="tel" label={telFormatter(inputs.carwashTel)} />
+          <IconWithLabel icon="location" label={inputs.carwashAddress} />
         </div>
 
         {/* 키포인트 */}
@@ -150,8 +121,7 @@ const MobilePreview = ({ inputs }) => {
                 return (
                   <IconWithLabel
                     key={key}
-                    src={KEYPOINT[key].iconSrc}
-                    alt={KEYPOINT[key].alt}
+                    icon={KEYPOINT[key].icon}
                     label={KEYPOINT[key].label}
                     size="xl"
                   />
