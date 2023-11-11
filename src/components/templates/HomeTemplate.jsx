@@ -18,10 +18,10 @@ const HomeTemplate = () => {
   const salesGrowthPercentage = data.data.response.salesGrowthPercentage;
 
   return (
-    <div className="grid gap-8">
-      <section className="grid gap-4">
+    <div className="grid-8">
+      <section className="grid-4">
         <h1 className="text-3xl font-bold">{userName} 사장님 안녕하세요!</h1>
-        <div className="flex gap-12">
+        <div className="flex-12">
           <DashboardItem
             label="이번 달 전체 판매"
             icon={SalesIcon}
@@ -39,9 +39,9 @@ const HomeTemplate = () => {
         </div>
       </section>
 
-      <section className="grid gap-4">
+      <section className="grid-4">
         <h2 className="text-2xl font-bold">{userName} 사장님의 매장</h2>
-        <div className="flex flex-wrap gap-12">
+        <div className="flex-wrap flex-12">
           {carwashInfoList.map((store) => (
             <CarwashShortcutItem
               key={store.carwashId}

@@ -109,8 +109,8 @@ const CarwashDetailEditingTemplate = () => {
   const { inputs, handleChange, isDirty } = useRegisterForm(initialValue);
 
   return (
-    <div className="flex gap-8">
-      <Box className="grid gap-8 p-14">
+    <div className="flex-8">
+      <Box className="grid-8 p-14">
         <div className="text-2xl font-bold">세차장 정보 수정</div>
         <RegisterForm
           inputs={inputs}
