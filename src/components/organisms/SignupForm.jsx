@@ -64,9 +64,6 @@ const SignupForm = () => {
         case "1004":
           message = "중복된 이메일이 존재합니다.";
           break;
-        case "1001":
-          message = "이메일 형식에 맞게 입력해주세요.";
-          break;
       }
 
       setErrorMessage(message);
