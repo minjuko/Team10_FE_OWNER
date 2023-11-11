@@ -16,15 +16,15 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
           to={-1}
         />
       );
-    default:
-      return (
-        <FallbackLayout
-          message="알 수 없는 오류가 발생했습니다."
-          buttonLabel="홈으로"
-          to="/"
-        />
-      );
   }
+
+  return (
+    <FallbackLayout
+      message="알 수 없는 오류가 발생했습니다."
+      buttonLabel="홈으로"
+      to="/"
+    />
+  );
 };
 
 const CarwashBayReservationHistoryPage = () => {
