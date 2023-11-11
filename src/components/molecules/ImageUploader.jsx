@@ -63,7 +63,7 @@ const ImageUploader = ({ value = [], onChange }) => {
         hidden
       />
       {/* URL.createObjectURL(file) */}
-      <div className="flex gap-4 p-4 overflow-x-auto overflow-y-hidden bg-gray-100 border border-gray-300 outline-none w-96 rounded-xl h-28">
+      <div className="flex-4 p-4 overflow-x-auto overflow-y-hidden bg-gray-100 border border-gray-300 outline-none w-96 rounded-xl h-28">
         {value.map((item, index) => {
           return (
             <div
