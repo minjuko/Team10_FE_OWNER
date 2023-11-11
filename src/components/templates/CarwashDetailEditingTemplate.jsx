@@ -27,7 +27,7 @@ const CarwashDetailEditingTemplate = () => {
         [
           JSON.stringify({
             name: inputs.carwashName,
-            locationDTO: {
+            location: {
               address: inputs.carwashAddress,
               latitude: inputs.latitude,
               longitude: inputs.longitude,
