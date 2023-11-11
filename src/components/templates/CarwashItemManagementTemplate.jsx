@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Card from "../molecules/Card";
 import CarwashBayItem from "../organisms/CarwashBayItem";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addBays, getCarwashItem } from "../../apis/carwashes";
+import { useMutation } from "@tanstack/react-query";
+import { addBays } from "../../apis/carwashes";
 import { isEmpty } from "../../utils/isEmpty";
 import AsideLayout from "../atoms/AsideLayout";
 import MainContentLayout from "../atoms/MainContentLayout";
@@ -15,6 +15,31 @@ const CarwashItemManagementTemplate = () => {
   const { carwash_id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const errorHandler = (error) => {
+    const errorCode = error.response.data.error.code;
+
+    switch (errorCode) {
+      case "1201":
+        alert("인증에 오류가 발생했습니다. 다시 로그인해주세요.");
+        navigate("/login");
+        break;
+      case "1301":
+        alert("세차장을 찾을 수 없습니다. 매장관리로 돌아갑니다.");
+        navigate("/manage");
+        break;
+      case "1001":
+        alert("이미 사용중인 베이 번호입니다. 다른 번호로 추가해주세요.");
+        break;
+      case "1002":
+        alert("베이 번호는 숫자로 입력해주세요.");
+        break;
+      case "1102":
+        alert("접근 권한이 없습니다. 홈화면으로 이동합니다.");
+        navigate("/");
+        break;
+    }
+  };
 
   const {
     id,
@@ -34,6 +59,7 @@ const CarwashItemManagementTemplate = () => {
     onSuccess: () => {
       dispatch(getCarwashItemThunk(carwash_id));
     },
+    onError: errorHandler,
   });
 
   return (
