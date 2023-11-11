@@ -15,7 +15,7 @@ export const setBayStatus = async (data) => {
 // 매출관리 데이터
 export const getSales = async (carwash_id, selected_date) => {
   return instance.get(
-    `/api/owner/sales?carwash-id=${carwash_id}&selected-date=${selected_date}`
+    `/api/owner/sales?carwash-ids=${carwash_id}&selected-date=${selected_date}`
   );
 };
 
