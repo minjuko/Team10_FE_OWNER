@@ -4,15 +4,17 @@ import Toggle from "../atoms/Toggle";
 import { setBayStatus } from "../../apis/extras";
 import { Link } from "react-router-dom";
 import WarningMessage from "../atoms/WarningMessage";
+import { useDispatch } from "react-redux";
+import { getCarwashItemThunk } from "../../store/slices/carwashSlice";
 
 const CarwashBayItem = ({ carwashId, optime, bay }) => {
-  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
 
   const mutation = useMutation({
     queryKey: ["setBayStatus"],
     mutationFn: (data) => setBayStatus(data),
     onSuccess: () => {
-      queryClient.refetchQueries(["carwashItem"]);
+      dispatch(getCarwashItemThunk(carwashId));
     },
   });
 
