@@ -6,6 +6,7 @@ import { register } from "../apis/carwashes";
 import useRegisterForm from "../hooks/useRegisterForm";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 
 const RegisterPage = () => {
   const userName = useSelector((state) => state.auth.userName);
@@ -17,7 +18,7 @@ const RegisterPage = () => {
         [
           JSON.stringify({
             name: inputs.carwashName,
-            locationDTO: {
+            location: {
               address: inputs.carwashAddress,
               latitude: inputs.latitude,
               longitude: inputs.longitude,
