@@ -104,11 +104,11 @@ const RegisterPage = () => {
   const { inputs, handleChange, isDirty } = useRegisterForm(initialValue);
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
-      <Box className="grid gap-8 p-14">
+    <div className="items-center w-screen h-screen flex-center">
+      <Box className="grid-8 p-14">
         {/*제목 텍스트*/}
         <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <div className="grid gap-4 text-center">
+          <div className="text-center grid-4">
             <h1 className="text-3xl font-bold">
               {userName} 사장님, 입점을 환영합니다!
             </h1>
