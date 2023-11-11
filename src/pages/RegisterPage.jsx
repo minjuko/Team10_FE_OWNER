@@ -63,7 +63,7 @@ const RegisterPage = () => {
                 end: inputs.weekendCloseTime,
               },
             },
-            keywordId: inputs.keypoint,
+            keywordIdList: inputs.keypoint,
             description: inputs.carwashDescription,
             tel: inputs.carwashTel,
           }),
@@ -72,7 +72,7 @@ const RegisterPage = () => {
       );
 
       inputs.carwashImage.forEach((file) => {
-        formData.append("images", file);
+        formData.append("imageFileList", file);
       });
       formData.append("carwash", blob);
 

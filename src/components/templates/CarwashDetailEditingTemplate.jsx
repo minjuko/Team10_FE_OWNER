@@ -61,7 +61,7 @@ const CarwashDetailEditingTemplate = () => {
                 end: inputs.weekendCloseTime,
               },
             },
-            keywordId: inputs.keypoint,
+            keywordIdList: inputs.keypoint,
             description: inputs.carwashDescription,
             tel: inputs.carwashTel,
           }),
@@ -70,7 +70,7 @@ const CarwashDetailEditingTemplate = () => {
       );
 
       for (const file of inputs.carwashImage) {
-        formData.append("images", file);
+        formData.append("imageFileList", file);
       }
       formData.append("updateData", blob);
 
