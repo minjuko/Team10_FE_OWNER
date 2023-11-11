@@ -20,29 +20,23 @@ const CarwashDetailEditingTemplate = () => {
     queryFn: () => getCarwashesDetails(carwash_id),
   });
 
-  // 이미지 파일 또는 URL을 FormData에 추가하는 함수
-  // URL 형식일 경우 Blob 형태로 변환하여 추가
-  async function appendFilesToFormData(formData, fileOrUrl) {
-    if (fileOrUrl instanceof File) {
-      // 이미 File 객체인 경우
-      formData.append("images", fileOrUrl);
-    } else if (typeof fileOrUrl === "string") {
-      // URL인 경우
-      try {
-        const response = await fetch(fileOrUrl);
-        const blob = await response.blob();
-        const filename = fileOrUrl.split("/").pop(); // URL에서 파일명 추출
-        formData.append(
-          "images",
-          new File([blob], filename, { type: blob.type })
-        );
-      } catch (error) {
-        console.error("File download failed:", error);
-      }
-    }
+  const errorHandler = (error) => {
+    const errorCode = error.response.data.error.code;
 
-    return formData;
-  }
+    switch (errorCode) {
+      case "1201":
+        alert("인증에 오류가 발생했습니다. 다시 로그인해주세요.");
+        navigate("/login");
+        break;
+      case "1003":
+        alert("모든 데이터가 입력되지 않았습니다. 다시 시도해주세요.");
+        break;
+      default:
+        alert("알 수 없는 오류가 발생했습니다. 홈화면으로 이동합니다.");
+        navigate("/");
+        break;
+    }
+  };
 
   const mutation = useMutation({
     mutationFn: async (inputs) => {
@@ -51,7 +45,7 @@ const CarwashDetailEditingTemplate = () => {
         [
           JSON.stringify({
             name: inputs.carwashName,
-            locationDTO: {
+            location: {
               address: inputs.carwashAddress,
               latitude: inputs.latitude,
               longitude: inputs.longitude,
@@ -76,7 +70,7 @@ const CarwashDetailEditingTemplate = () => {
       );
 
       for (const file of inputs.carwashImage) {
-        await appendFilesToFormData(formData, file);
+        formData.append("images", file);
       }
       formData.append("updateData", blob);
 
@@ -87,9 +81,7 @@ const CarwashDetailEditingTemplate = () => {
       queryClient.refetchQueries(["carwashItem"]);
       navigate(`/manage/item/${carwash_id}`);
     },
-    onError: (error) => {
-      alert(`수정에 실패하였습니다. ${error.message}`);
-    },
+    onError: errorHandler,
   });
 
   const carwashDetail = data.data.response;
@@ -110,7 +102,7 @@ const CarwashDetailEditingTemplate = () => {
     weekendOpenTime: carwashDetail.optime.weekend.start,
     weekendCloseTime: carwashDetail.optime.weekend.end,
     keypoint: carwashDetail.keywordIdList,
-    carwashImage: imageFileList,
+    carwashImage: [],
     carwashDescription: carwashDetail.description,
   };
 

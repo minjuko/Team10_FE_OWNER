@@ -10,6 +10,7 @@ import CarwashItemManagementPage from "./pages/CarwashItemManagementPage";
 import CarwashDetailEditingPage from "./pages/CarwashDetailEditingPage";
 import CarwashBayReservationHistoryPage from "./pages/CarwashBayReservationHistoryPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const App = () => {
   return (
@@ -17,19 +18,55 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="/sales" element={<SalesManagementPage />}></Route>
-            <Route path="/manage" element={<CarwashManagementPage />}></Route>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }></Route>
+            <Route
+              path="/sales"
+              element={
+                <ProtectedRoute>
+                  <SalesManagementPage />
+                </ProtectedRoute>
+              }></Route>
+            <Route
+              path="/manage"
+              element={
+                <ProtectedRoute>
+                  <CarwashManagementPage />
+                </ProtectedRoute>
+              }></Route>
             <Route
               path="/manage/item/:carwash_id"
-              element={<CarwashItemManagementPage />}></Route>
+              element={
+                <ProtectedRoute>
+                  <CarwashItemManagementPage />
+                </ProtectedRoute>
+              }></Route>
             <Route
               path="/manage/item/:carwash_id/edit"
-              element={<CarwashDetailEditingPage />}></Route>
+              element={
+                <ProtectedRoute>
+                  <CarwashDetailEditingPage />
+                </ProtectedRoute>
+              }></Route>
             <Route
               path="/manage/item/:carwash_id/:bayId"
-              element={<CarwashBayReservationHistoryPage />}></Route>
-            <Route path="*" element={<NotFoundPage />}></Route>
+              element={
+                <ProtectedRoute>
+                  <CarwashBayReservationHistoryPage />
+                </ProtectedRoute>
+              }></Route>
+            <Route
+              path="*"
+              element={
+                <ProtectedRoute>
+                  <NotFoundPage />
+                </ProtectedRoute>
+              }></Route>
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>

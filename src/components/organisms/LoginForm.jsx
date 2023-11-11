@@ -55,6 +55,12 @@ const LoginForm = () => {
               message = "오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
               break;
           }
+        } else if (error.error.status === "404") {
+          switch (error.error.code) {
+            case "1301":
+              message = "이메일을 찾을 수 없습니다.";
+              break;
+          }
         }
         setErrorMessage(message);
       });
