@@ -12,7 +12,6 @@ import { useEffect } from "react";
 import { getCarwashItemThunk } from "../../store/slices/carwashSlice";
 
 const CarwashItemManagementTemplate = () => {
-  const queryClient = useQueryClient();
   const { carwash_id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,7 +32,7 @@ const CarwashItemManagementTemplate = () => {
   const mutation = useMutation({
     mutationFn: (data) => addBays(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(["carwashItem"]);
+      dispatch(getCarwashItemThunk(carwash_id));
     },
   });
 
