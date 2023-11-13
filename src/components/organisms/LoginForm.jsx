@@ -120,6 +120,12 @@ const LoginForm = () => {
           }}>
           회원가입
         </Button>
+
+        <div className="p-4 bg-gray-100 rounded-xl">
+          <strong className="text-primary">테스트용 계정</strong>
+          <div>email: owner@daum.net</div>
+          <div>pw: owner1234!</div>
+        </div>
       </form>
     </Box>
   );

@@ -65,16 +65,17 @@ const TimeTable = ({ optime, bookedTime }) => {
    * @returns
    */
   const isTimeSlotBooked = (hour, minute) => {
-    const slotStartTime = new Date(start_time);
-    slotStartTime.setHours(hour, minute);
-    const slotEndTime = new Date(slotStartTime);
-    slotEndTime.setMinutes(slotStartTime.getMinutes() + 30);
+    const slotStartTime = new Date();
+    slotStartTime.setHours(hour, minute, 0, 0);
+    const slotEndTime = new Date();
+    slotEndTime.setHours(hour, minute + 30, 0, 0);
 
-    return bookedTime.some(
-      (booking) =>
-        new Date(booking.start_time) <= slotStartTime &&
-        new Date(booking.end_time) >= slotEndTime
-    );
+    return bookedTime.some((booking) => {
+      return (
+        new Date(booking.start) <= slotStartTime &&
+        new Date(booking.end) >= slotEndTime
+      );
+    });
   };
 
   /**
