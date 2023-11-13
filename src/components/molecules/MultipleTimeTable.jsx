@@ -51,17 +51,17 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 시간표에 예약된 시간이 있는지 확인하는 함수
   // 예약된 시간이 있으면 true, 없으면 false를 반환
   const isTimeSlotBooked = (hour, minute, bookedTime) => {
-    const slotStartTime = dayjs(startTime).hour(hour).minute(minute);
-    const slotEndTime = slotStartTime.add(30, "minute");
+    const slotStartTime = new Date();
+    slotStartTime.setHours(hour, minute, 0, 0);
+    const slotEndTime = new Date();
+    slotEndTime.setHours(hour, minute + 30, 0, 0);
 
-    return bookedTime.some(
-      (booking) =>
-        // dayjs에 <=, >= 연산자가 없어서 isSame, isBefore, isAfter 메서드를 사용
-        (dayjs(booking.start_time).isSame(slotStartTime) ||
-          dayjs(booking.start_time).isBefore(slotStartTime)) &&
-        (dayjs(booking.end_time).isSame(slotEndTime) ||
-          dayjs(booking.end_time).isAfter(slotEndTime))
-    );
+    return bookedTime.some((booking) => {
+      return (
+        new Date(booking.start) <= slotStartTime &&
+        new Date(booking.end) >= slotEndTime
+      );
+    });
   };
 
   const hourLoop = (startHour, endHour) => {
