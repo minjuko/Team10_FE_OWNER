@@ -1,8 +1,5 @@
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import IconWithLabel from "../molecules/IconWIthLabel";
-import NoImage from "/noimage.png";
-import { isEmpty } from "../../utils/isEmpty";
 import { telFormatter } from "../../utils/telFormatter";
 
 const MobilePreview = ({ inputs }) => {
@@ -64,7 +61,7 @@ const MobilePreview = ({ inputs }) => {
               <div className="flex-1">
                 <div>평일</div>
                 {inputs.weekdayOpenTime === "00:00" &&
-                inputs.weekdayCloseTime === "23:59" ? (
+                inputs.weekdayCloseTime === "24:00" ? (
                   <div>24시간 운영</div>
                 ) : (
                   <div>
@@ -78,7 +75,7 @@ const MobilePreview = ({ inputs }) => {
           <div className="flex-1 ml-6">
             <div>주말</div>
             {inputs.weekendOpenTime === "00:00" &&
-            inputs.weekendCloseTime === "23:59" ? (
+            inputs.weekendCloseTime === "24:00" ? (
               <div>24시간 운영</div>
             ) : (
               <div>

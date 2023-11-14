@@ -30,7 +30,7 @@ const OpTimePicker = ({
                 setPrevWeekdayCloseTime(weekdayCloseTime);
                 setIsWeekday24hours(true);
                 onChange("weekdayOpenTime", "00:00");
-                onChange("weekdayCloseTime", "23:59");
+                onChange("weekdayCloseTime", "24:00");
               } else {
                 setIsWeekday24hours(false);
                 onChange("weekdayOpenTime", prevWeekdayOpenTime);
@@ -67,7 +67,7 @@ const OpTimePicker = ({
                 setPrevWeekendCloseTime(weekendCloseTime);
                 setIsWeekend24hours(true);
                 onChange("weekendOpenTime", "00:00");
-                onChange("weekendCloseTime", "23:59");
+                onChange("weekendCloseTime", "24:00");
               } else {
                 setIsWeekend24hours(false);
                 onChange("weekendOpenTime", prevWeekendOpenTime);
