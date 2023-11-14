@@ -60,28 +60,18 @@ const MobilePreview = ({ inputs }) => {
             label={
               <div className="flex-1">
                 <div>평일</div>
-                {inputs.weekdayOpenTime === "00:00" &&
-                inputs.weekdayCloseTime === "24:00" ? (
-                  <div>24시간 운영</div>
-                ) : (
-                  <div>
-                    {inputs.weekdayOpenTime}~{inputs.weekdayCloseTime}
-                  </div>
-                )}
+                <div>
+                  {inputs.weekdayOpenTime}~{inputs.weekdayCloseTime}
+                </div>
               </div>
             }
           />
 
           <div className="flex-1 ml-6">
             <div>주말</div>
-            {inputs.weekendOpenTime === "00:00" &&
-            inputs.weekendCloseTime === "24:00" ? (
-              <div>24시간 운영</div>
-            ) : (
-              <div>
-                {inputs.weekendOpenTime}~{inputs.weekendCloseTime}
-              </div>
-            )}
+            <div>
+              {inputs.weekendOpenTime}~{inputs.weekendCloseTime}
+            </div>
           </div>
           <IconWithLabel icon="tel" label={telFormatter(inputs.carwashTel)} />
           <IconWithLabel icon="location" label={inputs.carwashAddress} />
