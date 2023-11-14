@@ -8,7 +8,7 @@ import { telFormatter } from "../../utils/telFormatter";
 const MobilePreview = ({ inputs }) => {
   const KEYPOINT = {
     8: {
-      icon: "tel",
+      icon: "underside",
       label: "하부세차",
     },
     9: {
@@ -39,27 +39,6 @@ const MobilePreview = ({ inputs }) => {
 
   return (
     <div className="relative overflow-auto bg-white shadow-xl rounded-xl grow">
-      <Carousel
-        showArrows={true}
-        showStatus={false}
-        showIndicators={true}
-        autoPlay={true}
-        infiniteLoop={true}
-        showThumbs={false}>
-        {isEmpty(inputs.carwashImage) ? (
-          <img src={NoImage} alt="등록된 사진 없음" />
-        ) : (
-          inputs.carwashImage.map((image, index) => (
-            <img
-              key={index}
-              src={URL.createObjectURL(image)}
-              alt="이미지"
-              className="h-56"
-            />
-          ))
-        )}
-      </Carousel>
-
       <div className="p-4 grid-4">
         {/* 세차장 이름, 별점, 예약베이 */}
         <div className="flex-between">
