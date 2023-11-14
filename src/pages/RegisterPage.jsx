@@ -72,7 +72,7 @@ const RegisterPage = () => {
       );
 
       inputs.carwashImage.forEach((file) => {
-        formData.append("imageFileList", file);
+        formData.append("images", file);
       });
       formData.append("carwash", blob);
 
