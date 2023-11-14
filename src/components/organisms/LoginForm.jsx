@@ -37,31 +37,21 @@ const LoginForm = () => {
       .catch((error) => {
         let message;
 
-        if (error.error.status === "400") {
-          switch (error.error.code) {
-            case "1001":
-              message = "이메일 형식에 맞게 입력해주세요.";
-              break;
-            default:
-              message = "오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
-              break;
-          }
-        } else if (error.error.status === "401") {
-          switch (error.error.code) {
-            case "1201":
-              message = "비밀번호가 일치하지 않습니다.";
-              break;
-            default:
-              message = "오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
-              break;
-          }
-        } else if (error.error.status === "404") {
-          switch (error.error.code) {
-            case "1301":
-              message = "이메일을 찾을 수 없습니다.";
-              break;
-          }
+        switch (error.error.code) {
+          case "1001":
+            message = "올바른 정보를 입력해주세요.";
+            break;
+          case "1201":
+            message = "비밀번호가 일치하지 않습니다.";
+            break;
+          case "1301":
+            message = "이메일을 찾을 수 없습니다.";
+            break;
+          default:
+            message = "오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
+            break;
         }
+
         setErrorMessage(message);
       });
   };
