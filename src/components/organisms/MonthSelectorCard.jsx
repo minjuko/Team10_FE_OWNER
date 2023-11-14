@@ -55,11 +55,11 @@ const MonthSelectorCard = ({ onChange, monthlyRevenue }) => {
         </div>
       }>
       {/* 월 매출 */}
-      {monthlyRevenue && (
+      {monthlyRevenue ? (
         <div className="text-2xl font-semibold text-center text-primary">
           {monthlyRevenue.toLocaleString()}원
         </div>
-      )}
+      ) : null}
     </Card>
   );
 };
