@@ -18,9 +18,9 @@ const CarwashManagementTemplate = () => {
     <div className="grid gap-4">
       {isEmpty(carwashList) ? (
         <div className="flex-col justify-center w-auto flex-items-center-8">
-          <div className="text-xl">
+          <p className="text-xl">
             등록된 세차장이 없습니다. 먼저 입점신청 후 접속해주세요.
-          </div>
+          </p>
           <Button
             variant="long"
             onClick={() => {
