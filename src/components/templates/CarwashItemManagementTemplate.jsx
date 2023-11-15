@@ -73,11 +73,11 @@ const CarwashItemManagementTemplate = () => {
           <div className="grid-2">
             <div>
               <div className="flex-between">
-                <div className="font-semibold">이번 달 매출</div>
+                <h3 className="font-semibold">이번 달 매출</h3>
                 <div>{monthlySales?.toLocaleString()}원</div>
               </div>
               <div className="flex-between">
-                <div className="font-semibold">이번 달 예약</div>
+                <h3 className="font-semibold">이번 달 예약</h3>
                 <div>{monthlyReservations?.toLocaleString()}건</div>
               </div>
             </div>
@@ -85,7 +85,7 @@ const CarwashItemManagementTemplate = () => {
         </Card>
         <Button
           type="button"
-          className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
+          variant="aside"
           onClick={(e) => {
             e.preventDefault();
             navigate(`/manage/item/${carwash_id}/edit`);
@@ -94,7 +94,7 @@ const CarwashItemManagementTemplate = () => {
         </Button>
         <Button
           type="button"
-          className="h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl"
+          variant="aside"
           onClick={(e) => {
             e.preventDefault();
 

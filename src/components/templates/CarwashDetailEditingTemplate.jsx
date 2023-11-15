@@ -111,7 +111,7 @@ const CarwashDetailEditingTemplate = () => {
   return (
     <div className="flex-8">
       <Box className="grid-8 p-14">
-        <div className="text-2xl font-bold">세차장 정보 수정</div>
+        <h1 className="text-2xl font-bold">세차장 정보 수정</h1>
         <RegisterForm
           inputs={inputs}
           onChange={handleChange}
