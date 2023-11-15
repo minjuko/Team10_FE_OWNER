@@ -39,7 +39,12 @@ const TimeTable = ({ optime, bookedTime }) => {
   let endMinute;
 
   // 24시간 운영할 때: endHour와 endMinute을 24시 0분으로 설정
-  if (endTime.getHours() === 23 && endTime.getMinutes() === 59) {
+  if (
+    startTime.getHours() === 0 &&
+    startTime.getMinutes() === 0 &&
+    endTime.getHours() === 0 &&
+    endTime.getMinutes() === 0
+  ) {
     endHour = 24;
     endMinute = 0;
   }
