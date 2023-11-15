@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import MultipleTimeTable from "../molecules/MultipleTimeTable";
 import { isEmpty } from "../../utils/isEmpty";
+import dayjs from "dayjs";
 
 const CarwashItem = ({
   carwashId,
@@ -9,6 +10,7 @@ const CarwashItem = ({
   bayReservationList,
   imageList,
 }) => {
+  const today = dayjs().format("YYYY-MM-DD");
   return (
     <Link
       to={`/manage/item/${carwashId}`}
@@ -21,8 +23,9 @@ const CarwashItem = ({
         />
       </div>
       <div className="flex-grow">
-        <div className="p-4 text-2xl font-bold text-white bg-primary">
-          {name}
+        <div className="flex justify-between p-4 text-white bg-primary">
+          <h2 className="text-2xl font-bold">{name}</h2>
+          <div className="text-2xl">{today}</div>
         </div>
         <div className="p-4">
           {isEmpty(bayReservationList) ? (
