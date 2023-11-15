@@ -1,4 +1,4 @@
-import Checkbox from "../atoms/Checkbox";
+import Checkbox from "../atoms/CheckBox";
 import TimePicker from "../atoms/TimePicker";
 import RegisterFormItemStructure from "../atoms/RegisterFormItemStructure";
 import { useState } from "react";
