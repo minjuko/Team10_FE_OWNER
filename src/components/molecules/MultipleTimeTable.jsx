@@ -37,7 +37,7 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
   let endHour;
   let endMinute;
 
-  if (endTime.hour() === 23 && endTime.minute() === 59) {
+  if (startTime.hour() === 0) {
     endHour = 24;
     endMinute = 0;
   } else if (endTime.date() > startTime.date()) {
