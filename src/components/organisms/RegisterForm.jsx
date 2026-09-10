@@ -70,10 +70,13 @@ const RegisterForm = ({
   }, [inputs]);
 
   useEffect(() => {
-    const geocoder = new kakao.maps.services.Geocoder();
+    const kakaoMaps = window.kakao?.maps;
+    if (!kakaoMaps?.services) return;
+
+    const geocoder = new kakaoMaps.services.Geocoder();
 
     geocoder.addressSearch(inputs.carwashAddress, function (result, status) {
-      if (status === kakao.maps.services.Status.OK) {
+      if (status === kakaoMaps.services.Status.OK) {
         onChange("latitude", result[0].y);
         onChange("longitude", result[0].x);
       }
