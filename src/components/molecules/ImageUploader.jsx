@@ -1,12 +1,29 @@
-import { useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import RegisterFormItemStructure from "../atoms/RegisterFormItemStructure";
 import Button from "../atoms/Button";
 
 const ImageUploader = ({ value = [], onChange }) => {
   const fileInputRef = useRef();
+  const previewUrls = useMemo(
+    () =>
+      value.map((item) =>
+        item instanceof File ? URL.createObjectURL(item) : item,
+      ),
+    [value],
+  );
+
+  useEffect(() => {
+    return () => {
+      previewUrls.forEach((url, index) => {
+        if (value[index] instanceof File) URL.revokeObjectURL(url);
+      });
+    };
+  }, [previewUrls, value]);
 
   const handleChangeData = (e) => {
     const files = e.target.files;
+
+    if (!files.length) return;
 
     if (files[0].size > 200000) {
       return alert("200kb 이하의 이미지만 업로드 가능합니다.");
@@ -49,10 +66,12 @@ const ImageUploader = ({ value = [], onChange }) => {
           onClick={() => {
             fileInputRef.current.click();
           }}
-          variant="addPhoto">
+          variant="addPhoto"
+        >
           + 추가
         </Button>
-      }>
+      }
+    >
       <input
         type="file"
         accept="image/*"
@@ -71,10 +90,11 @@ const ImageUploader = ({ value = [], onChange }) => {
               className="relative w-20 h-20 overflow-auto shrink-0 rounded-xl"
               onClick={() => {
                 handleClickImage(index);
-              }}>
+              }}
+            >
               <img
                 className="absolute object-cover w-full h-full"
-                src={item instanceof File ? URL.createObjectURL(item) : item}
+                src={previewUrls[index]}
                 alt={`미리보기 ${index}}`}
               />
               {index === 0 && (
@@ -86,7 +106,8 @@ const ImageUploader = ({ value = [], onChange }) => {
                 variant="deletePhoto"
                 type="button"
                 onClick={(e) => handleClickDelete(e, index)}
-                className="absolute top-1 right-1">
+                className="absolute top-1 right-1"
+              >
                 ✕
               </Button>
             </div>
