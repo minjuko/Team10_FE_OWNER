@@ -12,17 +12,12 @@ import dayjs from "dayjs";
  * @param {Number} monthlyRevenue - 월 매출
  */
 const MonthSelectorCard = ({ onChange, monthlyRevenue }) => {
-  const currentMonthStart = dayjs().startOf("month");
   const formatYearMonth = (date) => date.format("YYYY-MM");
 
   const [yearMonth, setYearMonth] = useState(formatYearMonth(dayjs()));
 
   const incrementMonth = () => {
     const newDate = dayjs(yearMonth).add(1, "month");
-    // 현재 월 이후로 넘어가지 않도록 제한
-    if (newDate.isAfter(currentMonthStart)) {
-      return;
-    }
     const formattedDate = formatYearMonth(newDate);
     setYearMonth(formattedDate);
     onChange(newDate.format("YYYY-MM-DD"));
