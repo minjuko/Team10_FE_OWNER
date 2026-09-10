@@ -1,16 +1,23 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 const Toggle = ({ bay_id, status, mutation }) => {
   // status가 1이면 true, 이외 값은 false
   const [checked, setChecked] = useState(status === 1);
   const id = useId();
 
+  useEffect(() => {
+    setChecked(status === 1);
+  }, [status]);
+
   const handleChecked = (e) => {
     switch (e.target.checked) {
       case true:
         if (window.confirm("베이를 활성화 하시겠습니까?")) {
           setChecked(e.target.checked);
-          mutation.mutate({ bay_id, status: 1 });
+          mutation.mutate(
+            { bay_id, status: 1 },
+            { onError: () => setChecked(status === 1) }
+          );
         }
         break;
       case false:
@@ -20,14 +27,20 @@ const Toggle = ({ bay_id, status, mutation }) => {
           )
         ) {
           setChecked(e.target.checked);
-          mutation.mutate({ bay_id, status: 0 });
+          mutation.mutate(
+            { bay_id, status: 0 },
+            { onError: () => setChecked(status === 1) }
+          );
         }
         break;
     }
   };
 
   return (
-    <form className="flex-items-center-2">
+    <form
+      className="flex-items-center-2"
+      onClick={(e) => e.stopPropagation()}
+      onSubmit={(e) => e.preventDefault()}>
       <label htmlFor={id} className="font-semibold text-gray-500 select-none">
         베이 활성화
       </label>

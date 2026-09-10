@@ -22,7 +22,7 @@ const CarwashBayReservationHistoryTemplate = () => {
   };
 
   const { data } = useSuspenseQuery({
-    queryKey: ["reservationHistory", selectedDate],
+    queryKey: ["reservationHistory", bayId, selectedDate],
     queryFn: () => getCarwashBayReservationHistory(bayId, selectedDate),
   });
 

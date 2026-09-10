@@ -1,17 +1,18 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
 import { setBayStatus } from "../../apis/extras";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import WarningMessage from "../atoms/WarningMessage";
 import { useDispatch } from "react-redux";
 import { getCarwashItemThunk } from "../../store/slices/carwashSlice";
 
 const CarwashBayItem = ({ carwashId, optime, bay }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const errorHandler = (error) => {
-    const errorCode = error.response.data.error.code;
+    const errorCode = error?.response?.data?.error?.code;
 
     switch (errorCode) {
       case "1201":

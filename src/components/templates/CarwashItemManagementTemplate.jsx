@@ -17,7 +17,7 @@ const CarwashItemManagementTemplate = () => {
   const dispatch = useDispatch();
 
   const errorHandler = (error) => {
-    const errorCode = error.response.data.error.code;
+    const errorCode = error?.response?.data?.error?.code;
 
     switch (errorCode) {
       case "1201":
@@ -56,7 +56,7 @@ const CarwashItemManagementTemplate = () => {
 
   useEffect(() => {
     dispatch(getCarwashItemThunk(carwash_id));
-  }, [dispatch]);
+  }, [carwash_id, dispatch]);
 
   const mutation = useMutation({
     mutationFn: (data) => addBays(data),
