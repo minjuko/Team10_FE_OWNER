@@ -25,7 +25,7 @@ const MainLayout = () => {
   return (
     <>
       <GNB />
-      <main className="w-[1280px] mx-auto p-4 my-24">
+      <main className="w-full max-w-[1280px] mx-auto p-4 my-24">
         <Outlet />
       </main>
     </>

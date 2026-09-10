@@ -67,7 +67,7 @@ const RegisterPage = () => {
             tel: inputs.carwashTel,
           }),
         ],
-        { type: "application/json" }
+        { type: "application/json" },
       );
 
       inputs.carwashImage.forEach((file) => {
@@ -103,7 +103,7 @@ const RegisterPage = () => {
   const { inputs, handleChange, isDirty } = useRegisterForm(initialValue);
 
   return (
-    <div className="items-center w-screen h-screen flex-center">
+    <div className="items-center w-full min-h-screen py-8 flex-center">
       <Box className="grid-8 p-14">
         {/*제목 텍스트*/}
         <ErrorBoundary FallbackComponent={ErrorFallback}>

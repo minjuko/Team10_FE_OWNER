@@ -30,8 +30,8 @@ const GNB = () => {
   ];
 
   return (
-    <nav className="fixed top-0 z-50 flex w-full h-24 bg-white border-b border-gray-300 min-w-min">
-      <div className="w-[1280px] items-center flex-between mx-auto px-4">
+    <nav className="fixed top-0 z-50 flex w-full h-24 bg-white border-b border-gray-300">
+      <div className="w-full max-w-[1280px] items-center flex-between mx-auto px-4">
         <section className="flex-items-center-8">
           <NavLink to="/">
             <Image src={Logo} alt="뽀득뽀득 사장님 페이지 로고" />
@@ -45,7 +45,8 @@ const GNB = () => {
                   }`
                 }
                 key={index}
-                to={menu.path}>
+                to={menu.path}
+              >
                 {menu.label}
               </NavLink>
             ))}
