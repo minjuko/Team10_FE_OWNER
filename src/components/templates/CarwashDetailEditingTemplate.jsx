@@ -69,16 +69,20 @@ const CarwashDetailEditingTemplate = () => {
         { type: "application/json" }
       );
 
-      for (const file of inputs.carwashImage) {
+      inputs.carwashImage.forEach((file) => {
         formData.append("imageFileList", file);
-      }
+      });
       formData.append("updateData", blob);
 
       return putCarwashesDetails(carwash_id, formData);
     },
     onSuccess: () => {
       alert("정상적으로 수정되었습니다.");
-      queryClient.refetchQueries(["carwashItem"]);
+      queryClient.invalidateQueries({
+        queryKey: ["getCarwashDetail", carwash_id],
+      });
+      queryClient.invalidateQueries({ queryKey: ["carwash"] });
+      queryClient.invalidateQueries({ queryKey: ["home"] });
       navigate(`/manage/item/${carwash_id}`);
     },
     onError: errorHandler,
@@ -86,15 +90,11 @@ const CarwashDetailEditingTemplate = () => {
 
   const carwashDetail = data?.data?.response;
 
-  const imageFileList = carwashDetail?.imageFileList?.map((item) => {
-    return item.url;
-  });
-
   const initialValue = {
     carwashName: carwashDetail.name,
     carwashAddress: carwashDetail.locationDTO.address,
-    latitude: "",
-    longitude: "",
+    latitude: carwashDetail.locationDTO.latitude,
+    longitude: carwashDetail.locationDTO.longitude,
     carwashTel: carwashDetail.tel,
     pricePer30min: carwashDetail.price,
     weekdayOpenTime: carwashDetail.optime.weekday.start,

@@ -5,9 +5,16 @@ const useRegisterForm = (initialValue) => {
   const [isDirty, setIsDirty] = useState(false);
 
   const handleChange = (name, value) => {
-    setInputs((prev) => ({ ...prev, [name]: value }));
-    if (initialValue[name] !== inputs[name]) setIsDirty(true);
-    else setIsDirty(false);
+    setInputs((prev) => {
+      const nextInputs = { ...prev, [name]: value };
+      const hasChanged = Object.keys(nextInputs).some(
+        (key) =>
+          JSON.stringify(nextInputs[key]) !== JSON.stringify(initialValue[key])
+      );
+
+      setIsDirty(hasChanged);
+      return nextInputs;
+    });
   };
 
   return { inputs, handleChange, isDirty };
