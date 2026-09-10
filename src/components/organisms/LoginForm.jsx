@@ -104,6 +104,7 @@ const LoginForm = () => {
         </Button>
 
         <Button
+          type="button"
           variant="longwhite"
           onClick={() => {
             navigate("/signup");
