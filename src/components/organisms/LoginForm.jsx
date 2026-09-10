@@ -11,6 +11,9 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import WarningMessage from "../atoms/WarningMessage";
 
+const demoEmail = import.meta.env.VITE_DEMO_OWNER_EMAIL;
+const demoPassword = import.meta.env.VITE_DEMO_OWNER_PASSWORD;
+
 /**
  * LoginForm 로그인 폼
  *
@@ -24,6 +27,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { isSubmitting, errors },
   } = useForm();
@@ -112,11 +116,21 @@ const LoginForm = () => {
           회원가입
         </Button>
 
-        <div className="p-4 bg-gray-100 rounded-xl">
-          <strong className="text-primary">테스트용 계정</strong>
-          <div>email: owner@daum.net</div>
-          <div>pw: owner1234!</div>
-        </div>
+        {demoEmail && demoPassword && (
+          <div className="grid gap-2 p-4 bg-gray-100 rounded-xl">
+            <strong className="text-primary">Portfolio Demo</strong>
+            <Button
+              type="button"
+              variant="small"
+              onClick={() => {
+                setValue("email", demoEmail, { shouldValidate: true });
+                setValue("password", demoPassword, { shouldValidate: true });
+              }}>
+              데모 계정 입력
+            </Button>
+            <small>{demoEmail}</small>
+          </div>
+        )}
       </form>
     </Box>
   );
