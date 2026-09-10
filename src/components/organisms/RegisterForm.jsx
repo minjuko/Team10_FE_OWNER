@@ -7,6 +7,7 @@ import ImageUploader from "../molecules/ImageUploader";
 import OpTimePicker from "../molecules/OpTimePicker";
 import { useEffect, useState } from "react";
 import { isEmpty } from "../../utils/isEmpty";
+import { telFormatter } from "../../utils/telFormatter";
 
 const pointLabels = [
   "하부세차",
@@ -57,7 +58,7 @@ const RegisterForm = ({
     ) {
       setErrorMessage(ERROR_MESSAGE.required);
       setIsDisabled(true);
-    } else if (isNaN(inputs.carwashTel)) {
+    } else if (!/^\d{2,3}-?\d{3,4}-?\d{4}$/.test(inputs.carwashTel)) {
       setErrorMessage(ERROR_MESSAGE.onlyNumber);
       setIsDisabled(true);
     } else {
@@ -123,7 +124,7 @@ const RegisterForm = ({
               type="tel"
               value={inputs.carwashTel}
               onChange={(e) => {
-                onChange(e.target.name, e.target.value);
+                onChange(e.target.name, telFormatter(e.target.value));
               }}
               placeholder="전화번호"
             />
