@@ -1,4 +1,3 @@
-import React from "react";
 import RegisterForm from "../components/organisms/RegisterForm";
 import Box from "../components/atoms/Box";
 import { useMutation } from "@tanstack/react-query";
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackLayout from "../components/atoms/FallbackLayout";
 
-const ErrorFallback = ({ error, resetErrorBoundary }) => {
+const ErrorFallback = ({ resetErrorBoundary }) => {
   return (
     <FallbackLayout
       message="데이터를 불러오는 중 오류가 발생했습니다."
@@ -23,7 +22,7 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const errorHandler = (error) => {
-    const errorCode = error.response.data.error.code;
+    const errorCode = error?.response?.data?.error?.code;
 
     switch (errorCode) {
       case "1201":

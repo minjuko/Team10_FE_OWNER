@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 const HomeTemplate = () => {
   const { data } = useSuspenseQuery({ queryKey: ["home"], queryFn: getHome });
-  console.log(data);
   const userName = useSelector((state) => state.auth.userName);
 
   const carwashInfoList = data?.data?.response?.carwashInfoList;
@@ -43,7 +42,7 @@ const HomeTemplate = () => {
       <section className="grid-4">
         <h2 className="text-2xl font-bold">{userName} 사장님의 매장</h2>
         <div className="flex-wrap flex-12">
-          {carwashInfoList.map((store) => (
+          {carwashInfoList?.map((store) => (
             <CarwashShortcutItem
               key={store?.carwashId}
               carwashId={store?.carwashId}

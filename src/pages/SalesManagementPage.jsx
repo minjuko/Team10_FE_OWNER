@@ -4,8 +4,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import LoadingAnimation from "../components/atoms/LoadingAnimation";
 import FallbackLayout from "../components/atoms/FallbackLayout";
 
-const ErrorFallback = ({ error, resetErrorBoundary }) => {
-  const errorCode = error.response.data.error.code;
+const ErrorFallback = ({ error }) => {
+  const errorCode = error?.response?.data?.error?.code;
 
   switch (errorCode) {
     case "1003":

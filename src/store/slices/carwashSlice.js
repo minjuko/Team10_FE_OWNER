@@ -8,7 +8,9 @@ export const getCarwashItemThunk = createAsyncThunk(
       const response = await getCarwashItem(carwashId);
       return response.data.response;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data ?? { error: { message: error.message } }
+      );
     }
   }
 );
@@ -41,7 +43,7 @@ const carwashSlice = createSlice({
       }),
       builder.addCase(getCarwashItemThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload.error;
+        state.error = action.payload?.error ?? action.error;
       });
   },
 });

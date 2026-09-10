@@ -7,6 +7,5 @@
  * @returns {Boolean} 비었으면 true, 아니면 false
  */
 export const isEmpty = (array) => {
-  if (array.length === 0) return true;
-  else return false;
+  return !Array.isArray(array) || array.length === 0;
 };

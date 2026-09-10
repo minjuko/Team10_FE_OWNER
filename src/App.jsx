@@ -70,7 +70,13 @@ const App = () => {
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
-          <Route path="/register" element={<RegisterPage />}></Route>
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute>
+                <RegisterPage />
+              </ProtectedRoute>
+            }></Route>
         </Routes>
       </BrowserRouter>
     </div>

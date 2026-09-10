@@ -9,7 +9,9 @@ export const loginThunk = createAsyncThunk(
       localStorage.setItem("Token", response.headers.authorization);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data ?? { error: { message: error.message } }
+      );
     }
   }
 );
@@ -21,7 +23,9 @@ export const getUserInfoThunk = createAsyncThunk(
       const response = await getUserInfo();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data ?? { error: { message: error.message } }
+      );
     }
   }
 );
@@ -51,7 +55,7 @@ const authSlice = createSlice({
       }),
       builder.addCase(loginThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload.error;
+        state.error = action.payload?.error ?? action.error;
       }),
       builder.addCase(getUserInfoThunk.pending, (state) => {
         state.isLoading = true;
@@ -63,7 +67,7 @@ const authSlice = createSlice({
       }),
       builder.addCase(getUserInfoThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload.error;
+        state.error = action.payload?.error ?? action.error;
       });
   },
 });
