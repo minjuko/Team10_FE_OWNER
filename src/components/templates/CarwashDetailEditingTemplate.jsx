@@ -66,7 +66,7 @@ const CarwashDetailEditingTemplate = () => {
             tel: inputs.carwashTel,
           }),
         ],
-        { type: "application/json" }
+        { type: "application/json" },
       );
 
       inputs.carwashImage.forEach((file) => {
@@ -118,6 +118,7 @@ const CarwashDetailEditingTemplate = () => {
           mutation={mutation}
           isDirty={isDirty}
           buttonLabel="수정하기"
+          requireImage={false}
         />
       </Box>
       <MobilePreview inputs={inputs} />

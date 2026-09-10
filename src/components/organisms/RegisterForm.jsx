@@ -30,7 +30,14 @@ const ERROR_MESSAGE = {
  *
  * @todo 각 input에 대한 validation 필요
  */
-const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
+const RegisterForm = ({
+  inputs,
+  onChange,
+  mutation,
+  isDirty,
+  buttonLabel,
+  requireImage = true,
+}) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -45,7 +52,7 @@ const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
       inputs.weekendOpenTime === "" ||
       inputs.weekendCloseTime === "" ||
       isEmpty(inputs.keypoint) ||
-      isEmpty(inputs.carwashImage) ||
+      (requireImage && isEmpty(inputs.carwashImage)) ||
       inputs.carwashDescription === ""
     ) {
       setErrorMessage(ERROR_MESSAGE.required);
@@ -80,7 +87,8 @@ const RegisterForm = ({ inputs, onChange, mutation, isDirty, buttonLabel }) => {
         e.preventDefault();
         if (isDirty) mutation.mutate(inputs);
         else alert("변경사항이 없습니다.");
-      }}>
+      }}
+    >
       {/* Wrapper */}
       <div className="flex-8">
         {/* 왼쪽 영역 */}
