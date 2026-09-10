@@ -37,7 +37,7 @@ const LoginForm = () => {
       .catch((error) => {
         let message;
 
-        switch (error.error.code) {
+        switch (error?.error?.code) {
           case "1001":
             message = "올바른 정보를 입력해주세요.";
             break;

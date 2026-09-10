@@ -47,22 +47,24 @@ const MESSAGES = {
 const SignupForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const mutation = useMutation({
-    mutationFn: (data) => {
-      signup(data);
-    },
+    mutationFn: signup,
     onSuccess: () => {
       alert("회원가입이 완료되었습니다. 로그인해주세요.");
       navigate("/login");
     },
     onError: (error) => {
       let message;
+      const errorCode = error?.response?.data?.error?.code;
 
-      switch (error.error.code) {
+      switch (errorCode) {
         case "1001":
           message = "입력값이 형식에 맞는지 확인해주세요.";
           break;
         case "1004":
           message = "중복된 이메일이 존재합니다.";
+          break;
+        default:
+          message = "오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
           break;
       }
 
@@ -90,7 +92,7 @@ const SignupForm = () => {
       if (result.data.success) setEmailChecked(true);
       alert("사용 가능한 이메일입니다. 회원가입을 진행해주세요.");
     } catch (error) {
-      const errorCode = error.response.data.error.code;
+      const errorCode = error?.response?.data?.error?.code;
       switch (errorCode) {
         case "1001":
           alert("이메일 형식에 맞게 입력해주세요.");
@@ -103,7 +105,7 @@ const SignupForm = () => {
   };
 
   useEffect(() => {
-    if (emailChecked) setEmailChecked(false);
+    setEmailChecked(false);
   }, [email]);
 
   const onSubmit = async (data) => {
