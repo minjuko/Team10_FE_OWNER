@@ -4,7 +4,7 @@ import Card from "../molecules/Card";
 import MonthSelectorCard from "../organisms/MonthSelectorCard";
 import SalesItem from "../organisms/SalesItem";
 import { getRevenue, getSales } from "../../apis/extras";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -59,7 +59,10 @@ const SalesManagementTemplate = () => {
   const carwashList = salesData?.data?.data?.response?.carwashList;
   const reservationList = salesData?.data?.data?.response?.reservationList;
   const revenue = revenueData?.data?.data?.response?.revenue;
-  const allCarwashIds = carwashList?.map((item) => item?.carwashId) ?? [];
+  const allCarwashIds = useMemo(
+    () => carwashList?.map((item) => item?.carwashId) ?? [],
+    [carwashList]
+  );
   const isAllSelected =
     allCarwashIds.length > 0 &&
     allCarwashIds.every((carwashId) => selectedCarwash.includes(carwashId));
