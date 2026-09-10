@@ -41,7 +41,7 @@ const RegisterForm = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const validate = () => {
+  useEffect(() => {
     if (
       inputs.carwashName === "" ||
       inputs.carwashAddress === "" ||
@@ -56,18 +56,15 @@ const RegisterForm = ({
       inputs.carwashDescription === ""
     ) {
       setErrorMessage(ERROR_MESSAGE.required);
-      return false;
+      setIsDisabled(true);
     } else if (isNaN(inputs.carwashTel)) {
       setErrorMessage(ERROR_MESSAGE.onlyNumber);
-      return false;
+      setIsDisabled(true);
+    } else {
+      setErrorMessage("");
+      setIsDisabled(false);
     }
-    setErrorMessage("");
-    return true;
-  };
-
-  useEffect(() => {
-    validate() ? setIsDisabled(false) : setIsDisabled(true);
-  }, [inputs]);
+  }, [inputs, requireImage]);
 
   useEffect(() => {
     const kakaoMaps = window.kakao?.maps;
@@ -81,6 +78,8 @@ const RegisterForm = ({
         onChange("longitude", result[0].x);
       }
     });
+    // onChange is intentionally excluded so coordinate updates do not retrigger geocoding.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputs.carwashAddress]);
 
   return (
