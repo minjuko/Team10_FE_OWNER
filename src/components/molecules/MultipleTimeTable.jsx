@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { getOperatingTimeRange } from "../../utils/operatingTime";
 
 const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 오늘이 주말인지 확인하는 함수
@@ -26,17 +27,8 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 1. 끝 시간이 23:59인 경우, 24:00으로 변경
   // 2. 끝 시간이 시작 시간보다 뒤인 경우, 끝 시간에 24시간을 더함 (12시 넘어서 운영하는 경우)
   // 3. 그 외의 경우는 끝 시간 그대로 사용
-  const [startHour, startMinute] = startTime.split(":").map(Number);
-  let [endHour, endMinute] = endTime.split(":").map(Number);
-  const startMinutes = startHour * 60 + startMinute;
-  const endMinutes = endHour * 60 + endMinute;
-
-  if (startMinutes === endMinutes) {
-    endHour = 24;
-    endMinute = 0;
-  } else if (endMinutes < startMinutes) {
-    endHour += 24;
-  }
+  const { startHour, startMinute, endHour, endMinute } =
+    getOperatingTimeRange(startTime, endTime);
 
   // 시간표에 예약된 시간이 있는지 확인하는 함수
   // 예약된 시간이 있으면 true, 없으면 false를 반환

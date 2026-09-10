@@ -12,6 +12,7 @@
  */
 
 import dayjs from "dayjs";
+import { getOperatingTimeRange } from "../../utils/operatingTime";
 
 const TimeTable = ({ optime, bookedTime }) => {
   const today = dayjs();
@@ -27,20 +28,8 @@ const TimeTable = ({ optime, bookedTime }) => {
     end_time = optime.weekday.end;
   }
 
-  const [startHour, startMinute] = start_time.split(":").map(Number);
-  let [endHour, endMinute] = end_time.split(":").map(Number);
-  const startMinutes = startHour * 60 + startMinute;
-  const endMinutes = endHour * 60 + endMinute;
-
-  // 24시간 운영할 때: endHour와 endMinute을 24시 0분으로 설정
-  if (startMinutes === endMinutes) {
-    endHour = 24;
-    endMinute = 0;
-  }
-  // 운영시간이 하루를 넘어가는 경우: endHour에 24를 더해서 설정
-  else if (endMinutes < startMinutes) {
-    endHour += 24;
-  }
+  const { startHour, startMinute, endHour, endMinute } =
+    getOperatingTimeRange(start_time, end_time);
 
   /**
    * isTimeSlotBooked 함수
