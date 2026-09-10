@@ -27,36 +27,19 @@ const TimeTable = ({ optime, bookedTime }) => {
     end_time = optime.weekday.end;
   }
 
-  const startTime = new Date();
-  const endTime = new Date();
-
-  startTime.setHours(start_time.split(":")[0], start_time.split(":")[1]);
-  endTime.setHours(end_time.split(":")[0], end_time.split(":")[1]);
-
-  let startHour = startTime.getHours();
-  let startMinute = startTime.getMinutes();
-  let endHour;
-  let endMinute;
+  const [startHour, startMinute] = start_time.split(":").map(Number);
+  let [endHour, endMinute] = end_time.split(":").map(Number);
+  const startMinutes = startHour * 60 + startMinute;
+  const endMinutes = endHour * 60 + endMinute;
 
   // 24시간 운영할 때: endHour와 endMinute을 24시 0분으로 설정
-  if (
-    startTime.getHours() === 0 &&
-    startTime.getMinutes() === 0 &&
-    endTime.getHours() === 0 &&
-    endTime.getMinutes() === 0
-  ) {
+  if (startMinutes === endMinutes) {
     endHour = 24;
     endMinute = 0;
   }
   // 운영시간이 하루를 넘어가는 경우: endHour에 24를 더해서 설정
-  else if (endTime.getDate() > startTime.getDate()) {
-    endHour = endTime.getHours() + 24;
-    endMinute = endTime.getMinutes();
-  }
-  // 운영시간이 하루를 넘어가지 않는 경우: endHour와 endMinute을 그대로 설정
-  else {
-    endHour = endTime.getHours();
-    endMinute = endTime.getMinutes();
+  else if (endMinutes < startMinutes) {
+    endHour += 24;
   }
 
   /**

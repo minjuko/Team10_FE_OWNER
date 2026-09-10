@@ -9,22 +9,16 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
     return day === 0 || day === 6;
   };
 
-  // 문자열을 dayjs 객체로 변환하는 함수
-  const convertToDayjs = (timeString) => {
-    const [hour, minute] = timeString.split(":").map(Number);
-    return dayjs().startOf("day").hour(hour).minute(minute);
-  };
-
   // 주말인지 여부에 따라 시간표 시작 시간과 끝 시간을 설정
   let startTime;
   let endTime;
 
   if (isTodayWeekend()) {
-    startTime = convertToDayjs(optime.weekend.start);
-    endTime = convertToDayjs(optime.weekend.end);
+    startTime = optime.weekend.start;
+    endTime = optime.weekend.end;
   } else {
-    startTime = convertToDayjs(optime.weekday.start);
-    endTime = convertToDayjs(optime.weekday.end);
+    startTime = optime.weekday.start;
+    endTime = optime.weekday.end;
   }
 
   // 시간표 시작 시간과 끝 시간을 시간과 분으로 나눔
@@ -32,20 +26,16 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 1. 끝 시간이 23:59인 경우, 24:00으로 변경
   // 2. 끝 시간이 시작 시간보다 뒤인 경우, 끝 시간에 24시간을 더함 (12시 넘어서 운영하는 경우)
   // 3. 그 외의 경우는 끝 시간 그대로 사용
-  let startHour = startTime.hour();
-  let startMinute = startTime.minute();
-  let endHour;
-  let endMinute;
+  const [startHour, startMinute] = startTime.split(":").map(Number);
+  let [endHour, endMinute] = endTime.split(":").map(Number);
+  const startMinutes = startHour * 60 + startMinute;
+  const endMinutes = endHour * 60 + endMinute;
 
-  if (startTime.hour() === 0) {
+  if (startMinutes === endMinutes) {
     endHour = 24;
     endMinute = 0;
-  } else if (endTime.date() > startTime.date()) {
-    endHour = endTime.hour() + 24;
-    endMinute = endTime.minute();
-  } else {
-    endHour = endTime.hour();
-    endMinute = endTime.minute();
+  } else if (endMinutes < startMinutes) {
+    endHour += 24;
   }
 
   // 시간표에 예약된 시간이 있는지 확인하는 함수
