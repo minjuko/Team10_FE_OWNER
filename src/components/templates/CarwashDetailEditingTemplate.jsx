@@ -121,7 +121,10 @@ const CarwashDetailEditingTemplate = () => {
           requireImage={false}
         />
       </Box>
-      <MobilePreview inputs={inputs} />
+      <MobilePreview
+        inputs={inputs}
+        existingImages={carwashDetail.imageFileList}
+      />
     </div>
   );
 };

@@ -4,8 +4,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import IconWithLabel from "../molecules/IconWIthLabel";
 import { telFormatter } from "../../utils/telFormatter";
 import { isEmpty } from "../../utils/isEmpty";
+import { useEffect, useMemo } from "react";
 
-const MobilePreview = ({ inputs }) => {
+const MobilePreview = ({ inputs, existingImages = [] }) => {
   const KEYPOINT = {
     8: {
       icon: "underside",
@@ -37,6 +38,27 @@ const MobilePreview = ({ inputs }) => {
     },
   };
 
+  const previewImages = useMemo(() => {
+    const savedImages = existingImages.map((image) => ({
+      src: image.url,
+      isObjectUrl: false,
+    }));
+    const newImages = inputs.carwashImage.map((image) => ({
+      src: URL.createObjectURL(image),
+      isObjectUrl: true,
+    }));
+
+    return [...savedImages, ...newImages];
+  }, [existingImages, inputs.carwashImage]);
+
+  useEffect(() => {
+    return () => {
+      previewImages.forEach((image) => {
+        if (image.isObjectUrl) URL.revokeObjectURL(image.src);
+      });
+    };
+  }, [previewImages]);
+
   return (
     <div className="relative overflow-auto bg-white shadow-xl rounded-xl grow">
       <Carousel
@@ -45,17 +67,13 @@ const MobilePreview = ({ inputs }) => {
         showIndicators={true}
         autoPlay={true}
         infiniteLoop={true}
-        showThumbs={false}>
-        {isEmpty(inputs.carwashImage) ? (
+        showThumbs={false}
+      >
+        {isEmpty(previewImages) ? (
           <img src={NoImage} alt="등록된 사진 없음" />
         ) : (
-          inputs.carwashImage.map((image, index) => (
-            <img
-              key={index}
-              src={URL.createObjectURL(image)}
-              alt="이미지"
-              className="h-56"
-            />
+          previewImages.map((image, index) => (
+            <img key={index} src={image.src} alt="이미지" className="h-56" />
           ))
         )}
       </Carousel>
