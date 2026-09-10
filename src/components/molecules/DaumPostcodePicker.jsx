@@ -21,7 +21,8 @@ const DaumPostcodePicker = ({ value, onChange }) => {
         }}
         className="shrink-0"
         type="button"
-        variant="small">
+        variant="small"
+      >
         주소검색
       </Button>
       {openPostcode && (
@@ -32,13 +33,13 @@ const DaumPostcodePicker = ({ value, onChange }) => {
               className="text-xl"
               onClick={() => {
                 setOpenPostcode(false);
-              }}>
+              }}
+            >
               ✕
             </Button>
           </div>
           <DaumPostcode
             onComplete={(data) => {
-              console.log(data);
               onChange("carwashAddress", data.address);
               setOpenPostcode(false);
             }}
