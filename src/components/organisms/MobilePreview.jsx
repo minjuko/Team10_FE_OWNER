@@ -7,6 +7,8 @@ import { isEmpty } from "../../utils/isEmpty";
 import { useEffect, useMemo } from "react";
 
 const MobilePreview = ({ inputs, existingImages = [] }) => {
+  const formatCloseTime = (time) => (time === "00:00" ? "24:00" : time);
+
   const KEYPOINT = {
     8: {
       icon: "underside",
@@ -60,7 +62,7 @@ const MobilePreview = ({ inputs, existingImages = [] }) => {
   }, [previewImages]);
 
   return (
-    <div className="relative overflow-auto bg-white shadow-xl rounded-xl grow">
+    <div className="relative w-96 overflow-auto bg-white shadow-xl rounded-xl shrink-0">
       <Carousel
         showArrows={true}
         showStatus={false}
@@ -73,7 +75,12 @@ const MobilePreview = ({ inputs, existingImages = [] }) => {
           <img src={NoImage} alt="등록된 사진 없음" />
         ) : (
           previewImages.map((image, index) => (
-            <img key={index} src={image.src} alt="이미지" className="h-56" />
+            <img
+              key={index}
+              src={image.src}
+              alt="이미지"
+              className="object-cover w-full h-56"
+            />
           ))
         )}
       </Carousel>
@@ -81,7 +88,7 @@ const MobilePreview = ({ inputs, existingImages = [] }) => {
         {/* 세차장 이름, 별점, 예약베이 */}
         <div className="flex-between">
           <div>
-            <h1 className="text-xl font-bold">{inputs.carwashName}</h1>
+            <h1 className="text-2xl font-bold">{inputs.carwashName}</h1>
             <div className="flex item-center">
               <IconWithLabel icon="star" />
               <div className="text-sm">5.0</div>
@@ -95,7 +102,7 @@ const MobilePreview = ({ inputs, existingImages = [] }) => {
         </div>
 
         {/* 영업시간, 주소 */}
-        <div className="p-4 text-sm bg-gray-100 grid-1 rounded-xl">
+        <div className="p-4 text-sm bg-gray-100 grid-1 rounded-lg">
           <h2 className="text-base font-bold">매장정보</h2>
           <IconWithLabel
             icon="time"
@@ -103,7 +110,8 @@ const MobilePreview = ({ inputs, existingImages = [] }) => {
               <div className="flex-1">
                 <div>평일</div>
                 <div>
-                  {inputs.weekdayOpenTime}~{inputs.weekdayCloseTime}
+                  {inputs.weekdayOpenTime}~
+                  {formatCloseTime(inputs.weekdayCloseTime)}
                 </div>
               </div>
             }
@@ -112,7 +120,8 @@ const MobilePreview = ({ inputs, existingImages = [] }) => {
           <div className="flex-1 ml-6">
             <div>주말</div>
             <div>
-              {inputs.weekendOpenTime}~{inputs.weekendCloseTime}
+              {inputs.weekendOpenTime}~
+              {formatCloseTime(inputs.weekendCloseTime)}
             </div>
           </div>
           <IconWithLabel icon="tel" label={telFormatter(inputs.carwashTel)} />
@@ -120,7 +129,7 @@ const MobilePreview = ({ inputs, existingImages = [] }) => {
         </div>
 
         {/* 키포인트 */}
-        <div className="p-4 bg-gray-100 grid-2 rounded-xl">
+        <div className="p-4 bg-gray-100 grid-2 rounded-lg">
           <h2 className="font-bold">키포인트</h2>
           <div className="grid-cols-2 text-xs grid-2">
             {Object.keys(KEYPOINT).map((key) => {
