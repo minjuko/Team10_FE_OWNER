@@ -32,9 +32,9 @@ const CarwashItem = ({
       <div className="flex-grow">
         <div className="flex justify-between p-4 text-white bg-primary">
           <h2 className="text-2xl font-bold">{name}</h2>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div className="text-2xl">{today}</div>
-            <span className="px-3 py-1 text-sm font-semibold text-primary bg-white rounded-full transition group-hover:translate-x-1">
+            <span className="px-3 py-1 text-sm font-semibold text-white border border-white rounded-full transition group-hover:translate-x-1">
               상세 관리 →
             </span>
           </div>
