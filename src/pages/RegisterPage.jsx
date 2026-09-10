@@ -3,10 +3,13 @@ import Box from "../components/atoms/Box";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../apis/carwashes";
 import useRegisterForm from "../hooks/useRegisterForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackLayout from "../components/atoms/FallbackLayout";
+import { getUserInfoThunk } from "../store/slices/authSlice";
+import { useEffect } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const ErrorFallback = ({ resetErrorBoundary }) => {
   return (
@@ -19,7 +22,19 @@ const ErrorFallback = ({ resetErrorBoundary }) => {
 
 const RegisterPage = () => {
   const userName = useSelector((state) => state.auth.userName);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userName) {
+      dispatch(getUserInfoThunk())
+        .then(unwrapResult)
+        .catch(() => {
+          localStorage.removeItem("Token");
+          navigate("/login");
+        });
+    }
+  }, [dispatch, navigate, userName]);
 
   const errorHandler = (error) => {
     const errorCode = error?.response?.data?.error?.code;
