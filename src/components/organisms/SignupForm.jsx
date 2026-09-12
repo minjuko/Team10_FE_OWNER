@@ -47,9 +47,7 @@ const MESSAGES = {
 const SignupForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const mutation = useMutation({
-    mutationFn: (data) => {
-      signup(data);
-    },
+    mutationFn: (data) => signup(data),
     onSuccess: () => {
       alert("회원가입이 완료되었습니다. 로그인해주세요.");
       navigate("/login");
