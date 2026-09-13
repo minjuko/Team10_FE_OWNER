@@ -2,7 +2,12 @@ import { useEffect, useMemo, useRef } from "react";
 import RegisterFormItemStructure from "../atoms/RegisterFormItemStructure";
 import Button from "../atoms/Button";
 
-const ImageUploader = ({ value = [], onChange }) => {
+const ImageUploader = ({
+  value = [],
+  onChange,
+  existingImages = [],
+  onDeleteExisting,
+}) => {
   const fileInputRef = useRef();
   const previewUrls = useMemo(
     () =>
@@ -83,6 +88,33 @@ const ImageUploader = ({ value = [], onChange }) => {
       />
       {/* URL.createObjectURL(file) */}
       <div className="flex-4 p-4 overflow-x-auto overflow-y-hidden bg-gray-100 border border-gray-300 outline-none w-96 rounded-xl h-28">
+        {existingImages.map((item, index) => {
+          return (
+            <div
+              key={`existing-${item.id ?? index}`}
+              className="relative w-20 h-20 overflow-auto shrink-0 rounded-xl"
+            >
+              <img
+                className="absolute object-cover w-full h-full"
+                src={item.url}
+                alt={`저장된 매장 사진 ${index + 1}`}
+              />
+              {index === 0 && (
+                <div className="absolute bottom-0 w-full p-1 text-xs text-center text-white bg-primary font-semobold">
+                  프로필
+                </div>
+              )}
+              <Button
+                variant="deletePhoto"
+                type="button"
+                onClick={() => onDeleteExisting?.(item)}
+                className="absolute top-1 right-1"
+              >
+                ✕
+              </Button>
+            </div>
+          );
+        })}
         {value.map((item, index) => {
           return (
             <div

@@ -4,11 +4,13 @@ import { getCarwashes } from "../../apis/carwashes";
 import { isEmpty } from "../../utils/isEmpty";
 import Button from "../atoms/Button";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 const CarwashManagementTemplate = () => {
+  const selectedDate = dayjs(Date.now()).format("YYYY-MM-DD");
   const { data } = useSuspenseQuery({
-    queryKey: ["carwash"],
-    queryFn: getCarwashes,
+    queryKey: ["carwash", selectedDate],
+    queryFn: () => getCarwashes(selectedDate),
   });
   const carwashList = data?.data?.response?.carwashList;
 

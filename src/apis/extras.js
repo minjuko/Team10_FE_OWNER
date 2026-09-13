@@ -1,8 +1,10 @@
 import { instance } from "./instance";
 
 // 홈화면 데이터
-export const getHome = async () => {
-  return instance.get("/api/owner/home");
+export const getHome = async (selectedDate) => {
+  return instance.get("/api/owner/home", {
+    params: selectedDate ? { "selected-date": selectedDate } : undefined,
+  });
 };
 
 // 베이 활성화 비활성화
@@ -13,10 +15,14 @@ export const setBayStatus = async (data) => {
 };
 
 // 매출관리 데이터
-export const getSales = async (carwash_id, selected_date) => {
+export const getSales = async (carwash_id, selected_date, selected_at) => {
   return instance.get(
-    `/api/owner/sales?carwash-ids=${carwash_id}&selected-date=${selected_date}`
+    `/api/owner/sales?carwash-ids=${carwash_id}&selected-date=${selected_date}&selected-at=${encodeURIComponent(selected_at)}`
   );
+};
+
+export const deleteBay = async (bay_id) => {
+  return instance.delete(`/api/owner/bays/${bay_id}`);
 };
 
 // 월 매출 데이터

@@ -4,7 +4,7 @@ import { getOperatingTimeRange } from "../../utils/operatingTime";
 const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 오늘이 주말인지 확인하는 함수
   const isTodayWeekend = () => {
-    const today = dayjs();
+    const today = dayjs(Date.now());
     const day = today.day();
 
     return day === 0 || day === 6;
@@ -33,9 +33,9 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 시간표에 예약된 시간이 있는지 확인하는 함수
   // 예약된 시간이 있으면 true, 없으면 false를 반환
   const isTimeSlotBooked = (hour, minute, bookedTime) => {
-    const slotStartTime = new Date();
+    const slotStartTime = new Date(Date.now());
     slotStartTime.setHours(hour, minute, 0, 0);
-    const slotEndTime = new Date();
+    const slotEndTime = new Date(Date.now());
     slotEndTime.setHours(hour, minute + 30, 0, 0);
 
     return bookedTime.some((booking) => {

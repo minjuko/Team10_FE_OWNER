@@ -8,13 +8,17 @@ import AsideLayout from "../atoms/AsideLayout";
 import MainContentLayout from "../atoms/MainContentLayout";
 import Button from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCarwashItemThunk } from "../../store/slices/carwashSlice";
+import dayjs from "dayjs";
 
 const CarwashItemManagementTemplate = () => {
   const { carwash_id } = useParams();
+  const selectedDate = dayjs(Date.now()).format("YYYY-MM-DD");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isBayModalOpen, setIsBayModalOpen] = useState(false);
+  const [bayNumber, setBayNumber] = useState("");
 
   const errorHandler = (error) => {
     const errorCode = error?.response?.data?.error?.code;
@@ -55,16 +59,27 @@ const CarwashItemManagementTemplate = () => {
   } = useSelector((state) => state.carwash);
 
   useEffect(() => {
-    dispatch(getCarwashItemThunk(carwash_id));
-  }, [carwash_id, dispatch]);
+    dispatch(getCarwashItemThunk({ carwashId: carwash_id, selectedDate }));
+  }, [carwash_id, dispatch, selectedDate]);
 
   const mutation = useMutation({
     mutationFn: (data) => addBays(data),
     onSuccess: () => {
-      dispatch(getCarwashItemThunk(carwash_id));
+      dispatch(getCarwashItemThunk({ carwashId: carwash_id, selectedDate }));
     },
     onError: errorHandler,
   });
+
+  const submitBay = (event) => {
+    event.preventDefault();
+    if (!/^\d+$/.test(bayNumber)) {
+      alert("베이 번호는 숫자로 입력해주세요.");
+      return;
+    }
+    mutation.mutate({ carwash_id, bay_number: bayNumber });
+    setBayNumber("");
+    setIsBayModalOpen(false);
+  };
 
   return (
     <div className="flex-16">
@@ -98,19 +113,49 @@ const CarwashItemManagementTemplate = () => {
           onClick={(e) => {
             e.preventDefault();
 
-            const bayNo = window.prompt("추가할 베이 번호를 입력하세요.");
-
-            if (bayNo) {
-              if (!isNaN(bayNo)) {
-                mutation.mutate({ carwash_id, bay_number: bayNo });
-              } else {
-                alert("베이 번호는 숫자로 입력해주세요.");
-              }
-            }
+            setIsBayModalOpen(true);
           }}>
           베이 추가
         </Button>
       </AsideLayout>
+      {isBayModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
+          <form
+            onSubmit={submitBay}
+            className="relative w-full max-w-sm p-6 bg-white shadow-2xl rounded-xl"
+          >
+            <button
+              type="button"
+              aria-label="베이 추가 닫기"
+              onClick={() => setIsBayModalOpen(false)}
+              className="absolute text-2xl leading-none text-gray-400 right-5 top-5 hover:text-gray-700"
+            >
+              ×
+            </button>
+            <h2 className="mb-4 text-xl font-semibold">베이 추가</h2>
+            <label className="block mb-2 text-sm text-gray-600" htmlFor="bay-number">
+              추가할 베이 번호
+            </label>
+            <input
+              id="bay-number"
+              autoFocus
+              inputMode="numeric"
+              value={bayNumber}
+              onChange={(event) => setBayNumber(event.target.value)}
+              className="w-full p-3 mb-4 bg-gray-100 border border-gray-300 outline-none rounded-xl"
+              placeholder="예: 4"
+            />
+            <div className="flex justify-end gap-2">
+              <Button type="button" variant="small" onClick={() => setIsBayModalOpen(false)}>
+                취소
+              </Button>
+              <Button type="submit" variant="cta" disabled={mutation.isPending}>
+                추가하기
+              </Button>
+            </div>
+          </form>
+        </div>
+      )}
       <MainContentLayout>
         {isEmpty(bayReservationList) ? (
           <div className="flex-col justify-center w-auto flex-items-center-8">
@@ -124,6 +169,7 @@ const CarwashItemManagementTemplate = () => {
               <CarwashBayItem
                 key={item?.bayId}
                 carwashId={id}
+                selectedDate={selectedDate}
                 optime={optime}
                 bay={item}
               />

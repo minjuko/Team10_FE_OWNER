@@ -38,6 +38,8 @@ const RegisterForm = ({
   isDirty,
   buttonLabel,
   requireImage = true,
+  existingImages = [],
+  onDeleteExisting,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
@@ -156,7 +158,12 @@ const RegisterForm = ({
         {/* 오른쪽 영역 */}
         <section className="grid-4">
           {/*매장 사진*/}
-          <ImageUploader value={inputs.carwashImage} onChange={onChange} />
+          <ImageUploader
+            value={inputs.carwashImage}
+            onChange={onChange}
+            existingImages={existingImages}
+            onDeleteExisting={onDeleteExisting}
+          />
 
           {/* 키포인트 */}
           <RegisterFormItemStructure label="키포인트">

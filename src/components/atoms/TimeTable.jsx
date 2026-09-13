@@ -15,7 +15,7 @@ import dayjs from "dayjs";
 import { getOperatingTimeRange } from "../../utils/operatingTime";
 
 const TimeTable = ({ optime, bookedTime }) => {
-  const today = dayjs();
+  const today = dayjs(Date.now());
 
   let start_time;
   let end_time;
@@ -42,9 +42,9 @@ const TimeTable = ({ optime, bookedTime }) => {
    * @returns
    */
   const isTimeSlotBooked = (hour, minute) => {
-    const slotStartTime = new Date();
+    const slotStartTime = new Date(Date.now());
     slotStartTime.setHours(hour, minute, 0, 0);
-    const slotEndTime = new Date();
+    const slotEndTime = new Date(Date.now());
     slotEndTime.setHours(hour, minute + 30, 0, 0);
 
     return bookedTime.some((booking) => {

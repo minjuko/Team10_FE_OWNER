@@ -5,9 +5,14 @@ import ReservationIcon from "/DashboardItem/reservationIcon.svg";
 import { getHome } from "../../apis/extras";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 const HomeTemplate = () => {
-  const { data } = useSuspenseQuery({ queryKey: ["home"], queryFn: getHome });
+  const selectedDate = dayjs(Date.now()).format("YYYY-MM-DD");
+  const { data } = useSuspenseQuery({
+    queryKey: ["home", selectedDate],
+    queryFn: () => getHome(selectedDate),
+  });
   const userName = useSelector((state) => state.auth.userName);
 
   const carwashInfoList = data?.data?.response?.carwashInfoList;

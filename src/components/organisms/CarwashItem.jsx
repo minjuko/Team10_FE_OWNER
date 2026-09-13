@@ -10,7 +10,7 @@ const CarwashItem = ({
   bayReservationList,
   imageList,
 }) => {
-  const today = dayjs().format("YYYY-MM-DD");
+  const today = dayjs(Date.now()).format("YYYY-MM-DD");
   return (
     <Link
       to={`/manage/item/${carwashId}`}

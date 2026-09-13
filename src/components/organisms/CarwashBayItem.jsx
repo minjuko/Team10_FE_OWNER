@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import TimeTable from "../atoms/TimeTable";
 import Toggle from "../atoms/Toggle";
-import { setBayStatus } from "../../apis/extras";
+import { deleteBay, setBayStatus } from "../../apis/extras";
 import { Link, useNavigate } from "react-router-dom";
 import WarningMessage from "../atoms/WarningMessage";
 import { useDispatch } from "react-redux";
 import { getCarwashItemThunk } from "../../store/slices/carwashSlice";
 
-const CarwashBayItem = ({ carwashId, optime, bay }) => {
+const CarwashBayItem = ({ carwashId, selectedDate, optime, bay }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,6 +20,11 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
         navigate("/login");
         break;
       case "1001":
+        alert(
+          error?.response?.data?.error?.message ??
+            "예약이 있는 베이는 삭제할 수 없습니다."
+        );
+        break;
       case "1002":
         alert("잘못된 값이 입력되었습니다. 다시 시도해주세요.");
         break;
@@ -41,7 +46,15 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
     queryKey: ["setBayStatus"],
     mutationFn: (data) => setBayStatus(data),
     onSuccess: () => {
-      dispatch(getCarwashItemThunk(carwashId));
+      dispatch(getCarwashItemThunk({ carwashId, selectedDate }));
+    },
+    onError: errorHandler,
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: () => deleteBay(bay.bayId),
+    onSuccess: () => {
+      dispatch(getCarwashItemThunk({ carwashId, selectedDate }));
     },
     onError: errorHandler,
   });
@@ -61,7 +74,24 @@ const CarwashBayItem = ({ carwashId, optime, bay }) => {
             </WarningMessage>
           )}
         </div>
-        <Toggle bay_id={bay.bayId} status={bay.status} mutation={mutation} />
+        <div className="flex-items-center-2">
+          <Toggle bay_id={bay.bayId} status={bay.status} mutation={mutation} />
+          <button
+            type="button"
+            aria-label={`베이 ${bay.bayNo} 삭제`}
+            className="px-2 py-1 text-xs text-red-600 bg-white border border-red-200 rounded-lg hover:bg-red-50"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              if (window.confirm(`베이 ${bay.bayNo}를 삭제하시겠습니까?`)) {
+                deleteMutation.mutate();
+              }
+            }}
+            disabled={deleteMutation.isPending}
+          >
+            삭제
+          </button>
+        </div>
       </div>
 
       <TimeTable optime={optime} bookedTime={bay.bayBookedTimeList} />

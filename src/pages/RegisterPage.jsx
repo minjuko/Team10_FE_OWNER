@@ -119,7 +119,15 @@ const RegisterPage = () => {
 
   return (
     <div className="items-center w-full min-h-screen py-8 flex-center">
-      <Box className="grid-8 p-14">
+      <Box className="relative grid-8 p-14">
+        <button
+          type="button"
+          aria-label="입점신청 닫기"
+          onClick={() => navigate("/")}
+          className="absolute text-3xl leading-none text-gray-400 transition-colors right-6 top-6 hover:text-gray-700"
+        >
+          ×
+        </button>
         {/*제목 텍스트*/}
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <div className="text-center grid-4">

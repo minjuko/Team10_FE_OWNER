@@ -14,7 +14,7 @@ const CarwashBayReservationHistoryTemplate = () => {
   const { bayId } = useParams();
 
   const [selectedDate, setSelectedDate] = useState(
-    dayjs().startOf("month").format("YYYY-MM-DD")
+    dayjs(Date.now()).startOf("month").format("YYYY-MM-DD")
   );
 
   const setDate = (newDate) => {

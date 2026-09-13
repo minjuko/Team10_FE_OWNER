@@ -5,7 +5,11 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { getCarwashesDetails, putCarwashesDetails } from "../../apis/carwashes";
+import {
+  deleteImage,
+  getCarwashesDetails,
+  putCarwashesDetails,
+} from "../../apis/carwashes";
 import MobilePreview from "../organisms/MobilePreview";
 import useRegisterForm from "../../hooks/useRegisterForm";
 import { useNavigate, useParams } from "react-router-dom";
@@ -88,6 +92,16 @@ const CarwashDetailEditingTemplate = () => {
     onError: errorHandler,
   });
 
+  const deleteImageMutation = useMutation({
+    mutationFn: (imageId) => deleteImage(imageId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["getCarwashDetail", carwash_id],
+      });
+    },
+    onError: errorHandler,
+  });
+
   const carwashDetail = data?.data?.response;
 
   const initialValue = {
@@ -110,16 +124,30 @@ const CarwashDetailEditingTemplate = () => {
 
   return (
     <div className="flex-8">
-      <Box className="grid-8 p-14">
+      <Box className="relative grid-8 p-14">
+        <button
+          type="button"
+          aria-label="세차장 정보 수정 닫기"
+          onClick={() => navigate(`/manage/item/${carwash_id}`)}
+          className="absolute text-3xl leading-none text-gray-400 transition-colors right-6 top-6 hover:text-gray-700"
+        >
+          ×
+        </button>
         <h1 className="text-2xl font-bold">세차장 정보 수정</h1>
-        <RegisterForm
+          <RegisterForm
           inputs={inputs}
           onChange={handleChange}
           mutation={mutation}
           isDirty={isDirty}
-          buttonLabel="수정하기"
-          requireImage={false}
-        />
+            buttonLabel="수정하기"
+            requireImage={false}
+            existingImages={carwashDetail.imageFileList}
+            onDeleteExisting={(image) => {
+              if (window.confirm("이 사진을 삭제하시겠습니까?")) {
+                deleteImageMutation.mutate(image.id);
+              }
+            }}
+          />
       </Box>
       <MobilePreview
         inputs={inputs}

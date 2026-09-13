@@ -3,9 +3,13 @@ import { getCarwashItem } from "../../apis/carwashes";
 
 export const getCarwashItemThunk = createAsyncThunk(
   "carwash/getCarwash",
-  async (carwashId, { rejectWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     try {
-      const response = await getCarwashItem(carwashId);
+      const carwashId =
+        typeof payload === "object" ? payload.carwashId : payload;
+      const selectedDate =
+        typeof payload === "object" ? payload.selectedDate : undefined;
+      const response = await getCarwashItem(carwashId, selectedDate);
       return response.data.response;
     } catch (error) {
       return rejectWithValue(

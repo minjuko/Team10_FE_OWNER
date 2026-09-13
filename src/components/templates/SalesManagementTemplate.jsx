@@ -24,8 +24,9 @@ const SalesManagementTemplate = () => {
   const [selectedCarwash, setSelectedCarwash] = useState([]);
   const [selectionInitialized, setSelectionInitialized] = useState(false);
   const [selectedDate, setSelectedDate] = useState(
-    dayjs().startOf("month").format("YYYY-MM-DD")
+    dayjs(Date.now()).startOf("month").format("YYYY-MM-DD")
   );
+  const selectedAt = dayjs(Date.now()).format("YYYY-MM-DDTHH:mm:ss");
 
   const setDate = (newDate) => {
     setSelectedDate(newDate);
@@ -34,8 +35,8 @@ const SalesManagementTemplate = () => {
   const [salesData, revenueData] = useSuspenseQueries({
     queries: [
       {
-        queryKey: ["sales", selectedCarwash, selectedDate],
-        queryFn: () => getSales(selectedCarwash, selectedDate),
+        queryKey: ["sales", selectedCarwash, selectedDate, selectedAt],
+        queryFn: () => getSales(selectedCarwash, selectedDate, selectedAt),
       },
       {
         queryKey: ["revenue", selectedCarwash, selectedDate],
