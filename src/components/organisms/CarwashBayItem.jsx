@@ -22,7 +22,7 @@ const CarwashBayItem = ({ carwashId, selectedDate, optime, bay }) => {
       case "1001":
         alert(
           error?.response?.data?.error?.message ??
-            "예약이 있는 베이는 삭제할 수 없습니다."
+            "예약이 있는 베이는 삭제할 수 없습니다.",
         );
         break;
       case "1002":
@@ -64,7 +64,8 @@ const CarwashBayItem = ({ carwashId, selectedDate, optime, bay }) => {
       to={`/manage/item/${carwashId}/${bay.bayId}`}
       className={`grid h-40 gap-4 p-4 shadow-xl rounded-xl ${
         !bay.status && "bg-gray-400"
-      }`}>
+      }`}
+    >
       <div className="items-center flex-between">
         <div className="flex-items-center-4">
           <div className="text-xl font-semibold">베이 {bay.bayNo}</div>

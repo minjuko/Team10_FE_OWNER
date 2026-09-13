@@ -24,7 +24,7 @@ const SalesManagementTemplate = () => {
   const [selectedCarwash, setSelectedCarwash] = useState([]);
   const [selectionInitialized, setSelectionInitialized] = useState(false);
   const [selectedDate, setSelectedDate] = useState(
-    dayjs(Date.now()).startOf("month").format("YYYY-MM-DD")
+    dayjs(Date.now()).startOf("month").format("YYYY-MM-DD"),
   );
   const selectedAt = dayjs(Date.now()).format("YYYY-MM-DDTHH:mm:ss");
 
@@ -51,7 +51,7 @@ const SalesManagementTemplate = () => {
       updatedSelectedCarwash = [...selectedCarwash, carwashId];
     } else {
       updatedSelectedCarwash = selectedCarwash.filter(
-        (item) => item !== carwashId
+        (item) => item !== carwashId,
       );
     }
     setSelectedCarwash(updatedSelectedCarwash);
@@ -62,7 +62,7 @@ const SalesManagementTemplate = () => {
   const revenue = revenueData?.data?.data?.response?.revenue;
   const allCarwashIds = useMemo(
     () => carwashList?.map((item) => item?.carwashId) ?? [],
-    [carwashList]
+    [carwashList],
   );
   const isAllSelected =
     allCarwashIds.length > 0 &&
@@ -85,14 +85,16 @@ const SalesManagementTemplate = () => {
               checked={isAllSelected}
               onChange={(e) =>
                 setSelectedCarwash(e.target.checked ? allCarwashIds : [])
-              }>
+              }
+            >
               전체 선택
             </Checkbox>
             {carwashList?.map((item) => (
               <Checkbox
                 key={item?.carwashId}
                 checked={selectedCarwash.includes(item?.carwashId)}
-                onChange={handleCheck(item?.carwashId)}>
+                onChange={handleCheck(item?.carwashId)}
+              >
                 {item?.name}
               </Checkbox>
             ))}

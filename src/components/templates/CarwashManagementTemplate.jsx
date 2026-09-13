@@ -27,7 +27,8 @@ const CarwashManagementTemplate = () => {
             variant="long"
             onClick={() => {
               navigate("/register");
-            }}>
+            }}
+          >
             입점신청
           </Button>
         </div>

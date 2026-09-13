@@ -24,49 +24,56 @@ const App = () => {
                 <ProtectedRoute>
                   <HomePage />
                 </ProtectedRoute>
-              }></Route>
+              }
+            ></Route>
             <Route
               path="/sales"
               element={
                 <ProtectedRoute>
                   <SalesManagementPage />
                 </ProtectedRoute>
-              }></Route>
+              }
+            ></Route>
             <Route
               path="/manage"
               element={
                 <ProtectedRoute>
                   <CarwashManagementPage />
                 </ProtectedRoute>
-              }></Route>
+              }
+            ></Route>
             <Route
               path="/manage/item/:carwash_id"
               element={
                 <ProtectedRoute>
                   <CarwashItemManagementPage />
                 </ProtectedRoute>
-              }></Route>
+              }
+            ></Route>
             <Route
               path="/manage/item/:carwash_id/edit"
               element={
                 <ProtectedRoute>
                   <CarwashDetailEditingPage />
                 </ProtectedRoute>
-              }></Route>
+              }
+            ></Route>
             <Route
               path="/manage/item/:carwash_id/:bayId"
               element={
                 <ProtectedRoute>
                   <CarwashBayReservationHistoryPage />
                 </ProtectedRoute>
-              }></Route>
+              }
+            ></Route>
             <Route
               path="*"
               element={
                 <ProtectedRoute>
                   <NotFoundPage />
                 </ProtectedRoute>
-              }></Route>
+              }
+            ></Route>
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
@@ -76,7 +83,8 @@ const App = () => {
               <ProtectedRoute>
                 <RegisterPage />
               </ProtectedRoute>
-            }></Route>
+            }
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -28,8 +28,10 @@ const TimeTable = ({ optime, bookedTime }) => {
     end_time = optime.weekday.end;
   }
 
-  const { startHour, startMinute, endHour, endMinute } =
-    getOperatingTimeRange(start_time, end_time);
+  const { startHour, startMinute, endHour, endMinute } = getOperatingTimeRange(
+    start_time,
+    end_time,
+  );
 
   /**
    * isTimeSlotBooked 함수
@@ -77,14 +79,14 @@ const TimeTable = ({ optime, bookedTime }) => {
     result.push(
       <th key={startHour} colSpan={colSpan} className="border border-gray-500">
         {startHour}
-      </th>
+      </th>,
     );
 
     for (let i = startHour + 1; i < endHour; i++) {
       result.push(
         <th key={i} colSpan="2" className="border border-gray-500">
           {i}
-        </th>
+        </th>,
       );
     }
 
@@ -92,7 +94,7 @@ const TimeTable = ({ optime, bookedTime }) => {
       result.push(
         <th key={endHour} colSpan="1" className="border border-gray-500">
           {endHour}
-        </th>
+        </th>,
       );
     }
 
@@ -125,7 +127,8 @@ const TimeTable = ({ optime, bookedTime }) => {
           key={`${currentHour}-${currentMinute}`}
           className={`w-12 h-6 border border-gray-500 ${
             isBooked ? "bg-primary hover:bg-sky-300" : ""
-          }`}></td>
+          }`}
+        ></td>,
       );
 
       if (currentMinute === 30) {

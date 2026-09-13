@@ -108,10 +108,10 @@ const LoginForm = () => {
           variant="longwhite"
           onClick={() => {
             navigate("/signup");
-          }}>
+          }}
+        >
           회원가입
         </Button>
-
       </form>
     </Box>
   );

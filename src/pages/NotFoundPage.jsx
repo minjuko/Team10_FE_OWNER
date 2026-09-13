@@ -13,7 +13,8 @@ const NotFoundPage = () => {
         variant="long"
         onClick={() => {
           navigate("/");
-        }}>
+        }}
+      >
         홈으로
       </Button>
     </div>

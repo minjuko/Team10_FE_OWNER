@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import React from "react";
 
 const STYLES = {
   long: "block w-96 h-14 p-4 bg-sky-500 text-white font-semibold rounded-xl disabled:bg-gray-300 disabled:text-gray-500",

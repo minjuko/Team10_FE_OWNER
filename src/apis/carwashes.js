@@ -45,10 +45,10 @@ export const deleteImage = async (image_id) => {
 
 export const getCarwashBayReservationHistory = async (
   bay_id,
-  selected_date
+  selected_date,
 ) => {
   return instance.get(
-    `/api/owner/reservations/${bay_id}?selected-date=${selected_date}`
+    `/api/owner/reservations/${bay_id}?selected-date=${selected_date}`,
   );
 };
 

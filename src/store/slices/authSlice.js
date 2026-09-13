@@ -10,10 +10,10 @@ export const loginThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data ?? { error: { message: error.message } }
+        error.response?.data ?? { error: { message: error.message } },
       );
     }
-  }
+  },
 );
 
 export const getUserInfoThunk = createAsyncThunk(
@@ -24,10 +24,10 @@ export const getUserInfoThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data ?? { error: { message: error.message } }
+        error.response?.data ?? { error: { message: error.message } },
       );
     }
-  }
+  },
 );
 
 const authSlice = createSlice({

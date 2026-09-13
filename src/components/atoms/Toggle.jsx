@@ -16,20 +16,20 @@ const Toggle = ({ bay_id, status, mutation }) => {
           setChecked(e.target.checked);
           mutation.mutate(
             { bay_id, status: 1 },
-            { onError: () => setChecked(status === 1) }
+            { onError: () => setChecked(status === 1) },
           );
         }
         break;
       case false:
         if (
           window.confirm(
-            "베이를 비활성화 하시겠습니까?\n비활성화 되어있는 동안 사용자 앱에서 베이가 표시되지 않습니다."
+            "베이를 비활성화 하시겠습니까?\n비활성화 되어있는 동안 사용자 앱에서 베이가 표시되지 않습니다.",
           )
         ) {
           setChecked(e.target.checked);
           mutation.mutate(
             { bay_id, status: 0 },
-            { onError: () => setChecked(status === 1) }
+            { onError: () => setChecked(status === 1) },
           );
         }
         break;
@@ -40,7 +40,8 @@ const Toggle = ({ bay_id, status, mutation }) => {
     <form
       className="flex-items-center-2"
       onClick={(e) => e.stopPropagation()}
-      onSubmit={(e) => e.preventDefault()}>
+      onSubmit={(e) => e.preventDefault()}
+    >
       <label htmlFor={id} className="font-semibold text-gray-500 select-none">
         베이 활성화
       </label>

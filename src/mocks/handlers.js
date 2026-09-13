@@ -11,7 +11,7 @@ export const handlers = [
     const regex = {
       email: /^\w[\w._%+-]+@\w[\w.-]+\.[a-zA-Z]{2,6}$/,
       password:
-        /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!~`<>,./?;:'"\[\]{}\\()|_-])\S*$/,
+        /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!~`<>,./?;:'"[\]{}\\()|_-])\S*$/,
     };
 
     function validate(field, isValid, message) {
@@ -22,7 +22,7 @@ export const handlers = [
             success: false,
             response: null,
             error: { message: message, status: 401 },
-          })
+          }),
         );
       }
     }
@@ -66,19 +66,18 @@ export const handlers = [
   rest.post("/api/login/owner", (req, res, ctx) => {
     const { email, password } = req.body;
 
-    if (email !== "owner@nate.com" || password !== "owner1234!") {
+    if (email !== "owner@example.com" || password !== "example-password") {
       return res(
         ctx.status(401),
         ctx.json({
           success: false,
           response: null,
           error: "인증에 실패했습니다.",
-        })
+        }),
       );
     }
 
-    const token =
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlkIjoxLCJleHAiOjE2ODcwNTM5MzV9.fXlD0NZQXYYfPHV8rokRJTM86nhS869LZ1KIGi7_qvPOcVbXgvyZLKvnlLxomIiS3YFnQRLzXAJ2G41yI_AmG1";
+    const token = "Bearer mock-owner-token";
 
     return res(
       ctx.set("Authorization", token),
@@ -87,7 +86,7 @@ export const handlers = [
         success: true,
         response: null,
         error: null,
-      })
+      }),
     );
   }),
   // 매장 정보 수정(기존 정보 가져오기)
@@ -127,14 +126,13 @@ export const handlers = [
           },
           error: null,
         },
-      })
+      }),
     );
   }),
 
   // 매장 정보 수정
   // 백엔드 단에서 Validation 필요함
   rest.put("/api/owner/carwashes/:carwash_id/details", (req, res, ctx) => {
-    const carwash_id = req.params;
     const token = req.headers.get("Authorization");
     const modifiedInfo = req.body;
 
@@ -143,13 +141,13 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
     return res(
       ctx.status(200),
-      ctx.json({ success: true, response: null, error: null })
+      ctx.json({ success: true, response: null, error: null }),
     );
   }),
 
@@ -164,19 +162,18 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
     return res(
       ctx.status(200),
-      ctx.json({ success: true, response: null, error: null })
+      ctx.json({ success: true, response: null, error: null }),
     );
   }),
 
   // 베이 추가
   rest.post("/api/owner/carwashes/:carwash_id/bays", (req, res, ctx) => {
-    const carwash_id = req.params;
     const token = req.headers.get("Authorization");
 
     const bayInfo = req.body;
@@ -186,19 +183,18 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
     return res(
       ctx.status(200),
-      ctx.json({ success: true, response: null, error: null })
+      ctx.json({ success: true, response: null, error: null }),
     );
   }),
 
   // 베이 활성화/비활성화
   rest.put("/api/owner/bays/:bay_id", (req, res, ctx) => {
-    const bay_id = req.params;
     const status = req.url.searchParams.get("status");
     const token = req.headers.get("Authorization");
 
@@ -207,13 +203,13 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
     return res(
       ctx.status(200),
-      ctx.json({ success: true, response: null, error: null })
+      ctx.json({ success: true, response: null, error: null }),
     );
   }),
 
@@ -224,7 +220,7 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
@@ -244,7 +240,7 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
@@ -281,19 +277,18 @@ export const handlers = [
           ],
         },
         error: null,
-      })
+      }),
     );
   }),
 
   // 매장 관리 - 세차장 별
   rest.get("/api/owner/carwashes/:carwash_id", (req, res, ctx) => {
-    const carwash_id = req.params.carwash_id;
     const token = req.headers.get("Authorization");
 
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
@@ -368,7 +363,7 @@ export const handlers = [
           ],
         },
         error: null,
-      })
+      }),
     );
   }),
 
@@ -385,7 +380,7 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
@@ -399,7 +394,7 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
@@ -416,7 +411,7 @@ export const handlers = [
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
@@ -430,20 +425,18 @@ export const handlers = [
         success: true,
         response: null,
         error: null,
-      })
+      }),
     );
   }),
 
   // 예약 목록 조회 - 세차장별 (베이별)
   rest.get("/api/owner/reservation/:carwash_id/:bay_id", (req, res, ctx) => {
-    const carwash_id = req.params.carwash_id;
-    const bay_id = req.params.bay_id;
     const token = req.headers.get("Authorization");
 
     if (!token) {
       return res(
         ctx.status(401),
-        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" })
+        ctx.json({ error: "인증되지 않았습니다. (토큰 없음)" }),
       );
     }
 
@@ -501,7 +494,7 @@ export const handlers = [
           ],
         },
         error: null,
-      })
+      }),
     );
   }),
 ];

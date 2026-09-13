@@ -28,9 +28,10 @@ const TimePicker = ({ value, onChange, name, disabled = false }) => {
               setTime(timeStr);
               setShowTimePicker(false);
               onChange(name, timeStr);
-            }}>
+            }}
+          >
             {timeStr}
-          </div>
+          </div>,
         );
       });
     }
@@ -47,7 +48,8 @@ const TimePicker = ({ value, onChange, name, disabled = false }) => {
         onClick={() => {
           if (disabled) return;
           setShowTimePicker(!showTimePicker);
-        }}>
+        }}
+      >
         {time || "시간 선택"}
       </div>
       {showTimePicker && (

@@ -27,8 +27,10 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
   // 1. 끝 시간이 23:59인 경우, 24:00으로 변경
   // 2. 끝 시간이 시작 시간보다 뒤인 경우, 끝 시간에 24시간을 더함 (12시 넘어서 운영하는 경우)
   // 3. 그 외의 경우는 끝 시간 그대로 사용
-  const { startHour, startMinute, endHour, endMinute } =
-    getOperatingTimeRange(startTime, endTime);
+  const { startHour, startMinute, endHour, endMinute } = getOperatingTimeRange(
+    startTime,
+    endTime,
+  );
 
   // 시간표에 예약된 시간이 있는지 확인하는 함수
   // 예약된 시간이 있으면 true, 없으면 false를 반환
@@ -57,14 +59,14 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
     result.push(
       <th key={startHour} colSpan={colSpan} className="border border-gray-500">
         {startHour}
-      </th>
+      </th>,
     );
 
     for (let i = startHour + 1; i < endHour; i++) {
       result.push(
         <th key={i} colSpan="2" className="border border-gray-500">
           {i}
-        </th>
+        </th>,
       );
     }
 
@@ -72,7 +74,7 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
       result.push(
         <th key={endHour} colSpan="1" className="border border-gray-500">
           {endHour}
-        </th>
+        </th>,
       );
     }
 
@@ -87,9 +89,10 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
     result.push(
       <td
         key={`베이 ${bay_no}`}
-        className="w-16 h-6 text-center border border-gray-500">
+        className="w-16 h-6 text-center border border-gray-500"
+      >
         베이 {bay_no}
-      </td>
+      </td>,
     );
 
     while (
@@ -103,7 +106,8 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
           key={`${currentHour}:${currentMinute}`}
           className={`w-5 h-8 border border-gray-500 ${
             isBooked && "bg-primary"
-          }`}></td>
+          }`}
+        ></td>,
       );
 
       if (currentMinute === 30) {
@@ -130,7 +134,7 @@ const MultipleTimeTable = ({ optime, bayReservationList }) => {
                 startMinute,
                 endMinute,
                 item.bayBookedTimeList,
-                item.bayNo
+                item.bayNo,
               )}
             </tr>
           );

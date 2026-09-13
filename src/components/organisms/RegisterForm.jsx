@@ -21,7 +21,8 @@ const pointLabels = [
 
 const ERROR_MESSAGE = {
   required: "필수 항목이 입력되지 않았습니다.",
-  onlyNumber: "전화번호는 숫자만 입력해주세요.",
+  invalidTel: "전화번호 형식을 확인해 주세요.",
+  invalidPrice: "30분당 금액은 1 이상의 숫자로 입력해 주세요.",
 };
 
 /**
@@ -61,7 +62,13 @@ const RegisterForm = ({
       setErrorMessage(ERROR_MESSAGE.required);
       setIsDisabled(true);
     } else if (!/^\d{2,3}-?\d{3,4}-?\d{4}$/.test(inputs.carwashTel)) {
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
+      setErrorMessage(ERROR_MESSAGE.invalidTel);
+      setIsDisabled(true);
+    } else if (
+      !/^\d+$/.test(String(inputs.pricePer30min)) ||
+      Number(inputs.pricePer30min) < 1
+    ) {
+      setErrorMessage(ERROR_MESSAGE.invalidPrice);
       setIsDisabled(true);
     } else {
       setErrorMessage("");
@@ -81,9 +88,7 @@ const RegisterForm = ({
         onChange("longitude", result[0].x);
       }
     });
-    // onChange is intentionally excluded so coordinate updates do not retrigger geocoding.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputs.carwashAddress]);
+  }, [inputs.carwashAddress, onChange]);
 
   return (
     <form

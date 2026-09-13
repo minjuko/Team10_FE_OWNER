@@ -1,4 +1,3 @@
-import React from "react";
 import MobileSpriteSVG from "/mobile_icons.svg";
 
 /**

@@ -104,7 +104,8 @@ const CarwashItemManagementTemplate = () => {
           onClick={(e) => {
             e.preventDefault();
             navigate(`/manage/item/${carwash_id}/edit`);
-          }}>
+          }}
+        >
           세차장 정보 수정
         </Button>
         <Button
@@ -114,7 +115,8 @@ const CarwashItemManagementTemplate = () => {
             e.preventDefault();
 
             setIsBayModalOpen(true);
-          }}>
+          }}
+        >
           베이 추가
         </Button>
       </AsideLayout>
@@ -133,7 +135,10 @@ const CarwashItemManagementTemplate = () => {
               ×
             </button>
             <h2 className="mb-4 text-xl font-semibold">베이 추가</h2>
-            <label className="block mb-2 text-sm text-gray-600" htmlFor="bay-number">
+            <label
+              className="block mb-2 text-sm text-gray-600"
+              htmlFor="bay-number"
+            >
               추가할 베이 번호
             </label>
             <input
@@ -146,7 +151,11 @@ const CarwashItemManagementTemplate = () => {
               placeholder="예: 4"
             />
             <div className="flex justify-end gap-2">
-              <Button type="button" variant="small" onClick={() => setIsBayModalOpen(false)}>
+              <Button
+                type="button"
+                variant="small"
+                onClick={() => setIsBayModalOpen(false)}
+              >
                 취소
               </Button>
               <Button type="submit" variant="cta" disabled={mutation.isPending}>

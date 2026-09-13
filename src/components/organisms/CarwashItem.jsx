@@ -15,7 +15,8 @@ const CarwashItem = ({
     <Link
       to={`/manage/item/${carwashId}`}
       aria-label={`${name} 상세 관리 열기`}
-      className="group flex overflow-hidden rounded-xl shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      className="group flex overflow-hidden rounded-xl shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    >
       <div className="relative w-48 bg-sky-100">
         {imageList?.[0]?.url ? (
           <img

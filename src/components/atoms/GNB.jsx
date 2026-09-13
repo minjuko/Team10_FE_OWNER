@@ -10,7 +10,7 @@ import { logout } from "../../store/slices/authSlice";
  *
  * 사장님 사이트에서 전역적으로 상단에 표시되는 네비게이션 바입니다.
  */
-const GNB = () => {
+const GlobalNavigationBar = () => {
   const navigate = useNavigate();
   const { userName } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -68,4 +68,4 @@ const GNB = () => {
   );
 };
 
-export default GNB;
+export default GlobalNavigationBar;

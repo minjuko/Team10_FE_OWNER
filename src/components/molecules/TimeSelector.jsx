@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TextInput from "../atoms/TextInput";
@@ -30,7 +30,8 @@ const TimeSelector = ({ startTime, setStartTime, endTime, setEndTime }) => {
       <div
         className={`flex items-center pl-2 ${
           is24Hour ? "pointer-events-none" : ""
-        }`}>
+        }`}
+      >
         {!is24Hour ? (
           <>
             <div className="flex flex-col">
@@ -68,7 +69,8 @@ const TimeSelector = ({ startTime, setStartTime, endTime, setEndTime }) => {
           <TextInput
             name="registerform-time"
             placeholder="24시간 운영"
-            readOnly></TextInput>
+            readOnly
+          ></TextInput>
         )}
       </div>
     </div>

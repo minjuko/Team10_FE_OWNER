@@ -16,6 +16,9 @@ module.exports = {
   settings: { react: { version: "18.2" } },
   plugins: ["react-refresh", "prettier"],
   rules: {
+    // This legacy JavaScript project does not use runtime PropTypes. Keep the
+    // lint policy focused on correctness rules instead of partial annotations.
+    "react/prop-types": "off",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

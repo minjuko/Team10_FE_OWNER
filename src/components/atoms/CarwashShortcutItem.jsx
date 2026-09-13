@@ -10,7 +10,8 @@ const CarwashShortcutItem = ({
   return (
     <Link
       to={`/manage/item/${carwashId}`}
-      className="overflow-auto bg-white shadow-xl flex-items-center-4 w-96 rounded-xl">
+      className="overflow-auto bg-white shadow-xl flex-items-center-4 w-96 rounded-xl"
+    >
       <div className="relative w-36 h-36">
         <img
           src={imageFileList[0]?.url}

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Checkbox = ({ checked, onChange, disabled, children }) => {
   return (
     <label className="text-gray-700 select-none">

@@ -1,5 +1,3 @@
-import Box from "../atoms/Box";
-
 /**
  * Card 컴포넌트
  * 사장님 페이지 왼쪽 aside 영역에 나타나는 카드 컴포넌트의 기본형입니다.

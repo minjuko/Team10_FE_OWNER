@@ -13,10 +13,10 @@ export const getCarwashItemThunk = createAsyncThunk(
       return response.data.response;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data ?? { error: { message: error.message } }
+        error.response?.data ?? { error: { message: error.message } },
       );
     }
-  }
+  },
 );
 
 const carwashSlice = createSlice({

@@ -16,9 +16,13 @@ export const setBayStatus = async (data) => {
 
 // 매출관리 데이터
 export const getSales = async (carwash_id, selected_date, selected_at) => {
-  return instance.get(
-    `/api/owner/sales?carwash-ids=${carwash_id}&selected-date=${selected_date}&selected-at=${encodeURIComponent(selected_at)}`
-  );
+  return instance.get("/api/owner/sales", {
+    params: {
+      ...(carwash_id?.length ? { "carwash-ids": carwash_id.join(",") } : {}),
+      "selected-date": selected_date,
+      "selected-at": selected_at,
+    },
+  });
 };
 
 export const deleteBay = async (bay_id) => {
@@ -27,7 +31,10 @@ export const deleteBay = async (bay_id) => {
 
 // 월 매출 데이터
 export const getRevenue = async (carwash_id, selected_date) => {
-  return instance.get(
-    `/api/owner/revenue?carwash-ids=${carwash_id}&selected-date=${selected_date}`
-  );
+  return instance.get("/api/owner/revenue", {
+    params: {
+      ...(carwash_id?.length ? { "carwash-ids": carwash_id.join(",") } : {}),
+      "selected-date": selected_date,
+    },
+  });
 };

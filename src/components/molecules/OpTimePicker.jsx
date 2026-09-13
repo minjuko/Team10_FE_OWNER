@@ -36,10 +36,12 @@ const OpTimePicker = ({
                 onChange("weekdayOpenTime", prevWeekdayOpenTime);
                 onChange("weekdayCloseTime", prevWeekdayCloseTime);
               }
-            }}>
+            }}
+          >
             24시간 운영
           </Checkbox>
-        }>
+        }
+      >
         <div className="flex items-center justify-between">
           <TimePicker
             name="weekdayOpenTime"
@@ -73,10 +75,12 @@ const OpTimePicker = ({
                 onChange("weekendOpenTime", prevWeekendOpenTime);
                 onChange("weekendCloseTime", prevWeekendCloseTime);
               }
-            }}>
+            }}
+          >
             24시간 운영
           </Checkbox>
-        }>
+        }
+      >
         <div className="items-center flex-between">
           <TimePicker
             name="weekendOpenTime"

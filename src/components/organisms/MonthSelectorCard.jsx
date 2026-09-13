@@ -14,7 +14,9 @@ import dayjs from "dayjs";
 const MonthSelectorCard = ({ onChange, monthlyRevenue }) => {
   const formatYearMonth = (date) => date.format("YYYY-MM");
 
-  const [yearMonth, setYearMonth] = useState(formatYearMonth(dayjs(Date.now())));
+  const [yearMonth, setYearMonth] = useState(
+    formatYearMonth(dayjs(Date.now())),
+  );
 
   const incrementMonth = () => {
     const newDate = dayjs(yearMonth).add(1, "month");
@@ -48,7 +50,8 @@ const MonthSelectorCard = ({ onChange, monthlyRevenue }) => {
             ▶
           </Button>
         </div>
-      }>
+      }
+    >
       {/* 월 매출 */}
       {monthlyRevenue !== undefined && monthlyRevenue !== null ? (
         <div className="text-2xl font-semibold text-center text-primary">

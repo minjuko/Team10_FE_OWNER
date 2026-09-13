@@ -38,7 +38,7 @@ export const AddPhoto = {
   },
 };
 
-export const withTextInput = {
+export const WithTextInput = {
   args: {
     type: "withTextInput",
     label: "주소찾기",

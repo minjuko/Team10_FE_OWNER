@@ -1,5 +1,3 @@
-import React from "react";
-
 const getSizeClasses = (size) => {
   switch (size) {
     case "small": {

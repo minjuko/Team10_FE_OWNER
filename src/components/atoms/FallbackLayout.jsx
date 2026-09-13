@@ -16,7 +16,8 @@ const FallbackLayout = ({ message, resetErrorBoundary, buttonLabel, to }) => {
           variant="long"
           onClick={() => {
             navigate(to);
-          }}>
+          }}
+        >
           {buttonLabel}
         </Button>
       )}

@@ -134,20 +134,20 @@ const CarwashDetailEditingTemplate = () => {
           ×
         </button>
         <h1 className="text-2xl font-bold">세차장 정보 수정</h1>
-          <RegisterForm
+        <RegisterForm
           inputs={inputs}
           onChange={handleChange}
           mutation={mutation}
           isDirty={isDirty}
-            buttonLabel="수정하기"
-            requireImage={false}
-            existingImages={carwashDetail.imageFileList}
-            onDeleteExisting={(image) => {
-              if (window.confirm("이 사진을 삭제하시겠습니까?")) {
-                deleteImageMutation.mutate(image.id);
-              }
-            }}
-          />
+          buttonLabel="수정하기"
+          requireImage={false}
+          existingImages={carwashDetail.imageFileList}
+          onDeleteExisting={(image) => {
+            if (window.confirm("이 사진을 삭제하시겠습니까?")) {
+              deleteImageMutation.mutate(image.id);
+            }
+          }}
+        />
       </Box>
       <MobilePreview
         inputs={inputs}

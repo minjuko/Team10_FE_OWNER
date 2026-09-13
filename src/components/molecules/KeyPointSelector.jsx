@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Badge from "../atoms/Badge";
 
 /**
@@ -29,12 +29,13 @@ const KeyPointSelector = ({ value, pointLabels, handleChange }) => {
               else
                 valueCopy.splice(
                   valueCopy.indexOf(index + startingIndexInDB),
-                  1
+                  1,
                 );
               valueCopy.sort((a, b) => a - b);
               setSelected(valueCopy);
               handleChange("keypoint", valueCopy);
-            }}>
+            }}
+          >
             {label}
           </Badge>
         ))}

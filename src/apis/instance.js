@@ -22,7 +22,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 instance.interceptors.response.use(
@@ -30,9 +30,6 @@ instance.interceptors.response.use(
     return config;
   },
   (error) => {
-    // if (error.response.data.error.status === 401) {
-    //   window.location.href = "/login";
-    // }
     return Promise.reject(error);
-  }
+  },
 );
