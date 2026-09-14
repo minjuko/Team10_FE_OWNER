@@ -9,6 +9,7 @@ const STYLES = {
   deletePhoto: "w-6 h-6 bg-gray-100 rounded-full text-xs",
   withTextInput: "w-28 h-14 px-4 rounded-xl bg-sky-100 text-sky-500",
   cta: "block px-7 py-4 bg-primary text-white font-semibold rounded-full",
+  demo: "shrink-0 px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-lg whitespace-nowrap",
   aside:
     "h-16 p-4 text-xl font-semibold text-white bg-gray-700 shadow-xl rounded-xl",
 };

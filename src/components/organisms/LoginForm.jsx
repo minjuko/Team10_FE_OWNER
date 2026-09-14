@@ -112,17 +112,21 @@ const LoginForm = () => {
           </div>
         )}
 
-        <div className="rounded-lg bg-gray-50 p-3 text-sm text-gray-600">
-          <p>포트폴리오 테스트 계정</p>
-          <p className="mt-1 break-all">
-            {DEMO_OWNER_CREDENTIALS.email} / {DEMO_OWNER_CREDENTIALS.password}
-          </p>
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-sky-200 bg-sky-50 p-3 text-sm text-gray-600">
+          <div className="min-w-0">
+            <p className="font-semibold text-sky-700">처음 방문하셨나요?</p>
+            <p className="mt-1">테스트 계정으로 바로 체험해 보세요.</p>
+            <p className="mt-1 break-all text-xs text-gray-500">
+              {DEMO_OWNER_CREDENTIALS.email} / {DEMO_OWNER_CREDENTIALS.password}
+            </p>
+          </div>
           <Button
             type="button"
-            variant="longwhite"
+            variant="demo"
             onClick={fillDemoCredentials}
+            aria-label="테스트 계정 정보 입력"
           >
-            테스트 계정 입력
+            테스트 계정 사용
           </Button>
         </div>
 
