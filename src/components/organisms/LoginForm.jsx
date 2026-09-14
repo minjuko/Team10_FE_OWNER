@@ -11,6 +11,11 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import WarningMessage from "../atoms/WarningMessage";
 
+const DEMO_OWNER_CREDENTIALS = {
+  email: import.meta.env.VITE_DEMO_OWNER_EMAIL || "test-owner@example.com",
+  password: import.meta.env.VITE_DEMO_OWNER_PASSWORD || "test1234!",
+};
+
 /**
  * LoginForm 로그인 폼
  *
@@ -24,6 +29,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { isSubmitting, errors },
   } = useForm();
@@ -58,6 +64,13 @@ const LoginForm = () => {
 
   const email = watch("email");
   const password = watch("password");
+
+  const fillDemoCredentials = () => {
+    setValue("email", DEMO_OWNER_CREDENTIALS.email, { shouldValidate: true });
+    setValue("password", DEMO_OWNER_CREDENTIALS.password, {
+      shouldValidate: true,
+    });
+  };
 
   useEffect(() => {
     setErrorMessage("");
@@ -98,6 +111,20 @@ const LoginForm = () => {
             <WarningMessage>{errorMessage}</WarningMessage>
           </div>
         )}
+
+        <div className="rounded-lg bg-gray-50 p-3 text-sm text-gray-600">
+          <p>포트폴리오 테스트 계정</p>
+          <p className="mt-1 break-all">
+            {DEMO_OWNER_CREDENTIALS.email} / {DEMO_OWNER_CREDENTIALS.password}
+          </p>
+          <Button
+            type="button"
+            variant="longwhite"
+            onClick={fillDemoCredentials}
+          >
+            테스트 계정 입력
+          </Button>
+        </div>
 
         <Button type="submit" disabled={isSubmitting} variant="long">
           로그인
