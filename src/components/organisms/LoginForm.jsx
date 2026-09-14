@@ -29,7 +29,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     watch,
     formState: { isSubmitting, errors },
   } = useForm();
@@ -66,9 +66,9 @@ const LoginForm = () => {
   const password = watch("password");
 
   const fillDemoCredentials = () => {
-    setValue("email", DEMO_OWNER_CREDENTIALS.email, { shouldValidate: true });
-    setValue("password", DEMO_OWNER_CREDENTIALS.password, {
-      shouldValidate: true,
+    reset({
+      email: DEMO_OWNER_CREDENTIALS.email,
+      password: DEMO_OWNER_CREDENTIALS.password,
     });
   };
 
