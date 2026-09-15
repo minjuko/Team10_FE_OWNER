@@ -2,10 +2,10 @@
 
 [![Frontend CI](https://github.com/minjuko/ppodeuk-owner-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/minjuko/ppodeuk-owner-frontend/actions/workflows/ci.yml)
 
-셀프 세차장 예약 서비스 **뽀득뽀득**의 사업자용 웹 애플리케이션입니다. 사업자가 세차장을 등록하고 베이·예약·매출 정보를 관리할 수 있도록 구성했습니다.
+셀프 세차장 예약 서비스 **뽀득뽀득**의 사업자용 웹 애플리케이션입니다. 사업자가 세차장을 등록하고 베이·예약·매출 정보를 관리하는 화면을 담고 있습니다.
 
 > 개인의 주요 담당 저장소는 [USER Frontend](https://github.com/minjuko/ppodeuk-user-frontend)입니다.  
-> 이 저장소에서는 팀 프로젝트 당시 **세차장 등록 화면과 초기 입력 UI, 일부 입력·공통 컴포넌트**를 구현했습니다. 이후 코드 품질 개선, 회귀 테스트와 CI 구축을 진행했습니다.
+> 이 저장소에서는 팀 프로젝트 당시 **세차장 등록 화면과 초기 입력 UI, 일부 입력·공통 컴포넌트**를 맡았습니다. 이후 코드 품질 개선, 회귀 테스트와 CI 구축도 진행했습니다.
 
 ## 프로젝트 정보
 
